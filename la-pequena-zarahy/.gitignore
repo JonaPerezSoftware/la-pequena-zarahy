@@ -1,0 +1,12 @@
+# Archivos temporales y de sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# Subidas de usuarios (Privacidad)
+/uploads/cvs/*
+!/uploads/cvs/.htaccess
+
+# Otros
+.vscode/
+.idea/
