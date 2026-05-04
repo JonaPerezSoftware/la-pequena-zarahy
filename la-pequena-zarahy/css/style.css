@@ -172,7 +172,19 @@ section{padding:80px 0}
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  justify-content: flex-start; /* Por defecto para carrusel */
+  justify-content: center; /* Centrar por defecto */
+}
+/* Si el contenido desborda, alineamos a la izquierda para el scroll */
+@media (max-width: 1024px) {
+  .jobs-grid {
+    justify-content: flex-start;
+  }
+}
+@media (min-width: 1025px) {
+  /* Si hay más de 3 tarjetas, alineamos a la izquierda para que el carrusel funcione bien */
+  .jobs-grid:has(.job-card:nth-child(4)) {
+    justify-content: flex-start;
+  }
 }
 .jobs-grid:has(.jobs-empty) {
   justify-content: center;

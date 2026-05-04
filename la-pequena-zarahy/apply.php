@@ -9,7 +9,7 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 // ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_email = 'zarahygardenia@gmail.com'; // ← Correo real para postulaciones
+$admin_email = 'japrezch10@gmail.com'; // ← Correo real para postulaciones
 $max_size_mb = 5;
 $max_size = $max_size_mb * 1024 * 1024;
 $uploads_dir = __DIR__ . '/uploads/cvs/';

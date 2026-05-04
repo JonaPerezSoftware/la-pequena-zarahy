@@ -157,6 +157,20 @@
             "Licencia de conducir (deseable)"
         ],
         "fecha": "2025-05-01",
-        "activa": false
+        "activa": true
+    },
+    {
+        "id": "v_69f8a1d2591d6",
+        "titulo": "Cosecha bananera",
+        "departamento": "Operaciones",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Marcelino Maridueña",
+        "descripcion": "Cosecha en hacienda bananera Primobanano",
+        "requisitos": [
+            "Sin experiencia",
+            "Bachiller"
+        ],
+        "fecha": "2026-05-04",
+        "activa": true
     }
 ]

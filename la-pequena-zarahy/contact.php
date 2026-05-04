@@ -11,12 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // CONFIGURACIÓN
-$admin_email = 'zarahygardenia@gmail.com';
+$admin_email = 'japrezch10@gmail.com';
 
 // Capturar y limpiar datos
-$nombre  = trim($_POST['nombre']  ?? '');
-$correo  = trim($_POST['correo']  ?? '');
-$asunto  = trim($_POST['asunto']  ?? '');
+$nombre = trim($_POST['nombre'] ?? '');
+$correo = trim($_POST['correo'] ?? '');
+$asunto = trim($_POST['asunto'] ?? '');
 $mensaje = trim($_POST['mensaje'] ?? '');
 
 // Validación básica
@@ -31,13 +31,13 @@ if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
 }
 
 // Preparar el correo
-$to      = $admin_email;
+$to = $admin_email;
 $subject = "Nuevo mensaje de contacto: $asunto";
-$body    = "Has recibido un nuevo mensaje desde el sitio web La Pequeña Zarahy.\n\n";
-$body   .= "Nombre: $nombre\n";
-$body   .= "Correo: $correo\n";
-$body   .= "Asunto: $asunto\n\n";
-$body   .= "Mensaje:\n$mensaje\n";
+$body = "Has recibido un nuevo mensaje desde el sitio web La Pequeña Zarahy.\n\n";
+$body .= "Nombre: $nombre\n";
+$body .= "Correo: $correo\n";
+$body .= "Asunto: $asunto\n\n";
+$body .= "Mensaje:\n$mensaje\n";
 
 $headers = "From: webmaster@lapequenazarahy.com\r\n"; // Cambiar por dominio real al subir
 $headers .= "Reply-To: $correo\r\n";
