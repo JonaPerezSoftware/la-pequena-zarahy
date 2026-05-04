@@ -1,162 +1,162 @@
 [
-  {
-    "id": "1",
-    "titulo": "Auxiliar de Enfermería",
-    "departamento": "Salud",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Buscamos una persona comprometida para apoyar en la atención médica de comunidades vulnerables. Trabajarás junto a nuestro equipo de salud en brigadas médicas y seguimiento de pacientes.",
-    "requisitos": [
-      "Título en Enfermería o área afín",
-      "Experiencia mínima de 1 año",
-      "Disponibilidad para trabajo en campo",
-      "Vocación de servicio y empatía"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "2",
-    "titulo": "Coordinador/a de Programas Educativos",
-    "departamento": "Educación",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Guayaquil, Guayas",
-    "descripcion": "Responsable de planificar y ejecutar programas educativos para niños y jóvenes en situación de vulnerabilidad. Liderarás un equipo de voluntarios y docentes.",
-    "requisitos": [
-      "Licenciatura en Educación o Pedagogía",
-      "Experiencia en ONGs o trabajo comunitario",
-      "Habilidades de liderazgo y comunicación",
-      "Manejo de herramientas digitales"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "3",
-    "titulo": "Voluntario/a en Logística",
-    "departamento": "Operaciones",
-    "tipo": "Medio Tiempo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Apoyo en la organización y distribución de kits de alimentos y donaciones en las zonas de cobertura. Ideal para personas que quieran contribuir los fines de semana.",
-    "requisitos": [
-      "Mayor de 18 años",
-      "Disponibilidad los fines de semana",
-      "Actitud proactiva y trabajo en equipo",
-      "Licencia de conducir (deseable)"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "4",
-    "titulo": "Asistente Administrativo",
-    "departamento": "Administración",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Apoyo en tareas administrativas, gestión de archivos y coordinación de actividades del proyecto. Persona organizada y con experiencia en manejo de software de oficina.",
-    "requisitos": [
-      "Título en Administración o áreas afines",
-      "Experiencia mínima de 1 año",
-      "Manejo de Microsoft Office",
-      "Excelentes habilidades de comunicación"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "5",
-    "titulo": "Psicólogo/a Comunitario",
-    "departamento": "Salud",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Acompañamiento psicológico a personas en situación de vulnerabilidad. Desarrollo de talleres y actividades grupales para promover el bienestar emocional.",
-    "requisitos": [
-      "Licenciatura en Psicología Clínica",
-      "Experiencia en trabajo comunitario",
-      "Manejo de técnicas terapéuticas",
-      "Empatía y habilidades de escucha"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "6",
-    "titulo": "Coordinador de Proyectos",
-    "departamento": "Gerencia",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Supervisión y gestión integral de los diferentes proyectos de la fundación. Coordinación con equipos, stakeholders y donantes para asegurar el cumplimiento de objetivos.",
-    "requisitos": [
-      "Título universitario en áreas afines",
-      "Experiencia demostrable en gestión de proyectos",
-      "Liderazgo y capacidad de negociación",
-      "Conocimiento del sector social"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "7",
-    "titulo": "Asistente de Comunicaciones",
-    "departamento": "Comunicación",
-    "tipo": "Medio Tiempo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Apoyo en la gestión de redes sociales, creación de contenido y comunicación con beneficiarios. Ideal para personas creativas con experiencia en marketing digital.",
-    "requisitos": [
-      "Experiencia en redes sociales",
-      "Habilidades de redacción",
-      "Conocimiento de herramientas de diseño básico",
-      "Creatividad y proactividad"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "8",
-    "titulo": "Técnico de Soporte IT",
-    "departamento": "Tecnología",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Mantenimiento de equipos informáticos y soporte técnico a usuarios. Asegurar el buen funcionamiento de la infraestructura tecnológica de la fundación.",
-    "requisitos": [
-      "Título en Informática o afines",
-      "Conocimiento de hardware y software",
-      "Experiencia en soporte técnico",
-      "Resolución de problemas"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "9",
-    "titulo": "Voluntario/a en Desarrollo Infantil",
-    "departamento": "Educación",
-    "tipo": "Medio Tiempo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Apoyo en actividades lúdicas y educativas con niños de la primera infancia. Fomentar el desarrollo cognitivo y social de los pequeños.",
-    "requisitos": [
-      "Vocación de servicio",
-      "Paciencia y creatividad",
-      "Disponibilidad los fines de semana",
-      "Experiencia previa con niños (deseable)"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  },
-  {
-    "id": "10",
-    "titulo": "Asistente de Campo",
-    "departamento": "Operaciones",
-    "tipo": "Tiempo Completo",
-    "ubicacion": "Quito, Pichincha",
-    "descripcion": "Apoyo en la logística de las brigadas médicas y actividades comunitarias. Coordinación de movilización y distribución de materiales.",
-    "requisitos": [
-      "Capacidad de trabajo físico",
-      "Organización y planificación",
-      "Disponibilidad para trabajo en campo",
-      "Licencia de conducir (deseable)"
-    ],
-    "fecha": "2025-05-01",
-    "activa": true
-  }
+    {
+        "id": "1",
+        "titulo": "Auxiliar de Enfermería",
+        "departamento": "Salud",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Buscamos una persona comprometida para apoyar en la atención médica de comunidades vulnerables. Trabajarás junto a nuestro equipo de salud en brigadas médicas y seguimiento de pacientes.",
+        "requisitos": [
+            "Título en Enfermería o área afín",
+            "Experiencia mínima de 1 año",
+            "Disponibilidad para trabajo en campo",
+            "Vocación de servicio y empatía"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "2",
+        "titulo": "Coordinador\/a de Programas Educativos",
+        "departamento": "Educación",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Guayaquil, Guayas",
+        "descripcion": "Responsable de planificar y ejecutar programas educativos para niños y jóvenes en situación de vulnerabilidad. Liderarás un equipo de voluntarios y docentes.",
+        "requisitos": [
+            "Licenciatura en Educación o Pedagogía",
+            "Experiencia en ONGs o trabajo comunitario",
+            "Habilidades de liderazgo y comunicación",
+            "Manejo de herramientas digitales"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "3",
+        "titulo": "Voluntario\/a en Logística",
+        "departamento": "Operaciones",
+        "tipo": "Medio Tiempo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Apoyo en la organización y distribución de kits de alimentos y donaciones en las zonas de cobertura. Ideal para personas que quieran contribuir los fines de semana.",
+        "requisitos": [
+            "Mayor de 18 años",
+            "Disponibilidad los fines de semana",
+            "Actitud proactiva y trabajo en equipo",
+            "Licencia de conducir (deseable)"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "4",
+        "titulo": "Asistente Administrativo",
+        "departamento": "Administración",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Apoyo en tareas administrativas, gestión de archivos y coordinación de actividades del proyecto. Persona organizada y con experiencia en manejo de software de oficina.",
+        "requisitos": [
+            "Título en Administración o áreas afines",
+            "Experiencia mínima de 1 año",
+            "Manejo de Microsoft Office",
+            "Excelentes habilidades de comunicación"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "5",
+        "titulo": "Psicólogo\/a Comunitario",
+        "departamento": "Salud",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Acompañamiento psicológico a personas en situación de vulnerabilidad. Desarrollo de talleres y actividades grupales para promover el bienestar emocional.",
+        "requisitos": [
+            "Licenciatura en Psicología Clínica",
+            "Experiencia en trabajo comunitario",
+            "Manejo de técnicas terapéuticas",
+            "Empatía y habilidades de escucha"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "6",
+        "titulo": "Coordinador de Proyectos",
+        "departamento": "Gerencia",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Supervisión y gestión integral de los diferentes proyectos de la fundación. Coordinación con equipos, stakeholders y donantes para asegurar el cumplimiento de objetivos.",
+        "requisitos": [
+            "Título universitario en áreas afines",
+            "Experiencia demostrable en gestión de proyectos",
+            "Liderazgo y capacidad de negociación",
+            "Conocimiento del sector social"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "7",
+        "titulo": "Asistente de Comunicaciones",
+        "departamento": "Comunicación",
+        "tipo": "Medio Tiempo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Apoyo en la gestión de redes sociales, creación de contenido y comunicación con beneficiarios. Ideal para personas creativas con experiencia en marketing digital.",
+        "requisitos": [
+            "Experiencia en redes sociales",
+            "Habilidades de redacción",
+            "Conocimiento de herramientas de diseño básico",
+            "Creatividad y proactividad"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "8",
+        "titulo": "Técnico de Soporte IT",
+        "departamento": "Tecnología",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Mantenimiento de equipos informáticos y soporte técnico a usuarios. Asegurar el buen funcionamiento de la infraestructura tecnológica de la fundación.",
+        "requisitos": [
+            "Título en Informática o afines",
+            "Conocimiento de hardware y software",
+            "Experiencia en soporte técnico",
+            "Resolución de problemas"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "9",
+        "titulo": "Voluntario\/a en Desarrollo Infantil",
+        "departamento": "Educación",
+        "tipo": "Medio Tiempo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Apoyo en actividades lúdicas y educativas con niños de la primera infancia. Fomentar el desarrollo cognitivo y social de los pequeños.",
+        "requisitos": [
+            "Vocación de servicio",
+            "Paciencia y creatividad",
+            "Disponibilidad los fines de semana",
+            "Experiencia previa con niños (deseable)"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    },
+    {
+        "id": "10",
+        "titulo": "Asistente de Campo",
+        "departamento": "Operaciones",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "Quito, Pichincha",
+        "descripcion": "Apoyo en la logística de las brigadas médicas y actividades comunitarias. Coordinación de movilización y distribución de materiales.",
+        "requisitos": [
+            "Capacidad de trabajo físico",
+            "Organización y planificación",
+            "Disponibilidad para trabajo en campo",
+            "Licencia de conducir (deseable)"
+        ],
+        "fecha": "2025-05-01",
+        "activa": false
+    }
 ]

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,310 +11,654 @@
   <link rel="icon" type="image/png" sizes="16x16" href="../varios/Logo2.png">
   <link rel="apple-touch-icon" href="../varios/Logo2.png">
   <style>
-    :root{--purple:#7c3aed;--purple-light:#f5f3ff;--pink:#ec4899;--gradient:linear-gradient(135deg,#9333ea,#ec4899);--red:#dc2626;--green:#16a34a;--border:#e5e7eb;--text:#1e1b4b;--gray:#6b7280;--bg:#f8fafc;--radius:12px;--shadow:0 4px 20px rgba(124,58,237,.12)}
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-    .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:50px;font-size:.85rem;font-weight:600;cursor:pointer;border:none;font-family:inherit;transition:all .25s}
-    .btn-gradient{background:var(--gradient);color:#fff}
-    .btn-gradient:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(124,58,237,.4)}
-    .btn-danger{background:#fef2f2;color:var(--red);border:1px solid #fecaca}
-    .btn-danger:hover{background:var(--red);color:#fff}
-    .btn-success{background:#f0fdf4;color:var(--green);border:1px solid #bbf7d0}
-    .btn-outline{background:#fff;color:var(--purple);border:1.5px solid var(--purple)}
-    .btn-outline:hover{background:var(--purple);color:#fff}
-    input,select,textarea{font-family:inherit;font-size:.88rem;width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;color:var(--text);background:#fff;transition:border .2s}
-    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(124,58,237,.1)}
-    textarea{resize:vertical;min-height:80px}
-    label{display:block;font-size:.82rem;font-weight:600;margin-bottom:6px;color:var(--text)}
-    .form-group{margin-bottom:16px}
-    .alert{padding:12px 16px;border-radius:8px;font-size:.85rem;margin-bottom:16px;display:none}
-    .alert.success{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0;display:block}
-    .alert.error{background:#fef2f2;color:#b91c1c;border:1px solid #fecaca;display:block}
+    :root {
+      --purple: #7c3aed;
+      --purple-light: #f5f3ff;
+      --pink: #ec4899;
+      --gradient: linear-gradient(135deg, #9333ea, #ec4899);
+      --red: #dc2626;
+      --green: #16a34a;
+      --border: #e5e7eb;
+      --text: #1e1b4b;
+      --gray: #6b7280;
+      --bg: #f8fafc;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(124, 58, 237, .12)
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
+      transition: all .25s
+    }
+
+    .btn-gradient {
+      background: var(--gradient);
+      color: #fff
+    }
+
+    .btn-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(124, 58, 237, .4)
+    }
+
+    .btn-danger {
+      background: #fef2f2;
+      color: var(--red);
+      border: 1px solid #fecaca
+    }
+
+    .btn-danger:hover {
+      background: var(--red);
+      color: #fff
+    }
+
+    .btn-success {
+      background: #f0fdf4;
+      color: var(--green);
+      border: 1px solid #bbf7d0
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--purple);
+      border: 1.5px solid var(--purple)
+    }
+
+    .btn-outline:hover {
+      background: var(--purple);
+      color: #fff
+    }
+
+    input,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: .88rem;
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      background: #fff;
+      transition: border .2s
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(124, 58, 237, .1)
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px
+    }
+
+    label {
+      display: block;
+      font-size: .82rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--text)
+    }
+
+    .form-group {
+      margin-bottom: 16px
+    }
+
+    .alert {
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: .85rem;
+      margin-bottom: 16px;
+      display: none
+    }
+
+    .alert.success {
+      background: #f0fdf4;
+      color: #15803d;
+      border: 1px solid #bbf7d0;
+      display: block
+    }
+
+    .alert.error {
+      background: #fef2f2;
+      color: #b91c1c;
+      border: 1px solid #fecaca;
+      display: block
+    }
 
     /* ── Login ── */
-    #login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;background:linear-gradient(135deg,#4c1d95,#7c3aed 50%,#ec4899)}
-    .login-card{background:#fff;border-radius:20px;padding:40px 36px;width:100%;max-width:400px;box-shadow:0 24px 60px rgba(0,0,0,.2)}
-    .login-logo{text-align:center;margin-bottom:28px}
-    .login-logo .icon{font-size:2.8rem;display:block;margin-bottom:8px}
-    .login-logo h1{font-size:1.3rem;font-weight:700;color:var(--text)}
-    .login-logo p{font-size:.82rem;color:var(--gray);margin-top:4px}
-    .pw-wrap{position:relative}
-    .pw-wrap input{padding-right:44px}
-    .pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1rem;color:var(--gray)}
+    #login-screen {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      background: linear-gradient(135deg, #4c1d95, #7c3aed 50%, #ec4899)
+    }
+
+    .login-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, .2)
+    }
+
+    .login-logo {
+      text-align: center;
+      margin-bottom: 28px
+    }
+
+    .login-logo .icon {
+      font-size: 2.8rem;
+      display: block;
+      margin-bottom: 8px
+    }
+
+    .login-logo h1 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text)
+    }
+
+    .login-logo p {
+      font-size: .82rem;
+      color: var(--gray);
+      margin-top: 4px
+    }
+
+    .pw-wrap {
+      position: relative
+    }
+
+    .pw-wrap input {
+      padding-right: 44px
+    }
+
+    .pw-toggle {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--gray)
+    }
 
     /* ── Dashboard ── */
-    #dashboard{display:none}
-    .topbar{background:var(--gradient);color:#fff;padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-    .topbar h1{font-size:1rem;font-weight:700}
-    .topbar-right{display:flex;align-items:center;gap:12px;font-size:.82rem;opacity:.9}
-    .main{max-width:960px;margin:0 auto;padding:28px 20px}
-    .stats-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:28px}
-    .stat-box{background:#fff;border-radius:var(--radius);padding:20px;border:1.5px solid var(--border);text-align:center}
-    .stat-box strong{display:block;font-size:1.8rem;font-weight:800;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .stat-box span{font-size:.78rem;color:var(--gray);margin-top:4px;display:block}
-    .panel{background:#fff;border-radius:var(--radius);border:1.5px solid var(--border);margin-bottom:24px;overflow:hidden}
-    .panel-header{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-    .panel-header h2{font-size:1rem;font-weight:700}
-    .panel-body{padding:24px}
-    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-    .req-hint{font-size:.75rem;color:var(--gray);margin-top:5px}
+    #dashboard {
+      display: none
+    }
+
+    .topbar {
+      background: var(--gradient);
+      color: #fff;
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100
+    }
+
+    .topbar h1 {
+      font-size: 1rem;
+      font-weight: 700
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: .82rem;
+      opacity: .9
+    }
+
+    .main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 28px 20px
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px
+    }
+
+    .stat-box {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 20px;
+      border: 1.5px solid var(--border);
+      text-align: center
+    }
+
+    .stat-box strong {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .stat-box span {
+      font-size: .78rem;
+      color: var(--gray);
+      margin-top: 4px;
+      display: block
+    }
+
+    .panel {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1.5px solid var(--border);
+      margin-bottom: 24px;
+      overflow: hidden
+    }
+
+    .panel-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px
+    }
+
+    .panel-header h2 {
+      font-size: 1rem;
+      font-weight: 700
+    }
+
+    .panel-body {
+      padding: 24px
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px
+    }
+
+    .req-hint {
+      font-size: .75rem;
+      color: var(--gray);
+      margin-top: 5px
+    }
 
     /* ── Vacante list ── */
-    .vac-list{display:flex;flex-direction:column;gap:14px}
-    .vac-item{border:1.5px solid var(--border);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;transition:border .2s}
-    .vac-item:hover{border-color:var(--purple)}
-    .vac-item.inactive{opacity:.55}
-    .vac-info h3{font-size:.95rem;font-weight:700;margin-bottom:4px}
-    .vac-meta{display:flex;gap:10px;flex-wrap:wrap}
-    .vac-tag{font-size:.72rem;padding:3px 10px;border-radius:50px;background:var(--purple-light);color:var(--purple);font-weight:600}
-    .vac-tag.inactive-tag{background:#fef9c3;color:#854d0e}
-    .vac-actions{display:flex;gap:8px;flex-shrink:0;flex-wrap:wrap}
-    .vac-actions .btn{padding:7px 14px;font-size:.78rem}
-    .empty-state{text-align:center;padding:40px;color:var(--gray);font-size:.9rem}
+    .vac-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px
+    }
 
-    @media(max-width:600px){
-      .form-row{grid-template-columns:1fr}
-      .stats-bar{grid-template-columns:1fr}
-      .vac-item{flex-direction:column}
-      .login-card{padding:28px 20px}
-      .topbar h1{font-size:.9rem}
+    .vac-item {
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      transition: border .2s
+    }
+
+    .vac-item:hover {
+      border-color: var(--purple)
+    }
+
+    .vac-item.inactive {
+      opacity: .55
+    }
+
+    .vac-info h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .vac-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .vac-tag {
+      font-size: .72rem;
+      padding: 3px 10px;
+      border-radius: 50px;
+      background: var(--purple-light);
+      color: var(--purple);
+      font-weight: 600
+    }
+
+    .vac-tag.inactive-tag {
+      background: #fef9c3;
+      color: #854d0e
+    }
+
+    .vac-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      flex-wrap: wrap
+    }
+
+    .vac-actions .btn {
+      padding: 7px 14px;
+      font-size: .78rem
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px;
+      color: var(--gray);
+      font-size: .9rem
+    }
+
+    @media(max-width:600px) {
+      .form-row {
+        grid-template-columns: 1fr
+      }
+
+      .stats-bar {
+        grid-template-columns: 1fr
+      }
+
+      .vac-item {
+        flex-direction: column
+      }
+
+      .login-card {
+        padding: 28px 20px
+      }
+
+      .topbar h1 {
+        font-size: .9rem
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- ══════════════════ LOGIN ══════════════════ -->
-<div id="login-screen">
-  <div class="login-card">
-    <div class="login-logo">
-      <img src="../varios/Logo2.png" alt="Logo" style="height: 120px; width: auto; margin-bottom: 20px;">
-      <h1>La Pequeña Zarahy</h1>
-      <p>Panel de Administración</p>
+  <!-- ══════════════════ LOGIN ══════════════════ -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">
+        <img src="../varios/Logo2.png" alt="Logo" style="height: 120px; width: auto; margin-bottom: 20px;">
+        <h1>La Pequeña Zarahy</h1>
+        <p>Panel de Administración</p>
+      </div>
+      <div id="login-alert" class="alert"></div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <div class="pw-wrap">
+            <input type="password" id="password" placeholder="Ingresa la contraseña" required autofocus>
+            <button type="button" class="pw-toggle" id="pw-toggle" title="Mostrar contraseña">👁️</button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-gradient"
+          style="width:100%;justify-content:center;padding:12px;margin-top:4px">
+          Ingresar →
+        </button>
+      </form>
+      <p style="text-align:center;margin-top:20px;font-size:.78rem;color:var(--gray)">
+        <a href="../index.html" style="color:var(--purple)">← Volver al sitio</a>
+      </p>
     </div>
-    <div id="login-alert" class="alert"></div>
-    <form id="login-form">
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <div class="pw-wrap">
-          <input type="password" id="password" placeholder="Ingresa la contraseña" required autofocus>
-          <button type="button" class="pw-toggle" id="pw-toggle" title="Mostrar contraseña">👁️</button>
+  </div>
+
+  <!-- ══════════════════ DASHBOARD ══════════════════ -->
+  <div id="dashboard">
+    <div class="topbar">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="../varios/Logo2.png" alt="Logo"
+          style="height: 45px; width: auto; filter: drop-shadow(1px 1px 0px #fff) drop-shadow(-1px -1px 0px #fff) drop-shadow(1px -1px 0px #fff) drop-shadow(-1px 1px 0px #fff);">
+        <h1>La Pequeña Zarahy — Gestión de Vacantes</h1>
+      </div>
+      <div class="topbar-right">
+        <span id="admin-date"></span>
+        <button class="btn btn-outline"
+          style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);padding:6px 16px"
+          onclick="logout()">
+          Cerrar sesión
+        </button>
+      </div>
+    </div>
+
+    <div class="main">
+
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-box">
+          <strong id="stat-total">0</strong>
+          <span>Total de vacantes</span>
+        </div>
+        <div class="stat-box">
+          <strong id="stat-active">0</strong>
+          <span>Vacantes activas</span>
+        </div>
+        <div class="stat-box">
+          <strong id="stat-inactive">0</strong>
+          <span>Vacantes inactivas</span>
         </div>
       </div>
-      <button type="submit" class="btn btn-gradient" style="width:100%;justify-content:center;padding:12px;margin-top:4px">
-        Ingresar →
-      </button>
-    </form>
-    <p style="text-align:center;margin-top:20px;font-size:.78rem;color:var(--gray)">
-      <a href="../index.html" style="color:var(--purple)">← Volver al sitio</a>
-    </p>
-  </div>
-</div>
 
-<!-- ══════════════════ DASHBOARD ══════════════════ -->
-<div id="dashboard">
-  <div class="topbar">
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <img src="../varios/Logo2.png" alt="Logo" style="height: 45px; width: auto; filter: drop-shadow(1px 1px 0px #fff) drop-shadow(-1px -1px 0px #fff) drop-shadow(1px -1px 0px #fff) drop-shadow(-1px 1px 0px #fff);">
-      <h1>La Pequeña Zarahy — Gestión de Vacantes</h1>
-    </div>
-    <div class="topbar-right">
-      <span id="admin-date"></span>
-      <button class="btn btn-outline" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);padding:6px 16px" onclick="logout()">
-        Cerrar sesión
-      </button>
-    </div>
-  </div>
-
-  <div class="main">
-
-    <!-- Stats -->
-    <div class="stats-bar">
-      <div class="stat-box">
-        <strong id="stat-total">0</strong>
-        <span>Total de vacantes</span>
-      </div>
-      <div class="stat-box">
-        <strong id="stat-active">0</strong>
-        <span>Vacantes activas</span>
-      </div>
-      <div class="stat-box">
-        <strong id="stat-inactive">0</strong>
-        <span>Vacantes inactivas</span>
-      </div>
-    </div>
-
-    <!-- Agregar vacante -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>➕ Publicar Nueva Vacante</h2>
-        <button class="btn btn-outline" onclick="toggleForm()" id="toggle-form-btn">Colapsar</button>
-      </div>
-      <div class="panel-body" id="add-form-body">
-        <div id="add-alert" class="alert"></div>
-        <form id="add-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="f-titulo">Título del puesto *</label>
-              <input id="f-titulo" name="titulo" type="text" placeholder="Ej: Auxiliar de Enfermería" required>
+      <!-- Agregar vacante -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2>➕ Publicar Nueva Vacante</h2>
+          <button class="btn btn-outline" onclick="toggleForm()" id="toggle-form-btn">Colapsar</button>
+        </div>
+        <div class="panel-body" id="add-form-body">
+          <div id="add-alert" class="alert"></div>
+          <form id="add-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-titulo">Título del puesto *</label>
+                <input id="f-titulo" name="titulo" type="text" placeholder="Ej: Auxiliar de Enfermería" required>
+              </div>
+              <div class="form-group">
+                <label for="f-dept">Departamento *</label>
+                <select id="f-dept" name="departamento" required>
+                  <option value="">Selecciona...</option>
+                  <option>Salud</option>
+                  <option>Educación</option>
+                  <option>Operaciones</option>
+                  <option>Administración</option>
+                  <option>Comunicación</option>
+                  <option>Voluntariado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-tipo">Tipo de jornada</label>
+                <select id="f-tipo" name="tipo">
+                  <option>Tiempo Completo</option>
+                  <option>Medio Tiempo</option>
+                  <option>Voluntariado</option>
+                  <option>Por proyecto</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="f-ubic">Ubicación</label>
+                <input id="f-ubic" name="ubicacion" type="text" placeholder="Ej: Quito, Pichincha">
+              </div>
             </div>
             <div class="form-group">
-              <label for="f-dept">Departamento *</label>
-              <select id="f-dept" name="departamento" required>
-                <option value="">Selecciona...</option>
-                <option>Salud</option>
-                <option>Educación</option>
-                <option>Operaciones</option>
-                <option>Administración</option>
-                <option>Comunicación</option>
-                <option>Voluntariado</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="f-tipo">Tipo de jornada</label>
-              <select id="f-tipo" name="tipo">
-                <option>Tiempo Completo</option>
-                <option>Medio Tiempo</option>
-                <option>Voluntariado</option>
-                <option>Por proyecto</option>
-              </select>
+              <label for="f-desc">Descripción del puesto *</label>
+              <textarea id="f-desc" name="descripcion" rows="3" placeholder="Describe las responsabilidades y el rol..."
+                required></textarea>
             </div>
             <div class="form-group">
-              <label for="f-ubic">Ubicación</label>
-              <input id="f-ubic" name="ubicacion" type="text" placeholder="Ej: Quito, Pichincha">
+              <label for="f-reqs">Requisitos (uno por línea) *</label>
+              <textarea id="f-reqs" name="requisitos" rows="4"
+                placeholder="Título universitario en área afín&#10;Experiencia mínima 1 año&#10;Disponibilidad inmediata"
+                required></textarea>
+              <p class="req-hint">Escribe cada requisito en una línea separada</p>
             </div>
-          </div>
-          <div class="form-group">
-            <label for="f-desc">Descripción del puesto *</label>
-            <textarea id="f-desc" name="descripcion" rows="3" placeholder="Describe las responsabilidades y el rol..." required></textarea>
-          </div>
-          <div class="form-group">
-            <label for="f-reqs">Requisitos (uno por línea) *</label>
-            <textarea id="f-reqs" name="requisitos" rows="4" placeholder="Título universitario en área afín&#10;Experiencia mínima 1 año&#10;Disponibilidad inmediata" required></textarea>
-            <p class="req-hint">Escribe cada requisito en una línea separada</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <button type="submit" class="btn btn-gradient">Publicar Vacante 🚀</button>
-            <button type="reset" class="btn btn-outline">Limpiar</button>
-          </div>
-        </form>
-      </div>
-    </div>
-
-    <!-- Lista de vacantes -->
-    <div class="panel">
-      <div class="panel-header">
-        <h2>📋 Vacantes Publicadas</h2>
-        <button class="btn btn-outline" onclick="loadVacantes()" style="font-size:.78rem;padding:7px 16px">↻ Actualizar</button>
-      </div>
-      <div class="panel-body">
-        <div class="vac-list" id="vac-list">
-          <div class="empty-state">Cargando vacantes...</div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <button type="submit" class="btn btn-gradient">Publicar Vacante 🚀</button>
+              <button type="reset" class="btn btn-outline">Limpiar</button>
+            </div>
+          </form>
         </div>
       </div>
+
+      <!-- Lista de vacantes -->
+      <div class="panel">
+        <div class="panel-header">
+          <h2>📋 Vacantes Publicadas</h2>
+          <button class="btn btn-outline" onclick="loadVacantes()" style="font-size:.78rem;padding:7px 16px">↻
+            Actualizar</button>
+        </div>
+        <div class="panel-body">
+          <div class="vac-list" id="vac-list">
+            <div class="empty-state">Cargando vacantes...</div>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align:center;font-size:.78rem;color:var(--gray);margin-top:8px">
+        💡 Los cambios se reflejan inmediatamente en el sitio web.
+        <a href="../index.html#empleos" target="_blank" style="color:var(--purple)">Ver sitio →</a>
+      </p>
     </div>
-
-    <p style="text-align:center;font-size:.78rem;color:var(--gray);margin-top:8px">
-      💡 Los cambios se reflejan inmediatamente en el sitio web.
-      <a href="../index.html#empleos" target="_blank" style="color:var(--purple)">Ver sitio →</a>
-    </p>
   </div>
-</div>
 
-<script>
-// ── Configuración ──────────────────────────────────────────
-const API      = 'guardar_vacante.php';
-const PASSWORD = 'Zarahy2025!'; // Mismo que en PHP — solo para modo local
-let isLocal    = false; // true cuando no hay PHP (abrir como archivo)
-let localData  = [];
+  <script>
+    // ── Configuración ──────────────────────────────────────────
+    const API = 'guardar_vacante.php';
+    const PASSWORD = '1234'; // Mismo que en PHP — solo para modo local
+    let isLocal = false; // true cuando no hay PHP (abrir como archivo)
+    let localData = [];
 
-// ── Helpers ───────────────────────────────────────────────
-function showAlert(id, msg, type){
-  const el = document.getElementById(id);
-  el.textContent = msg;
-  el.className = 'alert ' + type;
-  setTimeout(() => { el.className = 'alert'; el.textContent = ''; }, 4000);
-}
-function updateStats(data){
-  const active = data.filter(v => v.activa !== false).length;
-  document.getElementById('stat-total').textContent    = data.length;
-  document.getElementById('stat-active').textContent   = active;
-  document.getElementById('stat-inactive').textContent = data.length - active;
-}
-function formatDate(d){ return d ? new Date(d+'T00:00:00').toLocaleDateString('es-EC',{day:'2-digit',month:'short',year:'numeric'}) : ''; }
+    // ── Helpers ───────────────────────────────────────────────
+    function showAlert(id, msg, type) {
+      const el = document.getElementById(id);
+      el.textContent = msg;
+      el.className = 'alert ' + type;
+      setTimeout(() => { el.className = 'alert'; el.textContent = ''; }, 4000);
+    }
+    function updateStats(data) {
+      const active = data.filter(v => v.activa !== false).length;
+      document.getElementById('stat-total').textContent = data.length;
+      document.getElementById('stat-active').textContent = active;
+      document.getElementById('stat-inactive').textContent = data.length - active;
+    }
+    function formatDate(d) { return d ? new Date(d + 'T00:00:00').toLocaleDateString('es-EC', { day: '2-digit', month: 'short', year: 'numeric' }) : ''; }
 
-// ── Login ──────────────────────────────────────────────────
-document.getElementById('pw-toggle').addEventListener('click', function(){
-  const inp = document.getElementById('password');
-  inp.type = inp.type === 'password' ? 'text' : 'password';
-});
+    // ── Login ──────────────────────────────────────────────────
+    document.getElementById('pw-toggle').addEventListener('click', function () {
+      const inp = document.getElementById('password');
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    });
 
-document.getElementById('login-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const pwd = document.getElementById('password').value;
-  try {
-    const res  = await fetch(API, { method:'POST', body: new URLSearchParams({action:'login', password:pwd}) });
-    const data = await res.json();
-    if (data.success) { enterDashboard(); }
-    else { showAlert('login-alert', data.message || 'Contraseña incorrecta.', 'error'); }
-  } catch {
-    // Modo local (sin servidor PHP)
-    if (pwd === PASSWORD) { isLocal = true; enterDashboard(); }
-    else { showAlert('login-alert', 'Contraseña incorrecta.', 'error'); }
-  }
-});
+    document.getElementById('login-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const pwd = document.getElementById('password').value;
+      try {
+        const res = await fetch(API, { method: 'POST', body: new URLSearchParams({ action: 'login', password: pwd }) });
+        const data = await res.json();
+        if (data.success) { enterDashboard(); }
+        else { showAlert('login-alert', data.message || 'Contraseña incorrecta.', 'error'); }
+      } catch {
+        // Modo local (sin servidor PHP)
+        if (pwd === PASSWORD) { isLocal = true; enterDashboard(); }
+        else { showAlert('login-alert', 'Contraseña incorrecta.', 'error'); }
+      }
+    });
 
-function enterDashboard(){
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
-  document.getElementById('admin-date').textContent = new Date().toLocaleDateString('es-EC',{weekday:'long',day:'2-digit',month:'long'});
-  loadVacantes();
-}
+    function enterDashboard() {
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      document.getElementById('admin-date').textContent = new Date().toLocaleDateString('es-EC', { weekday: 'long', day: '2-digit', month: 'long' });
+      loadVacantes();
+    }
 
-function logout(){
-  if (confirm('¿Cerrar sesión?')){
-    fetch(API, { method:'POST', body: new URLSearchParams({action:'logout'}) }).catch(()=>{});
-    location.reload();
-  }
-}
+    function logout() {
+      if (confirm('¿Cerrar sesión?')) {
+        fetch(API, { method: 'POST', body: new URLSearchParams({ action: 'logout' }) }).catch(() => { });
+        location.reload();
+      }
+    }
 
-// ── Toggle form ────────────────────────────────────────────
-function toggleForm(){
-  const body = document.getElementById('add-form-body');
-  const btn  = document.getElementById('toggle-form-btn');
-  const hidden = body.style.display === 'none';
-  body.style.display = hidden ? '' : 'none';
-  btn.textContent = hidden ? 'Colapsar' : 'Expandir';
-}
+    // ── Toggle form ────────────────────────────────────────────
+    function toggleForm() {
+      const body = document.getElementById('add-form-body');
+      const btn = document.getElementById('toggle-form-btn');
+      const hidden = body.style.display === 'none';
+      body.style.display = hidden ? '' : 'none';
+      btn.textContent = hidden ? 'Colapsar' : 'Expandir';
+    }
 
-// ── Load vacantes ──────────────────────────────────────────
-async function loadVacantes(){
-  try {
-    if (isLocal) { renderList(localData); return; }
-    const res  = await fetch(API + '?action=get');
-    const data = await res.json();
-    if (data.success) renderList(data.data || []);
-    else showAlert('add-alert', data.message, 'error');
-  } catch {
-    // Fallback: leer vacantes.json directo
-    try {
-      const r = await fetch('../vacantes.json?v='+Date.now());
-      localData = (await r.json()).filter(v => v.activa !== false);
-    } catch { localData = []; }
-    isLocal = true;
-    renderList(localData);
-  }
-}
+    // ── Load vacantes ──────────────────────────────────────────
+    async function loadVacantes() {
+      try {
+        if (isLocal) { renderList(localData); return; }
+        const res = await fetch(API + '?action=get');
+        const data = await res.json();
+        if (data.success) renderList(data.data || []);
+        else showAlert('add-alert', data.message, 'error');
+      } catch {
+        // Fallback: leer vacantes.json directo
+        try {
+          const r = await fetch('../vacantes.json?v=' + Date.now());
+          localData = (await r.json()).filter(v => v.activa !== false);
+        } catch { localData = []; }
+        isLocal = true;
+        renderList(localData);
+      }
+    }
 
-function renderList(data){
-  updateStats(data);
-  const list = document.getElementById('vac-list');
-  if (!data.length){
-    list.innerHTML = '<div class="empty-state">No hay vacantes publicadas.<br>Usa el formulario de arriba para agregar la primera.</div>';
-    return;
-  }
-  list.innerHTML = data.map(v => `
+    function renderList(data) {
+      updateStats(data);
+      const list = document.getElementById('vac-list');
+      if (!data.length) {
+        list.innerHTML = '<div class="empty-state">No hay vacantes publicadas.<br>Usa el formulario de arriba para agregar la primera.</div>';
+        return;
+      }
+      list.innerHTML = data.map(v => `
     <div class="vac-item ${v.activa === false ? 'inactive' : ''}" id="vac-${v.id}">
       <div class="vac-info">
         <h3>${v.titulo}</h3>
@@ -329,77 +674,78 @@ function renderList(data){
         <button class="btn btn-success" onclick="toggleVacante('${v.id}')">
           ${v.activa === false ? '▶ Activar' : '⏸ Desactivar'}
         </button>
-        <button class="btn btn-danger" onclick="deleteVacante('${v.id}', '${v.titulo.replace(/'/g,"\\'")}')">
+        <button class="btn btn-danger" onclick="deleteVacante('${v.id}', '${v.titulo.replace(/'/g, "\\'")}')">
           🗑 Eliminar
         </button>
       </div>
     </div>
   `).join('');
-}
-
-// ── Add vacante ────────────────────────────────────────────
-document.getElementById('add-form').addEventListener('submit', async e => {
-  e.preventDefault();
-  const fd   = new FormData(e.target);
-  fd.append('action','add');
-  const btn  = e.target.querySelector('[type=submit]');
-  btn.disabled = true; btn.textContent = '⏳ Publicando...';
-
-  try {
-    if (isLocal) {
-      const reqs = (fd.get('requisitos')||'').split('\n').map(s=>s.trim()).filter(Boolean);
-      const newV = {
-        id: 'v_' + Date.now(),
-        titulo: fd.get('titulo'), departamento: fd.get('departamento'),
-        tipo: fd.get('tipo'), ubicacion: fd.get('ubicacion'),
-        descripcion: fd.get('descripcion'), requisitos: reqs,
-        fecha: new Date().toISOString().split('T')[0], activa: true
-      };
-      localData.push(newV);
-      renderList(localData);
-      showAlert('add-alert','✅ Vacante agregada. (Nota: en modo local, los cambios no se guardan permanentemente. Sube el proyecto a Hostinger para guardar.)','success');
-      e.target.reset();
-    } else {
-      const res  = await fetch(API, { method:'POST', body:fd });
-      const data = await res.json();
-      if (data.success){ showAlert('add-alert','✅ '+data.message,'success'); loadVacantes(); e.target.reset(); }
-      else showAlert('add-alert', '❌ '+data.message, 'error');
     }
-  } catch(err) { showAlert('add-alert','❌ Error de conexión.','error'); }
 
-  btn.disabled = false; btn.textContent = 'Publicar Vacante 🚀';
-});
+    // ── Add vacante ────────────────────────────────────────────
+    document.getElementById('add-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      fd.append('action', 'add');
+      const btn = e.target.querySelector('[type=submit]');
+      btn.disabled = true; btn.textContent = '⏳ Publicando...';
 
-// ── Toggle activa ──────────────────────────────────────────
-async function toggleVacante(id){
-  try {
-    if (isLocal) {
-      localData = localData.map(v => v.id===id ? {...v, activa:!(v.activa!==false)} : v);
-      renderList(localData); return;
+      try {
+        if (isLocal) {
+          const reqs = (fd.get('requisitos') || '').split('\n').map(s => s.trim()).filter(Boolean);
+          const newV = {
+            id: 'v_' + Date.now(),
+            titulo: fd.get('titulo'), departamento: fd.get('departamento'),
+            tipo: fd.get('tipo'), ubicacion: fd.get('ubicacion'),
+            descripcion: fd.get('descripcion'), requisitos: reqs,
+            fecha: new Date().toISOString().split('T')[0], activa: true
+          };
+          localData.push(newV);
+          renderList(localData);
+          showAlert('add-alert', '✅ Vacante agregada. (Nota: en modo local, los cambios no se guardan permanentemente. Sube el proyecto a Hostinger para guardar.)', 'success');
+          e.target.reset();
+        } else {
+          const res = await fetch(API, { method: 'POST', body: fd });
+          const data = await res.json();
+          if (data.success) { showAlert('add-alert', '✅ ' + data.message, 'success'); loadVacantes(); e.target.reset(); }
+          else showAlert('add-alert', '❌ ' + data.message, 'error');
+        }
+      } catch (err) { showAlert('add-alert', '❌ Error de conexión.', 'error'); }
+
+      btn.disabled = false; btn.textContent = 'Publicar Vacante 🚀';
+    });
+
+    // ── Toggle activa ──────────────────────────────────────────
+    async function toggleVacante(id) {
+      try {
+        if (isLocal) {
+          localData = localData.map(v => v.id === id ? { ...v, activa: !(v.activa !== false) } : v);
+          renderList(localData); return;
+        }
+        const fd = new URLSearchParams({ action: 'toggle', id });
+        const res = await fetch(API, { method: 'POST', body: fd });
+        const data = await res.json();
+        if (data.success) loadVacantes();
+        else alert(data.message);
+      } catch { alert('Error de conexión.'); }
     }
-    const fd = new URLSearchParams({action:'toggle', id});
-    const res  = await fetch(API, { method:'POST', body:fd });
-    const data = await res.json();
-    if (data.success) loadVacantes();
-    else alert(data.message);
-  } catch { alert('Error de conexión.'); }
-}
 
-// ── Delete vacante ─────────────────────────────────────────
-async function deleteVacante(id, titulo){
-  if (!confirm(`¿Eliminar la vacante "${titulo}"? Esta acción no se puede deshacer.`)) return;
-  try {
-    if (isLocal) {
-      localData = localData.filter(v => v.id !== id);
-      renderList(localData); return;
+    // ── Delete vacante ─────────────────────────────────────────
+    async function deleteVacante(id, titulo) {
+      if (!confirm(`¿Eliminar la vacante "${titulo}"? Esta acción no se puede deshacer.`)) return;
+      try {
+        if (isLocal) {
+          localData = localData.filter(v => v.id !== id);
+          renderList(localData); return;
+        }
+        const fd = new URLSearchParams({ action: 'delete', id });
+        const res = await fetch(API, { method: 'POST', body: fd });
+        const data = await res.json();
+        if (data.success) loadVacantes();
+        else alert(data.message);
+      } catch { alert('Error de conexión.'); }
     }
-    const fd   = new URLSearchParams({action:'delete', id});
-    const res  = await fetch(API, { method:'POST', body:fd });
-    const data = await res.json();
-    if (data.success) loadVacantes();
-    else alert(data.message);
-  } catch { alert('Error de conexión.'); }
-}
-</script>
+  </script>
 </body>
+
 </html>

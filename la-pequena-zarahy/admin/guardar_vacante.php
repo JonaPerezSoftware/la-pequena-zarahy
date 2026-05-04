@@ -9,24 +9,29 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Origin: *');
 
 // ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_password = 'Zarahy2025!'; // ← CAMBIAR por contraseña segura
-$data_file      = __DIR__ . '/../vacantes.json';
+$admin_password = '1234'; // ← CAMBIAR por contraseña segura
+$data_file = __DIR__ . '/../vacantes.json';
 // ───────────────────────────────────────────────────────────
 
-function respond($success, $message = '', $data = null) {
+function respond($success, $message = '', $data = null)
+{
     $res = ['success' => $success, 'message' => $message];
-    if ($data !== null) $res['data'] = $data;
+    if ($data !== null)
+        $res['data'] = $data;
     echo json_encode($res, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-function load_vacantes($file) {
-    if (!file_exists($file)) return [];
+function load_vacantes($file)
+{
+    if (!file_exists($file))
+        return [];
     $content = file_get_contents($file);
     return json_decode($content, true) ?? [];
 }
 
-function save_vacantes($file, $data) {
+function save_vacantes($file, $data)
+{
     file_put_contents($file, json_encode(array_values($data), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
 
@@ -67,12 +72,12 @@ if ($action === 'get') {
 
 // ── ADD ────────────────────────────────────────────────────
 if ($action === 'add') {
-    $titulo      = trim($_POST['titulo']      ?? '');
-    $departamento= trim($_POST['departamento']?? '');
-    $tipo        = trim($_POST['tipo']        ?? '');
-    $ubicacion   = trim($_POST['ubicacion']   ?? '');
+    $titulo = trim($_POST['titulo'] ?? '');
+    $departamento = trim($_POST['departamento'] ?? '');
+    $tipo = trim($_POST['tipo'] ?? '');
+    $ubicacion = trim($_POST['ubicacion'] ?? '');
     $descripcion = trim($_POST['descripcion'] ?? '');
-    $req_raw     = trim($_POST['requisitos']  ?? '');
+    $req_raw = trim($_POST['requisitos'] ?? '');
 
     if (empty($titulo) || empty($descripcion)) {
         respond(false, 'El título y la descripción son obligatorios.');
@@ -83,18 +88,18 @@ if ($action === 'add') {
     ));
 
     $new = [
-        'id'           => uniqid('v_'),
-        'titulo'       => htmlspecialchars($titulo),
+        'id' => uniqid('v_'),
+        'titulo' => htmlspecialchars($titulo),
         'departamento' => htmlspecialchars($departamento),
-        'tipo'         => htmlspecialchars($tipo),
-        'ubicacion'    => htmlspecialchars($ubicacion),
-        'descripcion'  => htmlspecialchars($descripcion),
-        'requisitos'   => $requisitos,
-        'fecha'        => date('Y-m-d'),
-        'activa'       => true,
+        'tipo' => htmlspecialchars($tipo),
+        'ubicacion' => htmlspecialchars($ubicacion),
+        'descripcion' => htmlspecialchars($descripcion),
+        'requisitos' => $requisitos,
+        'fecha' => date('Y-m-d'),
+        'activa' => true,
     ];
 
-    $vacantes   = load_vacantes($data_file);
+    $vacantes = load_vacantes($data_file);
     $vacantes[] = $new;
     save_vacantes($data_file, $vacantes);
     respond(true, 'Vacante publicada exitosamente.', $new);
@@ -103,7 +108,8 @@ if ($action === 'add') {
 // ── DELETE ─────────────────────────────────────────────────
 if ($action === 'delete') {
     $id = $_POST['id'] ?? '';
-    if (empty($id)) respond(false, 'ID no válido.');
+    if (empty($id))
+        respond(false, 'ID no válido.');
     $vacantes = load_vacantes($data_file);
     $vacantes = array_filter($vacantes, fn($v) => $v['id'] !== $id);
     save_vacantes($data_file, $vacantes);
