@@ -9,7 +9,10 @@ header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 
 // ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_email = 'japrezch10@gmail.com'; // ← Correo real para postulaciones
+$admin_emails = [
+    'zarahygardenia@gmail.com',
+    // 'otro_correo@ejemplo.com' // Añade más correos aquí separados por coma
+]; // ← Correos reales para postulaciones
 $max_size_mb = 5;
 $max_size = $max_size_mb * 1024 * 1024;
 $uploads_dir = __DIR__ . '/uploads/cvs/';
@@ -71,53 +74,50 @@ if (!move_uploaded_file($file['tmp_name'], $filepath)) {
     respond(false, 'No se pudo guardar el archivo. Intenta de nuevo.');
 }
 
-// ── Construir email con adjunto ────────────────────────────
-$boundary = '==Boundary_' . md5(time());
-$fecha = date('d/m/Y H:i');
+// COPIA DE SEGURIDAD: Guardar datos en un archivo de texto por si el correo falla
+$log_dir = __DIR__ . '/admin/logs_postulaciones/';
+if (!is_dir($log_dir)) mkdir($log_dir, 0755, true);
+$log_file = $log_dir . date('Y-m-d_H-i-s') . '_' . preg_replace('/[^a-z0-9]/i', '_', $nombre) . '.txt';
+$log_content = "NUEVA POSTULACIÓN\n" .
+               "-----------------\n" .
+               "Fecha: " . date('Y-m-d H:i:s') . "\n" .
+               "Vacante: $vacante\n" .
+               "Nombre: $nombre\n" .
+               "Correo: $correo\n" .
+               "Teléfono: $telefono\n" .
+               "Archivo CV: $filename\n" .
+               "Mensaje:\n$mensaje";
+file_put_contents($log_file, $log_content);
 
-$subject = "=?UTF-8?B?" . base64_encode("🆕 Nueva Postulación — {$vacante}") . "?=";
+// IMPORTAR MOTOR SMTP DIRECTO
+require_once 'class.smtp.php';
 
-$headers = "From: noreply@{$_SERVER['HTTP_HOST']}\r\n";
-$headers .= "Reply-To: {$correo}\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: multipart/mixed; boundary=\"{$boundary}\"\r\n";
+// Configuración SMTP
+$smtp_user = 'info@xn--lapequeazarahy-wnb.es';
+$smtp_pass = 'Zarahy7.g';
 
-$html_body = "<html><body style='font-family:Arial,sans-serif;color:#1e1b4b;'>";
-$html_body .= "<div style='max-width:600px;margin:0 auto;padding:24px;border:1px solid #e5e7eb;border-radius:12px;'>";
-$html_body .= "<h2 style='color:#7c3aed;border-bottom:2px solid #7c3aed;padding-bottom:8px;'>📋 Nueva Postulación Recibida</h2>";
-$html_body .= "<table style='width:100%;border-collapse:collapse;margin-top:16px;'>";
-$html_body .= "<tr style='background:#f5f3ff;'><td style='padding:10px;font-weight:bold;width:35%;'>Vacante:</td><td style='padding:10px;'><strong>{$vacante}</strong></td></tr>";
-$html_body .= "<tr><td style='padding:10px;font-weight:bold;'>Nombre:</td><td style='padding:10px;'>{$nombre}</td></tr>";
-$html_body .= "<tr style='background:#f5f3ff;'><td style='padding:10px;font-weight:bold;'>Correo:</td><td style='padding:10px;'><a href='mailto:{$correo}'>{$correo}</a></td></tr>";
-$html_body .= "<tr><td style='padding:10px;font-weight:bold;'>Teléfono:</td><td style='padding:10px;'>" . (!empty($telefono) ? $telefono : '—') . "</td></tr>";
-$html_body .= "<tr style='background:#f5f3ff;'><td style='padding:10px;font-weight:bold;'>Fecha:</td><td style='padding:10px;'>{$fecha}</td></tr>";
-if (!empty($mensaje)) {
-    $html_body .= "<tr><td style='padding:10px;font-weight:bold;vertical-align:top;'>Mensaje:</td><td style='padding:10px;'>" . nl2br(htmlspecialchars($mensaje)) . "</td></tr>";
+// Enlace al CV (Dominio oficial forzado)
+$cv_url = "https://xn--lapequeazarahy-wnb.es/uploads/cvs/" . $filename;
+
+$subject = "Nueva Postulacion: $vacante";
+$body = "<h2>Nueva Postulación Recibida</h2>
+         <p><strong>Vacante:</strong> $vacante</p>
+         <p><strong>Nombre:</strong> $nombre</p>
+         <p><strong>Correo:</strong> $correo</p>
+         <p><strong>Teléfono:</strong> $telefono</p>
+         <p><strong>CV Adjunto:</strong> <a href='$cv_url'>Descargar / Ver PDF</a></p>
+         <p><strong>Mensaje:</strong><br>" . nl2br(htmlspecialchars($mensaje)) . "</p>";
+
+// ENVÍO DIRECTO A MÚLTIPLES DESTINATARIOS
+$success = false;
+foreach ($admin_emails as $email) {
+    if (SimpleSMTP::send($email, $subject, $body, $smtp_user, $smtp_pass, "Postulaciones Zarahy")) {
+        $success = true;
+    }
 }
-$html_body .= "</table>";
-$html_body .= "<p style='margin-top:20px;padding:12px;background:#faf5ff;border-radius:8px;color:#6b7280;font-size:13px;'>📎 El CV se adjunta en este correo y también fue guardado en el servidor.</p>";
-$html_body .= "</div></body></html>";
 
-// Cuerpo del email
-$body = "--{$boundary}\r\n";
-$body .= "Content-Type: text/html; charset=UTF-8\r\n";
-$body .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
-$body .= $html_body . "\r\n";
-
-// Adjunto PDF
-$file_data = base64_encode(file_get_contents($filepath));
-$body .= "--{$boundary}\r\n";
-$body .= "Content-Type: application/pdf; name=\"{$filename}\"\r\n";
-$body .= "Content-Transfer-Encoding: base64\r\n";
-$body .= "Content-Disposition: attachment; filename=\"{$filename}\"\r\n\r\n";
-$body .= chunk_split($file_data) . "\r\n";
-$body .= "--{$boundary}--";
-
-$mail_sent = mail($admin_email, $subject, $body, $headers);
-
-if ($mail_sent) {
-    respond(true, '¡Postulación enviada con éxito! Nos comunicaremos contigo pronto.');
+if ($success) {
+    respond(true, '¡Postulación enviada con éxito!');
 } else {
-    // El CV se guardó aunque el correo falle
-    respond(true, '¡CV recibido! Nos pondremos en contacto contigo pronto.');
+    respond(false, 'Error del servidor de correo. Tu CV fue guardado pero la notificación falló.');
 }

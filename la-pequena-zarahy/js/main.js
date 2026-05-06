@@ -206,8 +206,31 @@ function cerrarModal() {
   document.body.style.overflow = '';
 }
 
-function abrirModalDonacion() {
+function abrirModalDonacion(tipo = 'local') {
   if (!modalDonacion) return;
+  
+  const title = document.getElementById('don-modal-title');
+  const subtitle = document.getElementById('don-modal-subtitle');
+  const bankDetails = document.getElementById('don-bank-details');
+  const paypalDetails = document.getElementById('don-paypal-details');
+  const qrImg = document.getElementById('don-qr-img');
+  
+  if (tipo === 'internacional') {
+    title.textContent = 'Donación Internacional';
+    subtitle.textContent = 'A través de PayPal';
+    bankDetails.style.display = 'none';
+    paypalDetails.style.display = 'block';
+    qrImg.src = 'varios/qr_paypal.jpeg';
+    qrImg.alt = 'Código QR de PayPal';
+  } else {
+    title.textContent = 'Datos para Donación';
+    subtitle.textContent = 'Transferencia Bancaria Directa';
+    bankDetails.style.display = 'block';
+    paypalDetails.style.display = 'none';
+    qrImg.src = 'varios/qr_donacion.png';
+    qrImg.alt = 'Código QR Banco Pichincha';
+  }
+  
   modalDonacion.classList.add('open');
   document.body.style.overflow = 'hidden';
 }

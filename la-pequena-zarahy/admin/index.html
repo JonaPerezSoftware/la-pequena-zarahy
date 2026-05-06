@@ -7,23 +7,23 @@
   <title>Panel Admin — La Pequeña Zarahy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="../varios/Logo2.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../varios/Logo2.png">
-  <link rel="apple-touch-icon" href="../varios/Logo2.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../varios/primera_seccion3.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../varios/primera_seccion3.png">
+  <link rel="apple-touch-icon" href="../varios/primera_seccion3.png">
   <style>
     :root {
-      --purple: #7c3aed;
-      --purple-light: #f5f3ff;
-      --pink: #ec4899;
-      --gradient: linear-gradient(135deg, #9333ea, #ec4899);
+      --purple: #4c1d95;
+      --purple-light: #fff0f3;
+      --pink: #db2777;
+      --gradient: linear-gradient(135deg, #4c1d95, #db2777);
       --red: #dc2626;
       --green: #16a34a;
-      --border: #e5e7eb;
+      --border: #fecdd3;
       --text: #1e1b4b;
       --gray: #6b7280;
-      --bg: #f8fafc;
+      --bg: #fff5f7;
       --radius: 12px;
-      --shadow: 0 4px 20px rgba(124, 58, 237, .12)
+      --shadow: 0 4px 20px rgba(219, 39, 119, .08)
     }
 
     * {
@@ -159,7 +159,7 @@
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
-      background: linear-gradient(135deg, #4c1d95, #7c3aed 50%, #ec4899)
+      background: linear-gradient(135deg, #4c1d95, #db2777)
     }
 
     .login-card {
@@ -176,10 +176,10 @@
       margin-bottom: 28px
     }
 
-    .login-logo .icon {
-      font-size: 2.8rem;
-      display: block;
-      margin-bottom: 8px
+    .login-logo .logo-img {
+      width: 140px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1))
     }
 
     .login-logo h1 {
@@ -423,7 +423,7 @@
   <div id="login-screen">
     <div class="login-card">
       <div class="login-logo">
-        <img src="../varios/Logo2.png" alt="Logo" style="height: 120px; width: auto; margin-bottom: 20px;">
+        <img src="../varios/primera_seccion3.png?v=1" alt="Logo" class="logo-img">
         <h1>La Pequeña Zarahy</h1>
         <p>Panel de Administración</p>
       </div>
@@ -451,8 +451,8 @@
   <div id="dashboard">
     <div class="topbar">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="../varios/Logo2.png" alt="Logo"
-          style="height: 45px; width: auto; filter: drop-shadow(1px 1px 0px #fff) drop-shadow(-1px -1px 0px #fff) drop-shadow(1px -1px 0px #fff) drop-shadow(-1px 1px 0px #fff);">
+        <img src="../varios/primera_seccion3.png?v=1" alt="Logo"
+          style="height: 60px; width: auto; filter: brightness(1.1) drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(0 0 5px rgba(255,255,255,0.5));">
         <h1>La Pequeña Zarahy — Gestión de Vacantes</h1>
       </div>
       <div class="topbar-right">
@@ -569,7 +569,7 @@
   <script>
     // ── Configuración ──────────────────────────────────────────
     const API = 'guardar_vacante.php';
-    const PASSWORD = '1234'; // Mismo que en PHP — solo para modo local
+    const PASSWORD = 'Zarahy7.g'; // Mismo que en PHP — solo para modo local
     let isLocal = false; // true cuando no hay PHP (abrir como archivo)
     let localData = [];
 

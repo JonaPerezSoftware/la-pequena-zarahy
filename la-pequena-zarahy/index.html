@@ -15,11 +15,51 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" sizes="32x32" href="varios/Logo2.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="varios/Logo2.png">
-  <link rel="apple-touch-icon" href="varios/Logo2.png">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=1.8">
+  <link rel="icon" type="image/png" sizes="32x32" href="varios/primera_seccion3.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="varios/primera_seccion3.png">
+  <link rel="apple-touch-icon" href="varios/primera_seccion3.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <style>
+    /* REGLAS PARA TABLETS Y MÓVILES (Menú) */
+    @media (max-width: 1024px) {
+      .nav-menu.open {
+        z-index: 9999 !important;
+        display: flex !important;
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+      }
+      .hamburger {
+        z-index: 10000 !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        position: relative !important;
+      }
+    }
+    
+    /* FORZAR 1 COLUMNA EN MÓVILES (Cobertura) */
+    @media (max-width: 768px) {
+      .coverage-section .coverage-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+      }
+      .coverage-section .coverage-card:last-child {
+        grid-column: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -27,8 +67,8 @@
   <!-- ══════════════════ NAVBAR ══════════════════ -->
   <nav class="navbar" id="navbar">
     <div class="container">
-      <a href="#inicio" class="nav-logo">
-        <img src="varios/Logo2.png" alt="La Pequeña Zarahy Logo" style="height: 85px; width: auto;">
+      <a href="#inicio" class="nav-logo" style="max-width: 70%;">
+        <img src="varios/primera_seccion3.png" alt="La Pequeña Zarahy Logo" style="height: 85px; max-height: 85px; width: auto; max-width: 100%; object-fit: contain;">
       </a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -48,25 +88,35 @@
   <section class="hero" id="inicio">
     <div class="hero-bg"></div>
     <div class="container hero-content">
-      <div class="hero-badge">🌟 Sembrando esperanza desde Ecuador</div>
+      <div class="hero-image reveal" style="margin-bottom: 20px;">
+        <img src="varios/primera_seccion3.png" alt="La Pequeña Zarahy"
+          style="width: 100%; max-width: 450px; margin: 0 auto; display: block; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.2));">
+      </div>
       <h1 class="hero-title">
-        Transformamos Vidas<br>
-        <span>con Propósito</span>
+        <span>Transformamos Vidas con Propósito</span>
       </h1>
       <p class="hero-desc">
-        Proyecto social y agente de cambio que impulsa el desarrollo en todo el Ecuador
-        mediante el acompañamiento integral y la gestión estratégica del talento humano.
+        La Pequeña Zarahy es un proyecto social y agente de cambio que impulsa el desarrollo en todo el Ecuador mediante
+        el acompañamiento integral y la gestión estratégica del talento humano. Bajo un modelo de sostenibilidad ética,
+        reinvertimos los ingresos de nuestras capacitaciones para cubrir la infraestructura operativa; sin embargo,
+        dependemos de la suma de voluntades y de fondos nacionales, internacionales y donantes anónimos para ejecutar
+        intervenciones directas en comunidades vulnerables.
       </p>
       <div class="hero-actions">
         <a href="#donaciones" class="btn btn-white">💛 Quiero Donar</a>
         <a href="#servicios" class="btn btn-gradient">Conocer más →</a>
       </div>
+      <div class="hero-badge" style="margin-top: 30px;">🌟 Sembrando esperanza desde Ecuador</div>
+    </div>
     </div>
     </div>
   </section>
 
-  <!-- ══════════════════ MISIÓN & VISIÓN ══════════════════ -->
-  <section id="mision" style="background:#fff;">
+  <section id="mision" style="background:#fff0f3; position: relative; overflow: hidden; padding: 60px 0;">
+    <!-- Marca de agua OFICIAL: Manos sosteniendo corazón -->
+    <div
+      style="position: absolute; bottom: -80px; right: -80px; width: 500px; height: 500px; background: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Cpath d=%22M50,45 C40,25 15,25 15,45 C15,70 50,90 50,90 C50,90 85,70 85,45 C85,25 60,25 50,45 Z%22 fill=%22%23db2777%22 fill-opacity=%220.15%22/%3E%3Cpath d=%22M20,70 C10,75 5,85 15,95 C25,105 45,100 50,90 C55,100 75,105 85,95 C95,85 90,75 80,70 M35,80 C30,85 30,90 40,92 M65,80 C70,85 70,90 60,92%22 fill=%22none%22 stroke=%22%23db2777%22 stroke-width=%223%22 stroke-opacity=%220.25%22 stroke-linecap=%22round%22/%3E%3C/svg%3E') no-repeat center; background-size: contain; z-index: 0; pointer-events: none;">
+    </div>
     <div class="container">
       <div class="section-header reveal">
         <div class="section-badge purple">Quiénes Somos</div>
@@ -75,11 +125,8 @@
         </p>
       </div>
       <div class="about-intro reveal">
-        <p>La Pequeña Zarahy es un proyecto social y agente de cambio que impulsa el desarrollo en todo el Ecuador
-          mediante el acompañamiento integral y la gestión estratégica del talento humano. Bajo un modelo de
-          sostenibilidad ética, reinvertimos los ingresos de nuestras capacitaciones para cubrir la infraestructura
-          operativa; sin embargo, dependemos de la suma de voluntades y de fondos nacionales, internacionales y donantes
-          anónimos para ejecutar intervenciones directas en comunidades vulnerables.</p>
+        <p>Proyecto social y agente de cambio que impulsa el desarrollo en todo el Ecuador mediante el acompañamiento
+          integral y la gestión estratégica del talento humano.</p>
       </div>
       <div class="mv-grid">
         <div class="mv-card mission reveal">
@@ -196,6 +243,12 @@
             humano, ético y confidencial.</p>
         </div>
         <div class="card service-card reveal">
+          <div class="service-icon">📚</div>
+          <h3>Acompañamiento Educativo y Orientación</h3>
+          <p>Apoyo escolar, refuerzo académico y orientación vocacional para niños, jóvenes y adultos que buscan
+            potenciar su futuro profesional.</p>
+        </div>
+        <div class="card service-card reveal">
           <div class="service-icon">⚖️</div>
           <h3>Asesoría Legal</h3>
           <p>Orientamos y acompañamos a familias y personas en el ejercicio de sus derechos, facilitando el acceso a la
@@ -217,7 +270,8 @@
           <h2 class="section-title" style="color: var(--purple-dark);">Impacto Real en la Comunidad</h2>
           <p class="section-sub" style="margin: 0 0 30px 0; text-align: left;">Trabajamos de manera articulada con
             municipios, empresas privadas y equipos multidisciplinarios, fortaleciendo redes de apoyo y generando
-            impacto real en la sociedad. Cada intervención es diseñada con propósito y ejecutada con excelencia.</p>
+            impacto real en la sociedad. Cada intervención es diseñada con propósito y ejecutada con excelencia
+            realizamos para empresa pública y privada.</p>
 
           <div class="impact-points">
             <div class="impact-point">
@@ -239,6 +293,13 @@
               <div class="point-text">
                 <strong>Intervención Psicosocial</strong>
                 <span>Procesos integrales de transformación y sanación.</span>
+              </div>
+            </div>
+            <div class="impact-point">
+              <div class="point-icon" style="background: #fff1f2; color: var(--pink);">✓</div>
+              <div class="point-text">
+                <strong>Aliados del DECE (Escuelas y Colegios)</strong>
+                <span>Trabajamos de manera articulada para el bienestar integral estudiantil.</span>
               </div>
             </div>
           </div>
@@ -272,7 +333,7 @@
         </div>
         <div class="coverage-card reveal">
           <div class="cov-icon">📍</div>
-          <div class="cov-name">Guayaquil - Durán</div>
+          <div class="cov-name">Guayaquil</div>
         </div>
         <div class="coverage-card reveal">
           <div class="cov-icon">📍</div>
@@ -284,15 +345,19 @@
         </div>
         <div class="coverage-card reveal">
           <div class="cov-icon">📍</div>
-          <div class="cov-name">Santa Rosa - Quito Centro Sur</div>
+          <div class="cov-name">Quito</div>
         </div>
         <div class="coverage-card reveal">
           <div class="cov-icon">📍</div>
-          <div class="cov-name">El Guabo - Quevedo</div>
+          <div class="cov-name">Bucay</div>
         </div>
         <div class="coverage-card reveal">
           <div class="cov-icon">📍</div>
-          <div class="cov-name">El Cambio - Todo territorio ecuatoriano</div>
+          <div class="cov-name">Yaguachi</div>
+        </div>
+        <div class="coverage-card reveal" style="grid-column: span 3; max-width: 400px; margin: 0 auto; width: 100%;">
+          <div class="cov-icon">📍</div>
+          <div class="cov-name">Todo territorio ecuatoriano</div>
         </div>
       </div>
 
@@ -312,16 +377,28 @@
         <p class="section-sub">Tu generosidad transforma vidas. Tu apoyo nos permite continuar brindando servicios de
           calidad a personas y comunidades que más lo necesitan.</p>
       </div>
-      <div class="donations-container reveal" style="max-width: 600px; margin: 0 auto;">
+      <div class="donations-grid reveal"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 900px; margin: 0 auto;">
+        <!-- Donación Local -->
+        <div class="card donation-card">
+          <div class="don-icon" style="font-size: 3rem; margin-bottom: 15px;">🇪🇨</div>
+          <h3>Donación Local</h3>
+          <p>Ideal para transferencias dentro de Ecuador. Contamos con cuenta en Banco Pichincha para tu comodidad.</p>
+          <button class="btn btn-gradient" onclick="abrirModalDonacion('local')"
+            style="margin-top: 15px; width: 100%; justify-content: center;">
+            Datos Bancarios 💳
+          </button>
+        </div>
+
+        <!-- Donación Internacional -->
         <div class="card donation-card featured">
-          <div class="donation-badge">💖 Tu aporte cuenta</div>
-          <div class="don-icon" style="font-size: 4rem; margin: 20px 0;">🤝</div>
-          <h3>Apoya nuestra labor social</h3>
-          <p>Tu generosidad es el motor que nos permite seguir transformando vidas en todo el Ecuador. Haz una donación
-            directa a nuestra cuenta bancaria oficial.</p>
-          <button class="btn btn-white" onclick="abrirModalDonacion()"
-            style="margin-top: 20px; width: 100%; justify-content: center;">
-            Ver Datos para Donar 💳
+          <div class="donation-badge">🌍 Internacional</div>
+          <div class="don-icon" style="font-size: 3.5rem; margin: 15px 0;">🌐</div>
+          <h3>Donación Internacional</h3>
+          <p>Apóyanos desde cualquier parte del mundo de forma rápida y segura a través de PayPal.</p>
+          <button class="btn btn-white" onclick="abrirModalDonacion('internacional')"
+            style="margin-top: 15px; width: 100%; justify-content: center;">
+            Donar con PayPal 🅿️
           </button>
         </div>
       </div>
@@ -332,12 +409,13 @@
   <div class="modal-overlay" id="modal-donacion" role="dialog" aria-modal="true">
     <div class="modal">
       <div class="modal-header">
-        <h2>Datos para Donación</h2>
-        <p>Transferencia Bancaria Directa</p>
+        <h2 id="don-modal-title">Datos para Donación</h2>
+        <p id="don-modal-subtitle">Transferencia Bancaria Directa</p>
         <button class="modal-close" onclick="cerrarModalDonacion()" aria-label="Cerrar">✕</button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        <div class="bank-details"
+        <!-- Contenedor Banco (Local) -->
+        <div id="don-bank-details" class="bank-details"
           style="background: #f5f3ff; padding: 20px; border-radius: 12px; margin-bottom: 24px; text-align: left; border: 1px solid #e9d5ff;">
           <p style="margin-bottom: 8px;"><strong>🏦 Banco:</strong> Banco Pichincha</p>
           <p style="margin-bottom: 8px;"><strong>📄 Tipo de Cuenta:</strong> Ahorro transaccional</p>
@@ -348,11 +426,18 @@
               style="color: inherit; text-decoration: none;">gguerrerog@unemi.edu.ec</a></p>
         </div>
 
+        <!-- Contenedor PayPal (Internacional) -->
+        <div id="don-paypal-details"
+          style="display: none; margin-bottom: 20px; color: var(--text-dark); font-weight: 500;">
+          <p>Puedes realizar tu donación escaneando el código QR oficial de PayPal de nuestra fundación.</p>
+        </div>
+
         <div class="qr-container">
           <p style="font-weight: 600; margin-bottom: 12px; color: var(--purple);">O escanea el código QR:</p>
           <div
             style="background: #fff; padding: 15px; border: 2px dashed var(--purple); border-radius: 12px; display: inline-block; width: 220px; height: 220px; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
-            <img src="varios/qr_donacion.png" alt="Código QR para donación" style="max-width: 100%; border-radius: 8px;"
+            <img id="don-qr-img" src="varios/qr_donacion.png" alt="Código QR para donación"
+              style="max-width: 100%; border-radius: 8px;"
               onerror="this.src='https://placehold.co/200x200?text=QR+Próximamente'">
           </div>
           <p style="font-size: 0.8rem; color: var(--text-gray); margin-top: 12px;">Una vez realizada la transferencia,
@@ -464,10 +549,11 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="#inicio" class="nav-logo">
-            <img src="varios/Logo2.png" alt="La Pequeña Zarahy Logo" class="footer-logo"
-              style="height: 100px; width: auto; margin-bottom: 5px;">
+            <img src="varios/primera_seccion3.png" alt="La Pequeña Zarahy Logo" class="footer-logo"
+              style="height: 80px; width: auto; margin-bottom: 2px;">
           </a>
-          <p>💜 Más que un proyecto... somos una red de apoyo que acompaña, forma y transforma vidas con propósito.</p>
+          <p style="font-size: 0.85rem; line-height: 1.4;">💜 Más que un proyecto... somos una red de apoyo que
+            transforma vidas.</p>
         </div>
         <div class="footer-col">
           <h4>Navegación</h4>
@@ -492,7 +578,15 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 La Pequeña Zarahy. Todos los derechos reservados.</p>
+        <div class="copyright-info">
+          <p>© 2026 La Pequeña Zarahy. Todos los derechos reservados.</p>
+          <p style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">
+            Elaborado por:
+            <a href="https://wa.me/593988175009" target="_blank"
+              style="color: #fff; text-decoration: none; font-weight: 600;">Jonathan Pérez</a> |
+            <a href="mailto:japrezch10@gmail.com" style="color: #fff; text-decoration: none;">japrezch10@gmail.com</a>
+          </p>
+        </div>
         <div class="social-links">
           <a href="https://www.facebook.com/nhguerreros" class="social-link" aria-label="Facebook" target="_blank">
             <i class="fab fa-facebook-f"></i>
@@ -560,7 +654,7 @@
     </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=1.1"></script>
 </body>
 
 </html>

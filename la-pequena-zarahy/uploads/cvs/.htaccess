@@ -1,13 +1,12 @@
-# Bloquear listado de directorio
+# Permitir acceso a archivos PDF
 Options -Indexes
-
-# Solo permitir acceso a PDFs
-<FilesMatch "\.(?!pdf$)[^.]+$">
+<FilesMatch "\.pdf$">
     Order allow,deny
-    Deny from all
+    Allow from all
+    Satisfy Any
 </FilesMatch>
 
-# Bloquear ejecución de scripts
+# Bloquear ejecución de scripts por seguridad
 <FilesMatch "\.(php|php3|php4|php5|phtml|pl|py|jsp|asp|sh|cgi)$">
     Order allow,deny
     Deny from all
