@@ -22,12 +22,12 @@
     href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=1.8">
+  <link rel="stylesheet" href="css/style.css?v=2.1">
   <link rel="icon" type="image/png" sizes="32x32" href="varios/primera_seccion3.png">
   <link rel="icon" type="image/png" sizes="16x16" href="varios/primera_seccion3.png">
   <link rel="apple-touch-icon" href="varios/primera_seccion3.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  
+
   <style>
     /* REGLAS PARA TABLETS Y MÓVILES (Menú) */
     @media (max-width: 1024px) {
@@ -37,6 +37,7 @@
         transform: translateY(0) !important;
         opacity: 1 !important;
       }
+
       .hamburger {
         z-index: 10000 !important;
         background: transparent !important;
@@ -45,7 +46,7 @@
         position: relative !important;
       }
     }
-    
+
     /* FORZAR 1 COLUMNA EN MÓVILES (Cobertura) */
     @media (max-width: 768px) {
       .coverage-section .coverage-grid {
@@ -53,6 +54,7 @@
         grid-template-columns: 1fr !important;
         gap: 15px !important;
       }
+
       .coverage-section .coverage-card:last-child {
         grid-column: auto !important;
         max-width: none !important;
@@ -68,7 +70,8 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#inicio" class="nav-logo" style="max-width: 70%;">
-        <img src="varios/primera_seccion3.png" alt="La Pequeña Zarahy Logo" style="height: 85px; max-height: 85px; width: auto; max-width: 100%; object-fit: contain;">
+        <img src="varios/primera_seccion3.png" alt="La Pequeña Zarahy Logo"
+          style="height: 85px; max-height: 85px; width: auto; max-width: 100%; object-fit: contain;">
       </a>
       <button class="hamburger" id="hamburger" aria-label="Abrir menú">
         <span></span><span></span><span></span>
@@ -144,6 +147,23 @@
           </p>
         </div>
       </div>
+
+      <!-- Perfil de la Fundadora -->
+      <div class="founder-profile reveal" style="margin-top: 50px;">
+        <div class="founder-img">
+          <img src="varios/fundadora.jpeg" alt="Lcda. Gardenia Guerrero Guzmán">
+        </div>
+        <div class="founder-info">
+          <span class="founder-badge">Fundadora del Proyecto</span>
+          <h3 class="founder-name">Lcda. Gardenia Guerrero Guzmán</h3>
+          <p class="founder-desc">
+            "Mi mayor propósito es sembrar esperanza y brindar oportunidades a quienes más lo necesitan. Creo firmemente
+            que con empatía y trabajo conjunto, podemos transformar vidas y construir un Ecuador lleno de posibilidades
+            para todos."
+          </p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -575,33 +595,31 @@
             <li><a href="#">📍 Naranjito-Guayas</a></li>
             <li><a href="admin/">🔐 Panel Administración</a></li>
           </ul>
+          <div class="social-links" style="margin-top: 25px; justify-content: flex-start;">
+            <a href="https://www.facebook.com/nhguerreros" class="social-link" aria-label="Facebook" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/gardenia_guerrero/" class="social-link" aria-label="Instagram" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/gardenia-guerrero-g-a8740680/" class="social-link" aria-label="LinkedIn" target="_blank">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://wa.me/593987357673" class="social-link" aria-label="WhatsApp" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
         </div>
       </div>
-      <div class="footer-bottom">
-        <div class="copyright-info">
+      <div class="footer-bottom" style="justify-content: center;">
+        <div class="copyright-info" style="text-align: center; width: 100%;">
           <p>© 2026 La Pequeña Zarahy. Todos los derechos reservados.</p>
           <p style="font-size: 0.75rem; opacity: 0.8; margin-top: 5px;">
-            Elaborado por:
+            Página web desarrollada por:
             <a href="https://wa.me/593988175009" target="_blank"
               style="color: #fff; text-decoration: none; font-weight: 600;">Jonathan Pérez</a> |
             <a href="mailto:japrezch10@gmail.com" style="color: #fff; text-decoration: none;">japrezch10@gmail.com</a>
           </p>
-        </div>
-        <div class="social-links">
-          <a href="https://www.facebook.com/nhguerreros" class="social-link" aria-label="Facebook" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-          <a href="https://www.instagram.com/gardenia_guerrero/" class="social-link" aria-label="Instagram"
-            target="_blank">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/gardenia-guerrero-g-a8740680/" class="social-link" aria-label="LinkedIn"
-            target="_blank">
-            <i class="fab fa-linkedin-in"></i>
-          </a>
-          <a href="https://wa.me/593987357673" class="social-link" aria-label="WhatsApp" target="_blank">
-            <i class="fab fa-whatsapp"></i>
-          </a>
         </div>
       </div>
     </div>

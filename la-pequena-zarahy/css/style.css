@@ -111,7 +111,16 @@ section{padding:80px 0}
 .mv-card h3{font-size:1.4rem;font-weight:700;margin-bottom:12px}
 .mv-card.vision h3{color:var(--purple-deep)}
 .mv-card p{line-height:1.7;opacity:.9}
-.mv-card.vision p{color:var(--text-mid);opacity:1}
+.mv-card.vision p{color:var(--text-gray);opacity:1}
+
+/* ── Founder Profile ── */
+.founder-profile{background:#fff;border-radius:var(--radius);padding:40px;display:flex;align-items:center;gap:40px;box-shadow:var(--shadow);position:relative;overflow:hidden;border:1px solid #fecdd3}
+.founder-profile::before{content:'';position:absolute;top:0;left:0;width:6px;height:100%;background:var(--gradient)}
+.founder-img{width:180px;height:180px;flex-shrink:0;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 10px 25px rgba(219,39,119,0.15);background:var(--purple-light)}
+.founder-img img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.founder-badge{display:inline-block;background:#fdf2f8;color:var(--pink);font-size:.8rem;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:14px;text-transform:uppercase;letter-spacing:1px}
+.founder-name{font-family:'Dancing Script',cursive;font-size:clamp(2.2rem, 6vw, 3.2rem);background:linear-gradient(135deg, var(--purple), var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;line-height:1.2;padding:0 10px 5px 8px;margin-left:-8px}
+.founder-desc{font-size:1.05rem;color:var(--text-gray);line-height:1.8;font-style:italic}
 
 /* ── Values ── */
 .values-section{background:#fff}
@@ -355,6 +364,12 @@ textarea.form-control{resize:vertical;min-height:90px}
   .hero-stats{gap:24px}
   .hero-stat strong{font-size:1.6rem}
   .hero-actions{flex-direction:column;align-items:center}
+
+  /* Founder Profile (Mobile) */
+  .founder-profile{flex-direction:column;text-align:center;padding:35px 20px;gap:20px}
+  .founder-profile::before{width:100%;height:6px}
+  .founder-img{width:150px;height:150px;margin:0 auto}
+  .founder-name{font-size:1.8rem}
 
   /* Grids */
   .mv-grid{grid-template-columns:1fr}
