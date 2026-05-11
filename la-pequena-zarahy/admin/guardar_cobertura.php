@@ -3,7 +3,7 @@ session_start();
 header('Content-Type: application/json; charset=UTF-8');
 
 // ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_password = 'Zarahy7.g';
+$admin_password = 'JoseyGarde1328';
 $data_file = __DIR__ . '/../cobertura.json';
 $upload_dir = __DIR__ . '/../uploads/cobertura/';
 

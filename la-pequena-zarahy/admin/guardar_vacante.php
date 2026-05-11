@@ -9,7 +9,7 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Origin: *');
 
 // ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_password = 'Zarahy7.g'; // ← CAMBIAR por contraseña segura
+$admin_password = 'JoseyGarde1328'; // ← CAMBIAR por contraseña segura
 $data_file = __DIR__ . '/../vacantes.json';
 // ───────────────────────────────────────────────────────────
 
