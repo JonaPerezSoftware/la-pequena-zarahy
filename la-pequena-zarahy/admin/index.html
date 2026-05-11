@@ -467,6 +467,14 @@
 
     <div class="main">
 
+      <!-- TABS NAV -->
+      <div class="tabs" style="display:flex; gap:10px; margin-bottom: 24px;">
+        <button class="btn btn-gradient" id="tab-vacantes" onclick="showTab('vacantes')">Gestión de Vacantes</button>
+        <button class="btn btn-outline" id="tab-cobertura" onclick="showTab('cobertura')">Red de Cobertura</button>
+      </div>
+
+      <!-- VIEW: VACANTES -->
+      <div id="view-vacantes">
       <!-- Stats -->
       <div class="stats-bar">
         <div class="stat-box">
@@ -563,6 +571,60 @@
         💡 Los cambios se reflejan inmediatamente en el sitio web.
         <a href="../index.html#empleos" target="_blank" style="color:var(--purple)">Ver sitio →</a>
       </p>
+      </div> <!-- /VIEW VACANTES -->
+
+      <!-- VIEW: COBERTURA -->
+      <div id="view-cobertura" style="display: none;">
+        <!-- Agregar cobertura -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>🌍 Añadir / Editar Localidad y Coordinador</h2>
+            <button class="btn btn-outline" onclick="toggleFormCob()" id="toggle-form-cob-btn">Colapsar</button>
+          </div>
+          <div class="panel-body" id="add-form-cob-body">
+            <div id="cob-alert" class="alert"></div>
+            <form id="cob-form" enctype="multipart/form-data">
+              <input type="hidden" id="c-id" name="id">
+              
+              <div class="form-group">
+                <label for="c-localidad">Localidad / Zona *</label>
+                <input id="c-localidad" name="localidad" type="text" placeholder="Ej: Guayaquil" required>
+              </div>
+
+              <div style="background:#fdf2f8; padding:20px; border-radius:15px; border:1px dashed var(--pink); margin-bottom:20px;">
+                <h4 style="margin-bottom:15px; color:var(--purple); font-size:1rem; display:flex; align-items:center; gap:8px;">
+                  <span style="font-size:1.2rem">👥</span> Red de Coordinadores en esta Zona
+                </h4>
+                <div id="coordinadores-container">
+                  <!-- Se llena dinámicamente vía JS -->
+                </div>
+                <button type="button" class="btn btn-outline" style="width:100%; border-style:dashed; margin-top:10px; background:#fff" onclick="addCoordRow()">
+                  + Añadir otra persona a esta localidad
+                </button>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="submit" class="btn btn-gradient">Guardar Cambios en Cobertura 🚀</button>
+                <button type="button" class="btn btn-outline" onclick="resetCobForm()">Limpiar / Nuevo</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Lista de cobertura -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>📋 Red de Cobertura Activa</h2>
+            <button class="btn btn-outline" onclick="loadCobertura()" style="font-size:.78rem;padding:7px 16px">↻ Actualizar</button>
+          </div>
+          <div class="panel-body">
+            <div class="vac-list" id="cob-list">
+              <div class="empty-state">Cargando cobertura...</div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /VIEW COBERTURA -->
+
     </div>
   </div>
 
@@ -614,6 +676,7 @@
       document.getElementById('dashboard').style.display = 'block';
       document.getElementById('admin-date').textContent = new Date().toLocaleDateString('es-EC', { weekday: 'long', day: '2-digit', month: 'long' });
       loadVacantes();
+      loadCobertura();
     }
 
     function logout() {
@@ -622,6 +685,209 @@
         location.reload();
       }
     }
+
+    // ── TABS ───────────────────────────────────────────────────
+    function showTab(tab) {
+      if (tab === 'vacantes') {
+        document.getElementById('view-vacantes').style.display = 'block';
+        document.getElementById('view-cobertura').style.display = 'none';
+        document.getElementById('tab-vacantes').className = 'btn btn-gradient';
+        document.getElementById('tab-cobertura').className = 'btn btn-outline';
+        document.querySelector('.topbar h1').textContent = 'La Pequeña Zarahy — Gestión de Vacantes';
+      } else {
+        document.getElementById('view-vacantes').style.display = 'none';
+        document.getElementById('view-cobertura').style.display = 'block';
+        document.getElementById('tab-vacantes').className = 'btn btn-outline';
+        document.getElementById('tab-cobertura').className = 'btn btn-gradient';
+        document.querySelector('.topbar h1').textContent = 'La Pequeña Zarahy — Cobertura';
+      }
+    }
+
+    // ── COBERTURA ──────────────────────────────────────────────
+    const API_COB = 'guardar_cobertura.php';
+    let cobData = [];
+
+    function toggleFormCob() {
+      const b = document.getElementById('add-form-cob-body');
+      const btn = document.getElementById('toggle-form-cob-btn');
+      if (b.style.display === 'none') { b.style.display = 'block'; btn.textContent = 'Colapsar'; }
+      else { b.style.display = 'none'; btn.textContent = 'Expandir'; }
+    }
+
+    function addCoordRow(nombre = '', foto = '') {
+      const container = document.getElementById('coordinadores-container');
+      const div = document.createElement('div');
+      div.className = 'form-row';
+      div.style.marginBottom = '15px';
+      div.style.background = '#fff';
+      div.style.padding = '10px';
+      div.style.borderRadius = '10px';
+      div.style.position = 'relative';
+      div.innerHTML = `
+        <div class="form-group" style="flex:1">
+          <label style="font-size:0.8rem">Nombre Completo</label>
+          <input class="form-control" name="coord_nombres[]" value="${nombre}" placeholder="Ej: Lcda. Gardenia Guerrero" required>
+        </div>
+        <div class="form-group" style="flex:1">
+          <label style="font-size:0.8rem">Foto (opcional)</label>
+          <input type="file" name="coord_fotos[]" accept="image/*">
+          <input type="hidden" name="coord_fotos_prev[]" value="${foto}">
+          ${foto ? `<div style="margin-top:5px; font-size:0.7rem; color:var(--pink)">✓ Foto actual: ${foto.split('/').pop()}</div>` : ''}
+        </div>
+        <button type="button" onclick="this.parentElement.remove()" style="position:absolute; top:-10px; right:-10px; background:#ef4444; color:#fff; border:none; width:22px; height:22px; border-radius:50%; cursor:pointer; font-size:12px; display:flex; align-items:center; justify-content:center;">✕</button>
+      `;
+      container.appendChild(div);
+    }
+
+    function resetCobForm() {
+      document.getElementById('cob-form').reset();
+      document.getElementById('c-id').value = '';
+      document.getElementById('coordinadores-container').innerHTML = '';
+      addCoordRow(); // Iniciar con una fila vacía
+    }
+
+    async function loadCobertura() {
+      if (isLocal) return; // Modo prueba local sin PHP
+      try {
+        const res = await fetch(API_COB + '?action=get');
+        const json = await res.json();
+        if (json.success) {
+          cobData = json.data;
+          renderCobertura();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function renderCobertura() {
+      const list = document.getElementById('cob-list');
+      if (cobData.length === 0) {
+        list.innerHTML = '<div class="empty-state">No hay localidades registradas.</div>';
+        return;
+      }
+      list.innerHTML = '';
+      cobData.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'vac-item';
+        
+        let photosHtml = '<div style="display:flex; gap: -10px; align-items:center;">';
+        if (item.coordinadores && item.coordinadores.length) {
+          item.coordinadores.forEach((c, idx) => {
+            photosHtml += `
+              <div style="width:35px; height:35px; border-radius:50%; background:#fdf2f8; overflow:hidden; border: 2px solid #fff; margin-left: ${idx > 0 ? '-10px' : '0'}; z-index: ${10 - idx};">
+                ${c.foto ? `<img src="../${c.foto}" style="width:100%;height:100%;object-fit:cover;">` : '<div style="display:flex;height:100%;align-items:center;justify-content:center;font-size:14px;">👤</div>'}
+              </div>`;
+          });
+        } else {
+          // Fallback antigua estructura
+          photosHtml += `
+              <div style="width:35px; height:35px; border-radius:50%; background:#fdf2f8; overflow:hidden; border: 2px solid #fff;">
+                ${item.foto ? `<img src="../${item.foto}" style="width:100%;height:100%;object-fit:cover;">` : '<div style="display:flex;height:100%;align-items:center;justify-content:center;font-size:14px;">👤</div>'}
+              </div>`;
+        }
+        photosHtml += '</div>';
+
+        const namesArray = item.coordinadores ? item.coordinadores.map(c => c.nombre) : [item.nombres];
+        let namesDisplay = '';
+        if (namesArray.length > 1) {
+          const last = namesArray.pop();
+          namesDisplay = namesArray.join(', ') + ' y ' + last;
+        } else {
+          namesDisplay = namesArray[0] || '';
+        }
+
+        div.innerHTML = `
+          <div class="vac-info" style="display:flex; gap: 15px; align-items:center;">
+            ${photosHtml}
+            <div>
+              <h3 style="color:var(--purple-dark); margin-bottom:2px; font-size:1.05rem;">${item.localidad}</h3>
+              <div class="vac-meta" style="color:var(--text-mid); font-size:0.85rem;">
+                👤 ${namesDisplay}
+              </div>
+            </div>
+          </div>
+          <div class="vac-actions">
+            <button class="btn btn-outline" style="border-color:var(--purple);color:var(--purple);padding:5px 12px;font-size:0.8rem" onclick="editCobertura('${item.id}')">✏️ Editar</button>
+            <button class="btn btn-outline" style="border-color:#ef4444;color:#ef4444;padding:5px 10px;" onclick="deleteCobertura('${item.id}')">🗑️</button>
+          </div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function editCobertura(id) {
+      const item = cobData.find(c => c.id == id);
+      if (!item) return;
+      
+      document.getElementById('c-id').value = item.id;
+      document.getElementById('c-localidad').value = item.localidad;
+      
+      const container = document.getElementById('coordinadores-container');
+      container.innerHTML = '';
+      
+      if (item.coordinadores && item.coordinadores.length) {
+        item.coordinadores.forEach(c => addCoordRow(c.nombre, c.foto));
+      } else {
+        // Fallback estructura antigua
+        addCoordRow(item.nombres, item.foto);
+      }
+      
+      document.getElementById('add-form-cob-body').style.display = 'block';
+      document.getElementById('c-localidad').focus();
+      document.querySelector('.main').scrollIntoView({behavior: 'smooth'});
+    }
+
+    async function deleteCobertura(id) {
+      if (!confirm('¿Seguro que deseas eliminar esta localidad y su foto?')) return;
+      const fd = new FormData();
+      fd.append('action', 'delete');
+      fd.append('id', id);
+      try {
+        const res = await fetch(API_COB, { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          loadCobertura();
+        } else {
+          alert('Error: ' + json.message);
+        }
+      } catch (err) {
+        alert('Error de conexión');
+      }
+    }
+
+    document.getElementById('cob-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const id = document.getElementById('c-id').value;
+      fd.append('action', id ? 'edit' : 'add');
+      
+      const fileInputs = e.target.querySelectorAll('input[type="file"]');
+      for (let inp of fileInputs) {
+        if (inp.files.length > 0 && inp.files[0].size > 5 * 1024 * 1024) {
+          showAlert('cob-alert', 'Error: Una de las imágenes es muy pesada (máx 5MB).', 'error');
+          return;
+        }
+      }
+      
+      try {
+        const res = await fetch(API_COB, { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          showAlert('cob-alert', json.message, 'success');
+          resetCobForm();
+          loadCobertura();
+        } else {
+          showAlert('cob-alert', json.message, 'error');
+        }
+      } catch (err) {
+        console.error(err);
+        showAlert('cob-alert', 'Error de red al conectar con el servidor.', 'error');
+      }
+    });
+
+    // Cargar inicial
+    addCoordRow();
 
     // ── Toggle form ────────────────────────────────────────────
     function toggleForm() {

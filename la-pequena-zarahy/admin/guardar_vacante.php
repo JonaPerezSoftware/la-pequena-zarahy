@@ -39,12 +39,12 @@ $action = $_POST['action'] ?? $_GET['action'] ?? '';
 
 // ── LOGIN ──────────────────────────────────────────────────
 if ($action === 'login') {
-    $pwd = $_POST['password'] ?? '';
-    if ($pwd === $admin_password) {
+    $pwd = trim($_POST['password'] ?? '');
+    if ($pwd === trim($admin_password)) {
         $_SESSION['admin_ok'] = true;
         respond(true, 'Bienvenida');
     } else {
-        respond(false, 'Contraseña incorrecta. Inténtalo de nuevo.');
+        respond(false, 'Contraseña incorrecta. Verifica mayúsculas y puntos.');
     }
 }
 

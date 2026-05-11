@@ -22,7 +22,7 @@
     href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=2.1">
+  <link rel="stylesheet" href="css/style.css?v=2.2">
   <link rel="icon" type="image/png" sizes="32x32" href="varios/primera_seccion3.png">
   <link rel="icon" type="image/png" sizes="16x16" href="varios/primera_seccion3.png">
   <link rel="apple-touch-icon" href="varios/primera_seccion3.png">
@@ -44,21 +44,6 @@
         border: none !important;
         cursor: pointer !important;
         position: relative !important;
-      }
-    }
-
-    /* FORZAR 1 COLUMNA EN MÓVILES (Cobertura) */
-    @media (max-width: 768px) {
-      .coverage-section .coverage-grid {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-      }
-
-      .coverage-section .coverage-card:last-child {
-        grid-column: auto !important;
-        max-width: none !important;
-        margin: 0 !important;
       }
     }
   </style>
@@ -128,22 +113,35 @@
         </p>
       </div>
       <div class="about-intro reveal">
-        <p>Proyecto social y agente de cambio que impulsa el desarrollo en todo el Ecuador mediante el acompañamiento
-          integral y la gestión estratégica del talento humano.</p>
+        <p>Somos un proyecto social sin fines de lucro y agente de cambio en el Ecuador, que conecta empresas,
+          municipios y comunidades para generar impacto real. Brindamos servicios de capacitación, procesos de
+          selección, visitas domiciliarias con informes sociales, mediación, salud mental y apoyo social, garantizando
+          procesos más humanos, confiables y con valor social. A través de la autogestión y el apoyo solidario,
+          transformamos cada servicio en oportunidades que fortalecen a quienes más lo necesitan. Contamos con una red
+          de coordinadoras en cada territorio del país, asegurando cobertura y acompañamiento a nivel nacional.</p>
       </div>
       <div class="mv-grid">
         <div class="mv-card mission reveal">
           <div class="mv-icon">🎯</div>
           <h3>Nuestra Misión</h3>
-          <p>Brindar apoyo integral a personas y familias en situación de vulnerabilidad, proporcionando acceso a
-            servicios de salud, educación y alimentación, con un enfoque humanitario y de respeto a la dignidad humana.
+          <p>En La Pequeña Zarahy trabajamos para transformar vidas a través de la unión de profesionales, empresas,
+            instituciones y comunidades comprometidas con el bienestar social, humano y emocional de quienes más lo
+            necesitan. Nuestro propósito es crear espacios de apoyo, orientación, capacitación y acompañamiento
+            integral, impulsando proyectos sociales, educativos y comunitarios con amor, empatía, liderazgo y acción
+            real. Creemos en el poder de las alianzas estratégicas para generar oportunidades, fortalecer familias y
+            construir una sociedad más humana, consciente y solidaria.
           </p>
         </div>
         <div class="mv-card vision reveal">
           <div class="mv-icon" style="color:var(--purple)">🌟</div>
           <h3>Nuestra Visión</h3>
-          <p>Ser una organización referente en Ecuador en la transformación social, reconocida por su impacto positivo
-            en comunidades vulnerables, promoviendo un futuro donde cada persona tenga acceso a una vida digna y plena.
+          <p>Ser un proyecto social reconocido a nivel nacional e internacional por su impacto humano, profesional y
+            comunitario, convirtiéndose en una red de transformación social que inspire cambios reales en la vida de
+            miles de personas. Aspiramos a seguir creciendo mediante alianzas estratégicas con profesionales,
+            universidades, empresas, fundaciones y líderes comunitarios, llevando esperanza, formación, desarrollo y
+            apoyo a cada rincón donde exista una necesidad. Queremos dejar un legado de amor, resiliencia y servicio que
+            trascienda generaciones, demostrando que cuando se trabaja con propósito, el impacto puede cambiar
+            comunidades enteras.
           </p>
         </div>
       </div>
@@ -338,49 +336,9 @@
         <h2 class="section-title">Nuestra Cobertura</h2>
         <p class="section-sub">Presentes en las provincias donde el impacto es más necesario.</p>
       </div>
-      <div class="coverage-grid">
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Naranjito</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Marcelino Maridueña</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Milagro</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Guayaquil</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Mariscal Sucre</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Machala</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Quito</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Bucay</div>
-        </div>
-        <div class="coverage-card reveal">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Yaguachi</div>
-        </div>
-        <div class="coverage-card reveal" style="grid-column: span 3; max-width: 400px; margin: 0 auto; width: 100%;">
-          <div class="cov-icon">📍</div>
-          <div class="cov-name">Todo territorio ecuatoriano</div>
-        </div>
+      <div class="coverage-grid" id="cobertura-grid">
+        <p style="text-align:center; color: var(--text-mid); grid-column: 1/-1;">Cargando localidades de cobertura...</p>
       </div>
-
       <div class="coverage-footer reveal"
         style="margin-top: 40px; text-align: center; background: #fdf2f8; padding: 15px; border-radius: 50px; border: 1px dashed var(--pink); color: var(--text-dark); font-size: 0.9rem;">
         🚀 Actualmente en expansión, llegando a más comunidades cada día.
@@ -599,10 +557,12 @@
             <a href="https://www.facebook.com/nhguerreros" class="social-link" aria-label="Facebook" target="_blank">
               <i class="fab fa-facebook-f"></i>
             </a>
-            <a href="https://www.instagram.com/gardenia_guerrero/" class="social-link" aria-label="Instagram" target="_blank">
+            <a href="https://www.instagram.com/gardenia_guerrero/" class="social-link" aria-label="Instagram"
+              target="_blank">
               <i class="fab fa-instagram"></i>
             </a>
-            <a href="https://www.linkedin.com/in/gardenia-guerrero-g-a8740680/" class="social-link" aria-label="LinkedIn" target="_blank">
+            <a href="https://www.linkedin.com/in/gardenia-guerrero-g-a8740680/" class="social-link"
+              aria-label="LinkedIn" target="_blank">
               <i class="fab fa-linkedin-in"></i>
             </a>
             <a href="https://wa.me/593987357673" class="social-link" aria-label="WhatsApp" target="_blank">
@@ -672,7 +632,7 @@
     </div>
   </div>
 
-  <script src="js/main.js?v=1.1"></script>
+  <script src="js/main.js?v=2.0"></script>
 </body>
 
 </html>

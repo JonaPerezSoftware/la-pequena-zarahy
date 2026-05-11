@@ -1,0 +1,78 @@
+[
+    {
+        "id": "1",
+        "localidad": "Naranjito",
+        "nombres": "Lcda. Gardenia Guerrero",
+        "foto": "uploads\/cobertura\/coord_1_1778464164.jpeg"
+    },
+    {
+        "id": "2",
+        "localidad": "Marcelino Maridue\u00f1a",
+        "coordinadores": [
+            {
+                "nombre": "Jose Rodriguez",
+                "foto": ""
+            },
+            {
+                "nombre": "Lcda. Gardenia Guerrero",
+                "foto": "uploads\/cobertura\/coord_6a01478b2b5ac.jpeg"
+            }
+        ]
+    },
+    {
+        "id": "3",
+        "localidad": "Milagro",
+        "nombres": "Lcda. Adriana Ronquiillo",
+        "foto": ""
+    },
+    {
+        "id": "4",
+        "localidad": "Guayaquil",
+        "coordinadores": [
+            {
+                "nombre": "Lcda. Betzi Gomez ",
+                "foto": ""
+            },
+            {
+                "nombre": "Lcda. Mexi Litardo",
+                "foto": ""
+            }
+        ]
+    },
+    {
+        "id": "5",
+        "localidad": "Machala",
+        "nombres": "Lcda. Gabriela Loja Porras",
+        "foto": ""
+    },
+    {
+        "id": "6",
+        "localidad": "Quito",
+        "nombres": "Tecng. Erick Rodriguez",
+        "foto": ""
+    },
+    {
+        "id": "7",
+        "localidad": "Yaguachi",
+        "nombres": "Lcda. Monica Vera Cagua",
+        "foto": ""
+    },
+    {
+        "id": "8",
+        "localidad": "Santa Elena y sus alrededores",
+        "nombres": "Master Veronica Contreras",
+        "foto": ""
+    },
+    {
+        "id": "9",
+        "localidad": "Los R\u00edos",
+        "nombres": "Lcda. Nolka Vargas",
+        "foto": ""
+    },
+    {
+        "id": "10",
+        "localidad": "Todo territorio ecuatoriano",
+        "nombres": "Equipo de Coordinaci\u00f3n Nacional",
+        "foto": ""
+    }
+]

@@ -389,10 +389,93 @@ function showToast(msg, type = 'success') {
   });
 }
 
+// ── Cobertura ────────────────────────────────────────────────
+async function loadCobertura() {
+  const grid = document.getElementById('cobertura-grid');
+  if (!grid) return;
+  
+  let data = null;
+
+  // Intento 1: leer JSON directo
+  try {
+    const res = await fetch('cobertura.json?v=' + Date.now());
+    if (res.ok) {
+      const text = await res.text();
+      if (text.trim().startsWith('[') || text.trim().startsWith('{')) {
+        data = JSON.parse(text);
+      }
+    }
+  } catch(e) { /* falla silenciosa */ }
+
+  // Intento 2: usar el PHP (por si el JSON no está accesible)
+  if (!data) {
+    try {
+      const res2 = await fetch('admin/guardar_cobertura.php?action=get');
+      if (res2.ok) {
+        const json2 = await res2.json();
+        // El PHP puede devolver {success, data:[]} o directamente []
+        data = Array.isArray(json2) ? json2 : (json2.data || json2);
+      }
+    } catch(e) { /* falla silenciosa */ }
+  }
+
+  if (!data) {
+    grid.innerHTML = '<p style="text-align:center;color:var(--text-gray)">No se pudieron cargar las localidades. Por favor recarga la página.</p>';
+    return;
+  }
+
+    grid.innerHTML = '';
+    data.forEach((item, index) => {
+      const delay = index * 100; // cascada de animación
+      
+      let coordinatorsHtml = '<div class="cov-photos-container">';
+      let namesText = '';
+
+      // Soporte para múltiples coordinadores o estructura antigua
+      if (item.coordinadores && Array.isArray(item.coordinadores)) {
+        item.coordinadores.forEach(c => {
+          coordinatorsHtml += c.foto 
+            ? `<img src="${c.foto}" class="cov-photo" alt="${c.nombre}">` 
+            : `<div class="cov-photo">👤</div>`;
+        });
+        
+        const names = item.coordinadores.map(c => c.nombre);
+        if (names.length > 1) {
+          const last = names.pop();
+          namesText = names.join(', ') + ' y ' + last;
+        } else {
+          namesText = names[0] || '';
+        }
+      } else {
+        // Fallback estructura antigua
+        coordinatorsHtml += (item.foto && item.foto !== "") 
+          ? `<img src="${item.foto}" class="cov-photo" alt="Coordinadora">` 
+          : `<div class="cov-photo">👤</div>`;
+        namesText = item.nombres;
+      }
+      coordinatorsHtml += '</div>';
+
+      grid.innerHTML += `
+        <div class="coverage-card reveal" style="animation-delay: ${delay}ms;">
+          <div class="cov-icon">📍</div>
+          <div class="cov-name">${item.localidad}</div>
+          
+          <div class="coverage-overlay">
+            ${coordinatorsHtml}
+            <div class="cov-coord-name">${namesText}</div>
+          </div>
+        </div>
+      `;
+    });
+    // Volver a aplicar el observer si es necesario
+    grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+
 // ── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   const vacantes = await cargarVacantes();
   renderVacantes(vacantes);
+  loadCobertura();
   // Init Lucide icons
   if (window.lucide) lucide.createIcons();
 });
