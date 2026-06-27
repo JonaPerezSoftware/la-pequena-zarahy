@@ -118,9 +118,17 @@ async function cargarVacantes() {
     const res = await fetch('vacantes.json?v=' + Date.now());
     if (!res.ok) throw new Error('not found');
     const data = await res.json();
-    return data.filter(v => v.activa !== false);
+    return data.filter(v => v.activa !== false).sort((a, b) => {
+      const dateCompare = b.fecha.localeCompare(a.fecha);
+      if (dateCompare !== 0) return dateCompare;
+      return b.id.localeCompare(a.id);
+    });
   } catch {
-    return SAMPLE_VACANTES;
+    return [...SAMPLE_VACANTES].sort((a, b) => {
+      const dateCompare = b.fecha.localeCompare(a.fecha);
+      if (dateCompare !== 0) return dateCompare;
+      return b.id.localeCompare(a.id);
+    });
   }
 }
 

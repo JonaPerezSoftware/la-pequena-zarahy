@@ -1,1 +1,67 @@
-[]
+[
+    {
+        "id": "v_6a3f127de059b",
+        "titulo": "dasda",
+        "departamento": "Salud",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "",
+        "descripcion": "dsadsa",
+        "requisitos": [
+            "sdadsa"
+        ],
+        "fecha": "2026-06-27",
+        "activa": true
+    },
+    {
+        "id": "v_6a3f128874139",
+        "titulo": "dasdsadasd",
+        "departamento": "Salud",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "",
+        "descripcion": "dasdsa",
+        "requisitos": [
+            "dasdasdsa"
+        ],
+        "fecha": "2026-06-27",
+        "activa": true
+    },
+    {
+        "id": "v_6a3f1290c561f",
+        "titulo": "Cosecha",
+        "departamento": "Administración",
+        "tipo": "Medio Tiempo",
+        "ubicacion": "",
+        "descripcion": "sdad",
+        "requisitos": [
+            "dsadasdasd"
+        ],
+        "fecha": "2026-06-27",
+        "activa": true
+    },
+    {
+        "id": "v_6a3f129a05702",
+        "titulo": "dsadasdsa",
+        "departamento": "Comunicación",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "",
+        "descripcion": "dsad",
+        "requisitos": [
+            "dasda"
+        ],
+        "fecha": "2026-06-27",
+        "activa": true
+    },
+    {
+        "id": "v_6a3f12a2f139f",
+        "titulo": "nuevaaa",
+        "departamento": "Educación",
+        "tipo": "Tiempo Completo",
+        "ubicacion": "",
+        "descripcion": "dasd",
+        "requisitos": [
+            "adasdas"
+        ],
+        "fecha": "2026-06-27",
+        "activa": true
+    }
+]

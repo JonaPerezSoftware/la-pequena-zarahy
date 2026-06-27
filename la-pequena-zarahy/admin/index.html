@@ -919,12 +919,17 @@
 
     function renderList(data) {
       updateStats(data);
+      const sortedData = [...data].sort((a, b) => {
+        const dateCompare = (b.fecha || '').localeCompare(a.fecha || '');
+        if (dateCompare !== 0) return dateCompare;
+        return (b.id || '').localeCompare(a.id || '');
+      });
       const list = document.getElementById('vac-list');
-      if (!data.length) {
+      if (!sortedData.length) {
         list.innerHTML = '<div class="empty-state">No hay vacantes publicadas.<br>Usa el formulario de arriba para agregar la primera.</div>';
         return;
       }
-      list.innerHTML = data.map(v => `
+      list.innerHTML = sortedData.map(v => `
     <div class="vac-item ${v.activa === false ? 'inactive' : ''}" id="vac-${v.id}">
       <div class="vac-info">
         <h3>${v.titulo}</h3>
