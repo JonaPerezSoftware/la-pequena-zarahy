@@ -7,9 +7,9 @@
   <title>Panel Admin — La Pequeña Zarahy</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" sizes="32x32" href="../varios/primera_seccion3.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../varios/primera_seccion3.png">
-  <link rel="apple-touch-icon" href="../varios/primera_seccion3.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../varios/LogoNuevo.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../varios/LogoNuevo.png">
+  <link rel="apple-touch-icon" href="../varios/LogoNuevo.png">
   <style>
     :root {
       --purple: #4c1d95;
@@ -179,7 +179,7 @@
     .login-logo .logo-img {
       width: 140px;
       margin-bottom: 20px;
-      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.1))
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1))
     }
 
     .login-logo h1 {
@@ -423,7 +423,7 @@
   <div id="login-screen">
     <div class="login-card">
       <div class="login-logo">
-        <img src="../varios/primera_seccion3.png?v=1" alt="Logo" class="logo-img">
+        <img src="../varios/LogoNuevo.png" alt="Logo" class="logo-img">
         <h1>La Pequeña Zarahy</h1>
         <p>Panel de Administración</p>
       </div>
@@ -451,7 +451,7 @@
   <div id="dashboard">
     <div class="topbar">
       <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="../varios/primera_seccion3.png?v=1" alt="Logo"
+        <img src="../varios/LogoNuevo.png" alt="Logo"
           style="height: 60px; width: auto; filter: brightness(1.1) drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(0 0 5px rgba(255,255,255,0.5));">
         <h1>La Pequeña Zarahy — Gestión de Vacantes</h1>
       </div>
@@ -475,102 +475,102 @@
 
       <!-- VIEW: VACANTES -->
       <div id="view-vacantes">
-      <!-- Stats -->
-      <div class="stats-bar">
-        <div class="stat-box">
-          <strong id="stat-total">0</strong>
-          <span>Total de vacantes</span>
-        </div>
-        <div class="stat-box">
-          <strong id="stat-active">0</strong>
-          <span>Vacantes activas</span>
-        </div>
-        <div class="stat-box">
-          <strong id="stat-inactive">0</strong>
-          <span>Vacantes inactivas</span>
-        </div>
-      </div>
-
-      <!-- Agregar vacante -->
-      <div class="panel">
-        <div class="panel-header">
-          <h2>➕ Publicar Nueva Vacante</h2>
-          <button class="btn btn-outline" onclick="toggleForm()" id="toggle-form-btn">Colapsar</button>
-        </div>
-        <div class="panel-body" id="add-form-body">
-          <div id="add-alert" class="alert"></div>
-          <form id="add-form">
-            <div class="form-row">
-              <div class="form-group">
-                <label for="f-titulo">Título del puesto *</label>
-                <input id="f-titulo" name="titulo" type="text" placeholder="Ej: Auxiliar de Enfermería" required>
-              </div>
-              <div class="form-group">
-                <label for="f-dept">Departamento *</label>
-                <select id="f-dept" name="departamento" required>
-                  <option value="">Selecciona...</option>
-                  <option>Salud</option>
-                  <option>Educación</option>
-                  <option>Operaciones</option>
-                  <option>Administración</option>
-                  <option>Comunicación</option>
-                  <option>Voluntariado</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label for="f-tipo">Tipo de jornada</label>
-                <select id="f-tipo" name="tipo">
-                  <option>Tiempo Completo</option>
-                  <option>Medio Tiempo</option>
-                  <option>Voluntariado</option>
-                  <option>Por proyecto</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="f-ubic">Ubicación</label>
-                <input id="f-ubic" name="ubicacion" type="text" placeholder="Ej: Quito, Pichincha">
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="f-desc">Descripción del puesto *</label>
-              <textarea id="f-desc" name="descripcion" rows="3" placeholder="Describe las responsabilidades y el rol..."
-                required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="f-reqs">Requisitos (uno por línea) *</label>
-              <textarea id="f-reqs" name="requisitos" rows="4"
-                placeholder="Título universitario en área afín&#10;Experiencia mínima 1 año&#10;Disponibilidad inmediata"
-                required></textarea>
-              <p class="req-hint">Escribe cada requisito en una línea separada</p>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button type="submit" class="btn btn-gradient">Publicar Vacante 🚀</button>
-              <button type="reset" class="btn btn-outline">Limpiar</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Lista de vacantes -->
-      <div class="panel">
-        <div class="panel-header">
-          <h2>📋 Vacantes Publicadas</h2>
-          <button class="btn btn-outline" onclick="loadVacantes()" style="font-size:.78rem;padding:7px 16px">↻
-            Actualizar</button>
-        </div>
-        <div class="panel-body">
-          <div class="vac-list" id="vac-list">
-            <div class="empty-state">Cargando vacantes...</div>
+        <!-- Stats -->
+        <div class="stats-bar">
+          <div class="stat-box">
+            <strong id="stat-total">0</strong>
+            <span>Total de vacantes</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-active">0</strong>
+            <span>Vacantes activas</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-inactive">0</strong>
+            <span>Vacantes inactivas</span>
           </div>
         </div>
-      </div>
 
-      <p style="text-align:center;font-size:.78rem;color:var(--gray);margin-top:8px">
-        💡 Los cambios se reflejan inmediatamente en el sitio web.
-        <a href="../index.html#empleos" target="_blank" style="color:var(--purple)">Ver sitio →</a>
-      </p>
+        <!-- Agregar vacante -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>➕ Publicar Nueva Vacante</h2>
+            <button class="btn btn-outline" onclick="toggleForm()" id="toggle-form-btn">Colapsar</button>
+          </div>
+          <div class="panel-body" id="add-form-body">
+            <div id="add-alert" class="alert"></div>
+            <form id="add-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-titulo">Título del puesto *</label>
+                  <input id="f-titulo" name="titulo" type="text" placeholder="Ej: Auxiliar de Enfermería" required>
+                </div>
+                <div class="form-group">
+                  <label for="f-dept">Departamento *</label>
+                  <select id="f-dept" name="departamento" required>
+                    <option value="">Selecciona...</option>
+                    <option>Salud</option>
+                    <option>Educación</option>
+                    <option>Operaciones</option>
+                    <option>Administración</option>
+                    <option>Comunicación</option>
+                    <option>Voluntariado</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="f-tipo">Tipo de jornada</label>
+                  <select id="f-tipo" name="tipo">
+                    <option>Tiempo Completo</option>
+                    <option>Medio Tiempo</option>
+                    <option>Voluntariado</option>
+                    <option>Por proyecto</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="f-ubic">Ubicación</label>
+                  <input id="f-ubic" name="ubicacion" type="text" placeholder="Ej: Quito, Pichincha">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="f-desc">Descripción del puesto *</label>
+                <textarea id="f-desc" name="descripcion" rows="3"
+                  placeholder="Describe las responsabilidades y el rol..." required></textarea>
+              </div>
+              <div class="form-group">
+                <label for="f-reqs">Requisitos (uno por línea) *</label>
+                <textarea id="f-reqs" name="requisitos" rows="4"
+                  placeholder="Título universitario en área afín&#10;Experiencia mínima 1 año&#10;Disponibilidad inmediata"
+                  required></textarea>
+                <p class="req-hint">Escribe cada requisito en una línea separada</p>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="submit" class="btn btn-gradient">Publicar Vacante 🚀</button>
+                <button type="reset" class="btn btn-outline">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Lista de vacantes -->
+        <div class="panel">
+          <div class="panel-header">
+            <h2>📋 Vacantes Publicadas</h2>
+            <button class="btn btn-outline" onclick="loadVacantes()" style="font-size:.78rem;padding:7px 16px">↻
+              Actualizar</button>
+          </div>
+          <div class="panel-body">
+            <div class="vac-list" id="vac-list">
+              <div class="empty-state">Cargando vacantes...</div>
+            </div>
+          </div>
+        </div>
+
+        <p style="text-align:center;font-size:.78rem;color:var(--gray);margin-top:8px">
+          💡 Los cambios se reflejan inmediatamente en el sitio web.
+          <a href="../index.html#empleos" target="_blank" style="color:var(--purple)">Ver sitio →</a>
+        </p>
       </div> <!-- /VIEW VACANTES -->
 
       <!-- VIEW: COBERTURA -->
@@ -585,20 +585,23 @@
             <div id="cob-alert" class="alert"></div>
             <form id="cob-form" enctype="multipart/form-data">
               <input type="hidden" id="c-id" name="id">
-              
+
               <div class="form-group">
                 <label for="c-localidad">Localidad / Zona *</label>
                 <input id="c-localidad" name="localidad" type="text" placeholder="Ej: Guayaquil" required>
               </div>
 
-              <div style="background:#fdf2f8; padding:20px; border-radius:15px; border:1px dashed var(--pink); margin-bottom:20px;">
-                <h4 style="margin-bottom:15px; color:var(--purple); font-size:1rem; display:flex; align-items:center; gap:8px;">
+              <div
+                style="background:#fdf2f8; padding:20px; border-radius:15px; border:1px dashed var(--pink); margin-bottom:20px;">
+                <h4
+                  style="margin-bottom:15px; color:var(--purple); font-size:1rem; display:flex; align-items:center; gap:8px;">
                   <span style="font-size:1.2rem">👥</span> Red de Coordinadores en esta Zona
                 </h4>
                 <div id="coordinadores-container">
                   <!-- Se llena dinámicamente vía JS -->
                 </div>
-                <button type="button" class="btn btn-outline" style="width:100%; border-style:dashed; margin-top:10px; background:#fff" onclick="addCoordRow()">
+                <button type="button" class="btn btn-outline"
+                  style="width:100%; border-style:dashed; margin-top:10px; background:#fff" onclick="addCoordRow()">
                   + Añadir otra persona a esta localidad
                 </button>
               </div>
@@ -615,7 +618,8 @@
         <div class="panel">
           <div class="panel-header">
             <h2>📋 Red de Cobertura Activa</h2>
-            <button class="btn btn-outline" onclick="loadCobertura()" style="font-size:.78rem;padding:7px 16px">↻ Actualizar</button>
+            <button class="btn btn-outline" onclick="loadCobertura()" style="font-size:.78rem;padding:7px 16px">↻
+              Actualizar</button>
           </div>
           <div class="panel-body">
             <div class="vac-list" id="cob-list">
@@ -770,7 +774,7 @@
       cobData.forEach(item => {
         const div = document.createElement('div');
         div.className = 'vac-item';
-        
+
         let photosHtml = '<div style="display:flex; gap: -10px; align-items:center;">';
         if (item.coordinadores && item.coordinadores.length) {
           item.coordinadores.forEach((c, idx) => {
@@ -819,23 +823,23 @@
     function editCobertura(id) {
       const item = cobData.find(c => c.id == id);
       if (!item) return;
-      
+
       document.getElementById('c-id').value = item.id;
       document.getElementById('c-localidad').value = item.localidad;
-      
+
       const container = document.getElementById('coordinadores-container');
       container.innerHTML = '';
-      
+
       if (item.coordinadores && item.coordinadores.length) {
         item.coordinadores.forEach(c => addCoordRow(c.nombre, c.foto));
       } else {
         // Fallback estructura antigua
         addCoordRow(item.nombres, item.foto);
       }
-      
+
       document.getElementById('add-form-cob-body').style.display = 'block';
       document.getElementById('c-localidad').focus();
-      document.querySelector('.main').scrollIntoView({behavior: 'smooth'});
+      document.querySelector('.main').scrollIntoView({ behavior: 'smooth' });
     }
 
     async function deleteCobertura(id) {
@@ -861,7 +865,7 @@
       const fd = new FormData(e.target);
       const id = document.getElementById('c-id').value;
       fd.append('action', id ? 'edit' : 'add');
-      
+
       const fileInputs = e.target.querySelectorAll('input[type="file"]');
       for (let inp of fileInputs) {
         if (inp.files.length > 0 && inp.files[0].size > 5 * 1024 * 1024) {
@@ -869,7 +873,7 @@
           return;
         }
       }
-      
+
       try {
         const res = await fetch(API_COB, { method: 'POST', body: fd });
         const json = await res.json();
