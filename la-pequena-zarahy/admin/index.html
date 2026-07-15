@@ -296,6 +296,11 @@
       opacity: .9
     }
 
+    .topbar-title-mobile,
+    .logout-text-mobile {
+      display: none
+    }
+
     .main {
       max-width: 960px;
       margin: 0 auto;
@@ -461,8 +466,45 @@
         padding: 28px 20px
       }
 
+      .topbar {
+        padding: 0 10px;
+        height: 50px;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        gap: 6px;
+      }
+
+      .topbar img {
+        height: 34px !important;
+      }
+
       .topbar h1 {
-        font-size: .9rem
+        font-size: .85rem;
+        text-align: left;
+      }
+
+      .topbar .topbar-brand,
+      .topbar .topbar-title-desktop,
+      .logout-text-desktop {
+        display: none;
+      }
+
+      .topbar-title-mobile,
+      .logout-text-mobile {
+        display: inline;
+      }
+
+      .topbar-right {
+        gap: 6px;
+      }
+
+      .topbar .btn {
+        padding: 5px 10px !important;
+        font-size: .75rem;
+      }
+
+      #admin-date {
+        display: none;
       }
     }
   </style>
@@ -504,17 +546,22 @@
   <!-- ══════════════════ DASHBOARD ══════════════════ -->
   <div id="dashboard">
     <div class="topbar">
-      <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="display: flex; align-items: center; gap: 8px;">
         <img src="../varios/LogoNuevo.png" alt="Logo"
           style="height: 60px; width: auto; filter: brightness(1.1) drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(0 0 5px rgba(255,255,255,0.5));">
-        <h1>La Pequeña Zarahy — Panel de Administración</h1>
+        <h1>
+          <span class="topbar-brand">La Pequeña Zarahy — </span>
+          <span class="topbar-title-desktop">Panel de Administración</span>
+          <span class="topbar-title-mobile">Panel Admin</span>
+        </h1>
       </div>
       <div class="topbar-right">
         <span id="admin-date"></span>
         <button class="btn btn-outline"
           style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.3);padding:6px 16px"
           onclick="logout()">
-          Cerrar sesión
+          <span class="logout-text-desktop">Cerrar sesión</span>
+          <span class="logout-text-mobile">Salir</span>
         </button>
       </div>
     </div>
