@@ -1,0 +1,52 @@
+[
+    {
+        "id": "lab_1784079480_105",
+        "titulo": "DAD",
+        "descripcion": "DASDASD",
+        "ubicacion": "Marcelino maridueña",
+        "fecha": "2026-07-14",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a56e478c15c1.jpg",
+            "uploads\/labores\/labor_6a56e478c191d.jpg",
+            "uploads\/labores\/labor_6a56e478c1d3f.jpeg"
+        ],
+        "creado": "2026-07-15 03:38:00"
+    },
+    {
+        "id": "lab_1784079455_893",
+        "titulo": "DASDAS",
+        "descripcion": "DASDAS",
+        "ubicacion": "DASDASD",
+        "fecha": "2026-07-14",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a56e45f38e8d.jpg"
+        ],
+        "creado": "2026-07-15 03:37:35"
+    },
+    {
+        "id": "lab_1784079438_821",
+        "titulo": "asAS",
+        "descripcion": "SDADASD",
+        "ubicacion": "milagro",
+        "fecha": "2026-07-14",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a56e44eb3950.jpg"
+        ],
+        "creado": "2026-07-15 03:37:18"
+    },
+    {
+        "id": "lab_1784079163_159",
+        "titulo": "prueba",
+        "descripcion": "dsadas",
+        "ubicacion": "Marcelino maridueña",
+        "fecha": "2026-07-14",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a56e33b29b2e.jpg"
+        ],
+        "creado": "2026-07-15 03:32:43"
+    }
+]

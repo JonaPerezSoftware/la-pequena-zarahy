@@ -64,8 +64,8 @@ section{padding:80px 0}
 .navbar:not(.scrolled) .nav-logo img, .footer-logo {
   filter: drop-shadow(1px 1px 0px #fff) drop-shadow(-1px -1px 0px #fff) drop-shadow(1px -1px 0px #fff) drop-shadow(-1px 1px 0px #fff);
 }
-.nav-menu{display:flex;align-items:center;gap:12px}
-.nav-link{padding:10px 18px;border-radius:8px;font-size:1.05rem;font-weight:600;color:var(--text-mid);transition:var(--transition)}
+.nav-menu{display:flex;align-items:center;gap:8px}
+.nav-link{padding:8px 12px;border-radius:8px;font-size:0.95rem;font-weight:600;color:var(--text-mid);transition:var(--transition);white-space:nowrap}
 .nav-link:hover,.nav-link.active{color:var(--purple);background:#f5f3ff}
 .nav-btn{padding:9px 22px;border-radius:50px;font-size:.88rem;font-weight:600;background:var(--gradient);color:#fff;transition:var(--transition)}
 .nav-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(147,51,234,.4)}
@@ -83,6 +83,9 @@ section{padding:80px 0}
 .hero-badge{display:inline-block;background:#f5f3ff;border:1px solid #e9d5ff;padding:8px 22px;border-radius:50px;font-size:.85rem;font-weight:600;color:var(--purple);margin-bottom:28px}
 .hero-title{margin-bottom:25px}
 .hero-title span{font-family:'Dancing Script',cursive;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 15px;background:linear-gradient(135deg, var(--purple-dark), var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:clamp(2rem,7vw,5.5rem);line-height:1.1;filter:drop-shadow(0 2px 5px rgba(0,0,0,0.05))}
+.hero-resolution{display:inline-flex;align-items:center;justify-content:center;gap:8px;margin:-10px auto 28px;padding:8px 20px;background:rgba(124,58,237,0.05);border:1px dashed rgba(124,58,237,0.3);border-radius:50px;font-size:clamp(0.8rem,1.8vw,0.95rem);color:var(--purple-dark);font-weight:600;letter-spacing:.3px;max-width:100%;box-shadow:0 2px 12px rgba(124,58,237,0.04);transition:var(--transition)}
+.hero-resolution:hover{background:rgba(124,58,237,0.08);transform:translateY(-1px)}
+.hero-resolution i{color:var(--purple);font-size:1rem}
 .brand-icon{display:inline-block;width:clamp(60px, 15vw, 90px);height:auto;vertical-align:middle;filter:drop-shadow(0 0 10px rgba(236,72,153,0.4));margin:0 10px}
 .brand-icon svg{width:100%;height:100%}
 .hero-desc{font-size:1.15rem;color:var(--text-mid);max-width:700px;margin:0 auto 36px;line-height:1.8}
@@ -122,23 +125,43 @@ section{padding:80px 0}
 .founder-name{font-family:'Dancing Script',cursive;font-size:clamp(2.2rem, 6vw, 3.2rem);background:linear-gradient(135deg, var(--purple), var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;line-height:1.2;padding:0 10px 5px 8px;margin-left:-8px}
 .founder-desc{font-size:1.05rem;color:var(--text-gray);line-height:1.8;font-style:italic}
 
+/* ── Directiva ── */
+.directiva-section{}
+.directiva-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:28px}
+.directiva-card{background:#fff;border-radius:var(--radius);padding:36px 24px 28px;text-align:center;border:1px solid #fecdd3;box-shadow:var(--shadow);transition:var(--transition);display:flex;flex-direction:column;align-items:center;gap:14px}
+.directiva-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:var(--purple)}
+.directiva-photo-wrap{width:130px;height:130px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 8px 24px rgba(124,58,237,.18);margin-bottom:4px;flex-shrink:0;background:var(--gradient-soft)}
+.directiva-photo-wrap img{width:100%;height:100%;object-fit:cover;object-position:center top}
+.directiva-avatar{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem}
+.directiva-badge{display:inline-block;padding:5px 16px;border-radius:50px;font-size:.72rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.directiva-badge.presidente{background:#fdf2f8;color:#9333ea;border:1px solid #e9d5ff}
+.directiva-badge.vicepresidente{background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0}
+.directiva-badge.secretaria{background:#eff6ff;color:#2563eb;border:1px solid #bfdbfe}
+.directiva-badge.tesorero{background:#fefce8;color:#ca8a04;border:1px solid #fde68a}
+.directiva-badge.vocal{background:#f5f3ff;color:#7c3aed;border:1px solid #ddd6fe}
+.directiva-name{font-size:1rem;font-weight:700;color:var(--text-dark);line-height:1.35;text-align:center;margin:0}
+@media(max-width:768px){.directiva-grid{grid-template-columns:repeat(2,1fr);gap:20px}.directiva-photo-wrap{width:110px;height:110px}}
+@media(max-width:480px){.directiva-grid{grid-template-columns:repeat(2,1fr);gap:14px}.directiva-photo-wrap{width:90px;height:90px}}
+
+
 /* ── Values ── */
 .values-section{background:#fff}
-.values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.value-card{text-align:center;padding:36px 24px}
-.value-icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;background:var(--gradient-soft);font-size:1.5rem}
+.values-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
+.value-card{text-align:center;flex:0 1 300px;min-width:260px;}
+.value-icon{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;background:var(--gradient-soft);font-size:1.8rem}
 .value-card h3{font-size:1.1rem;font-weight:700;margin-bottom:10px;color:var(--text-dark)}
 .value-card p{color:var(--text-gray);font-size:.9rem;line-height:1.6}
 
 /* ── Services ── */
 .services-grid--wide{display:flex;flex-wrap:wrap;justify-content:center;gap:24px}
-.service-card{flex:0 1 calc(33.333% - 16px);min-width:300px;padding:30px;position:relative;overflow:hidden;background:var(--bg-card);border-radius:var(--radius);box-shadow:var(--shadow);transition:var(--transition)}
+.service-card{flex:0 1 calc(33.333% - 16px);min-width:300px;position:relative;overflow:hidden}
 @media(max-width:991px){.service-card{flex:0 1 calc(50% - 12px)}}
 @media(max-width:650px){.service-card{flex:0 1 100%}}
 .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gradient)}
 .service-icon{width:64px;height:64px;border-radius:50%;background:#fff1f2;display:flex;align-items:center;justify-content:center;margin-bottom:18px;font-size:1.6rem;color:var(--pink);border:1px solid #fecdd3}
 .service-card h3{font-size:1.05rem;font-weight:700;margin-bottom:10px}
 .service-card p{color:var(--text-gray);font-size:.9rem;line-height:1.6}
+
 
 /* ── Impact Detail ── */
 .impact-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
@@ -499,10 +522,11 @@ textarea.form-control{resize:vertical;min-height:90px}
   line-height: 1.2;
 }
 
-/* ── DIRECTIVA ─────────────────────────────────────────────── */
+/* ── DIRECTIVA ────────────────────────────────────── */
 .directiva-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 30px;
   max-width: 1100px;
   margin: 0 auto;
@@ -521,6 +545,8 @@ textarea.form-control{resize:vertical;min-height:90px}
   align-items: center;
   position: relative;
   z-index: 2; /* Por encima de la marca de agua */
+  width: 300px;
+  flex-shrink: 0;
 }
 
 .directiva-card:hover {
@@ -530,12 +556,12 @@ textarea.form-control{resize:vertical;min-height:90px}
 }
 
 .directiva-photo-wrap {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   margin-bottom: 20px;
   position: relative;
-  padding: 5px;
+  padding: 2px;
   background: linear-gradient(135deg, var(--purple-light), var(--pink-light));
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
@@ -551,7 +577,7 @@ textarea.form-control{resize:vertical;min-height:90px}
   align-items: center;
   justify-content: center;
   font-size: 40px;
-  border: 3px solid #fff;
+  border: 1.5px solid #fff;
 }
 
 .directiva-badge {
@@ -580,10 +606,631 @@ textarea.form-control{resize:vertical;min-height:90px}
 
 @media (max-width: 768px) {
   .directiva-grid {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
   }
   .directiva-card {
     padding: 25px 15px;
+    width: 250px;
   }
 }
+
+@media (max-width: 480px) {
+  .directiva-card {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* =============================================
+   LABOR SOCIAL — SECCIÓN
+   ============================================= */
+
+.labor-section {
+  background: var(--bg);
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.labor-section .section-title {
+  color: var(--text-dark);
+}
+
+.labor-section .section-sub {
+  color: var(--text-gray);
+}
+
+.labor-scroll-hint {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-gray);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.labor-scroll-hint span {
+  display: inline-block;
+  animation: swingHint 1.5s ease-in-out infinite;
+}
+
+@keyframes swingHint {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+/* ── Contenedor de scroll ── */
+.labor-scroll-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.labor-track-wrapper {
+  flex: 1;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.labor-track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 8px 30px;
+  cursor: grab;
+  user-select: none;
+  justify-content: flex-start;
+}
+
+/* Estado vacío: centrar completamente */
+.labor-track:has(.labor-empty) {
+  overflow-x: hidden;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+
+/* Tarjeta única en escritorio: centrar */
+@media (min-width: 1025px) {
+  .labor-track:has(.labor-card:only-child) {
+    justify-content: center;
+  }
+}
+
+/* Tarjeta única en móvil/tablet: centrar */
+@media (max-width: 1024px) {
+  .labor-track:has(.labor-card:only-child) {
+    justify-content: center;
+    overflow-x: hidden;
+  }
+}
+
+.labor-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 40px 20px;
+}
+
+.labor-empty-icon {
+  font-size: 4.5rem;
+  margin-bottom: 16px;
+  animation: pulseEmpty 2s infinite ease-in-out;
+}
+
+@keyframes pulseEmpty {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.labor-track:active {
+  cursor: grabbing;
+}
+
+.labor-track::-webkit-scrollbar {
+  height: 5px;
+}
+.labor-track::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+.labor-track::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.4);
+  border-radius: 10px;
+}
+.labor-track::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.7);
+}
+
+/* ── Tarjeta de labor ── */
+.labor-card {
+  flex: 0 0 360px;
+  scroll-snap-align: start;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  min-height: 460px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s;
+  display: flex;
+  flex-direction: column;
+}
+
+.labor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(124, 58, 237, 0.3);
+}
+
+/* ── Foto principal de la tarjeta ── */
+.labor-card-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.labor-card:hover .labor-card-img {
+  transform: scale(1.04);
+}
+
+.labor-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+  background: var(--gradient-soft);
+  flex-shrink: 0;
+}
+
+.labor-card-no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: var(--gradient-soft);
+}
+
+/* Badge de fotos múltiples */
+.labor-photo-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: background 0.2s;
+  z-index: 2;
+}
+
+.labor-photo-badge:hover {
+  background: var(--purple);
+}
+
+/* Badge "más reciente" */
+.labor-recent-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--gradient);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+}
+
+/* ── Contenido de la tarjeta ── */
+.labor-card-content {
+  padding: 20px 22px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.labor-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.labor-card-desc {
+  font-size: 0.86rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  flex: 1;
+  max-height: 180px;
+  overflow-y: auto;
+  word-break: break-word;
+  white-space: pre-wrap;
+  padding-right: 4px;
+}
+
+.labor-card-desc::-webkit-scrollbar { width: 4px; }
+.labor-card-desc::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.labor-card-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 4px;
+  padding-top: 14px;
+  border-top: 1px solid #f3f4f6;
+}
+
+.labor-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--text-gray);
+}
+
+.labor-meta-item i {
+  color: var(--purple);
+  font-size: 0.78rem;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.labor-meta-item strong {
+  color: var(--text-dark);
+}
+
+.labor-time-badge {
+  display: inline-flex;
+  align-items: center;
+  background: #f3f4f6;
+  color: var(--text-mid);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.labor-card-footer {
+  margin-top: auto;
+  padding-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn-galeria {
+  background: var(--purple);
+  color: #fff;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(124,58,237,0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-galeria:hover {
+  background: var(--purple-dark);
+  box-shadow: 0 4px 12px rgba(124,58,237,0.4);
+  transform: translateY(-1px);
+}
+
+.labor-carousel-wrap {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 54px;
+}
+
+.labor-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gradient-soft);
+  border: 1.5px solid var(--border);
+  color: var(--purple-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  z-index: 10;
+}
+
+.labor-nav-btn.left {
+  left: 0;
+}
+
+.labor-nav-btn.right {
+  right: 0;
+}
+
+.labor-nav-btn:hover {
+  background: var(--purple);
+  color: #fff;
+  border-color: var(--purple);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.labor-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+  transform: translateY(-50%);
+}
+
+/* ── Estado vacío ── */
+.labor-empty {
+  flex: 0 0 100%;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-gray);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.labor-empty-icon {
+  font-size: 3.5rem;
+  margin-bottom: 6px;
+}
+
+.labor-empty h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.labor-empty p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+}
+
+/* ── Modal Galería ── */
+.labor-gallery-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.93);
+  backdrop-filter: blur(8px);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.labor-gallery-overlay.open {
+  display: flex;
+}
+
+.labor-gallery-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: calc(100vw - 160px);
+}
+
+.labor-gallery-img {
+  max-width: 100%;
+  max-height: calc(100vh - 120px);
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  animation: galleryFadeIn 0.25s ease;
+}
+
+@keyframes galleryFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.labor-gallery-close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 3001;
+}
+
+.labor-gallery-close:hover { background: rgba(255,255,255,0.25); }
+
+.labor-gallery-nav {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(124,58,237,0.25);
+  border: 1.5px solid rgba(124,58,237,0.4);
+  color: #c4b5fd;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 3001;
+}
+
+.labor-gallery-nav:hover {
+  background: rgba(124,58,237,0.5);
+  color: #fff;
+}
+
+.labor-gallery-counter {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  font-weight: 600;
+}
+
+/* ── Responsive Labor ── */
+@media (max-width: 768px) {
+  .labor-carousel-wrap { padding: 0 40px; }
+  .labor-card { flex: 0 0 300px; min-height: 420px; }
+  .labor-nav-btn { width: 36px; height: 36px; font-size: 0.8rem; }
+  .labor-nav-btn.left { left: 2px; }
+  .labor-nav-btn.right { right: 2px; }
+  .labor-gallery-content { max-width: calc(100vw - 100px); }
+}
+
+@media (max-width: 480px) {
+  .labor-carousel-wrap { padding: 0; }
+  .labor-card { flex: 0 0 calc(100vw - 48px); min-height: 400px; }
+  .labor-nav-btn { display: none; }
+  .labor-gallery-content { max-width: calc(100vw - 80px); }
+  .labor-gallery-nav { width: 38px; height: 38px; font-size: 0.9rem; }
+  .labor-scroll-hint { display: flex; }
+}
+
+@media (min-width: 481px) {
+  .labor-scroll-hint { display: none; }
+}
+
+/* =============================================
+   CONVENIOS — SECCIÓN
+   ============================================= */
+
+.convenios-section {
+  background: #fdfbff;
+  padding: 80px 0;
+}
+
+.convenios-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.convenio-card {
+  flex: 0 1 calc(20% - 20px);
+  min-width: 200px;
+  max-width: 240px;
+  background: #fff;
+  border: 1.5px solid #f0e6ff;
+  border-radius: 16px;
+  padding: 24px 16px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: default;
+  box-shadow: 0 2px 12px rgba(124,58,237,0.04);
+}
+
+.convenio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(124,58,237,0.12);
+  border-color: rgba(124,58,237,0.3);
+}
+
+.convenio-logo-wrap {
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9f5ff;
+  border: 1px solid #ede9fe;
+  flex-shrink: 0;
+}
+
+.convenio-logo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+}
+
+.convenio-logo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: linear-gradient(135deg, #f5f3ff, #faf5ff);
+}
+
+.convenio-nombre {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.convenios-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 20px;
+  color: var(--text-gray);
+}
+
+.convenios-empty h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.convenios-empty p {
+  font-size: 0.88rem;
+}
+

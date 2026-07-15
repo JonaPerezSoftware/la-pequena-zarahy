@@ -481,9 +481,457 @@ async function loadCobertura() {
 
 // ── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
+  loadContenidoPagina();
   const vacantes = await cargarVacantes();
   renderVacantes(vacantes);
   loadCobertura();
+  loadLabores();
+  loadConvenios();
   // Init Lucide icons
   if (window.lucide) lucide.createIcons();
 });
+
+// ── Contenido Página ────────────────────────────────────────
+async function loadContenidoPagina() {
+  try {
+    const res = await fetch('contenido_pagina.json?v=' + Date.now());
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    
+    // Inicio
+    if (data.inicio) {
+      if (document.getElementById('hero-titulo')) document.getElementById('hero-titulo').innerHTML = (data.inicio.titulo || '').replace(/\n/g, '<br>');
+      if (document.getElementById('hero-desc')) document.getElementById('hero-desc').innerHTML = (data.inicio.descripcion || '').replace(/\n/g, '<br>');
+      const heroActions = document.querySelector('.hero-actions');
+      if (heroActions) {
+         const btns = heroActions.querySelectorAll('.btn');
+         if (btns[0] && data.inicio.boton_donar) btns[0].innerHTML = data.inicio.boton_donar;
+         if (btns[1] && data.inicio.boton_unete) btns[1].innerHTML = data.inicio.boton_unete;
+      }
+    }
+
+    // Nosotros
+    if (data.nosotros) {
+      const msTitle = document.querySelector('#mision .section-title');
+      if (msTitle) msTitle.textContent = data.nosotros.titulo || '';
+      if (document.getElementById('nosotros-sub')) document.getElementById('nosotros-sub').innerHTML = (data.nosotros.texto1 || '').replace(/\n/g, '<br>');
+      if (document.getElementById('nosotros-intro')) {
+        document.getElementById('nosotros-intro').innerHTML = (data.nosotros.texto2 || '').replace(/\n/g, '<br>');
+      }
+      if (data.nosotros.mision_vision) {
+        if (document.getElementById('nosotros-mision')) document.getElementById('nosotros-mision').innerHTML = (data.nosotros.mision_vision.mision || '').replace(/\n/g, '<br>');
+        if (document.getElementById('nosotros-vision')) document.getElementById('nosotros-vision').innerHTML = (data.nosotros.mision_vision.vision || '').replace(/\n/g, '<br>');
+      }
+      if (data.nosotros.estadisticas) {
+        if (document.getElementById('stat-familias')) document.getElementById('stat-familias').dataset.target = data.nosotros.estadisticas.familias || 0;
+        if (document.getElementById('stat-proyectos')) document.getElementById('stat-proyectos').dataset.target = data.nosotros.estadisticas.proyectos || 0;
+        if (document.getElementById('stat-voluntarios')) document.getElementById('stat-voluntarios').dataset.target = data.nosotros.estadisticas.voluntarios || 0;
+      }
+    }
+
+    // Fundadora
+    if (data.fundadora) {
+      if (document.getElementById('fundadora-nombre')) document.getElementById('fundadora-nombre').textContent = data.fundadora.nombre || '';
+      if (document.getElementById('fundadora-badge')) document.getElementById('fundadora-badge').textContent = data.fundadora.cargo || '';
+      if (document.getElementById('fundadora-cita')) document.getElementById('fundadora-cita').innerHTML = (data.fundadora.cita || '').replace(/\n/g, '<br>');
+      if (data.fundadora.foto) {
+        if (document.getElementById('fundadora-foto')) {
+          document.getElementById('fundadora-foto').src = data.fundadora.foto;
+          document.getElementById('fundadora-foto').style.display = 'block';
+        }
+      } else {
+        if (document.getElementById('fundadora-foto')) {
+          document.getElementById('fundadora-foto').style.display = 'none';
+        }
+      }
+    }
+
+    // Directiva
+    if (data.directiva && data.directiva.miembros) {
+      const grid = document.getElementById('directiva-grid');
+      if (grid) {
+        const cargoClass = (cargo) => {
+          const c = (cargo || '').toLowerCase();
+          if (c.includes('presiden') && !c.includes('vice')) return 'presidente';
+          if (c.includes('vice')) return 'vicepresidente';
+          if (c.includes('secret')) return 'secretaria';
+          if (c.includes('tesore')) return 'tesorero';
+          return 'vocal';
+        };
+        grid.innerHTML = data.directiva.miembros.map((m, i) => `
+          <div class="directiva-card reveal" style="animation-delay: ${i*100}ms;">
+            <div class="directiva-photo-wrap">
+              ${m.foto
+                ? `<img src="${m.foto}" alt="${m.nombre}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+                   <div class="directiva-avatar" style="display:none">👤</div>`
+                : `<div class="directiva-avatar">👤</div>`}
+            </div>
+            <span class="directiva-badge ${cargoClass(m.cargo)}">${m.cargo.toUpperCase()}</span>
+            <h4 class="directiva-name">${m.nombre}</h4>
+          </div>
+        `).join('');
+        // Re-registrar los nuevos elementos .reveal
+        grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      }
+    }
+
+    // Valores
+    if (data.valores && data.valores.lista) {
+      const grid = document.getElementById('valores-grid');
+      if (grid) {
+        grid.innerHTML = data.valores.lista.map((v, i) => `
+          <div class="card value-card reveal" style="animation-delay: ${i*100}ms;">
+            <div class="value-icon">${v.icono}</div>
+            <h3>${v.titulo}</h3>
+            <p>${v.descripcion}</p>
+          </div>
+        `).join('');
+        // Re-registrar los nuevos elementos .reveal
+        grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      }
+    }
+
+    // Servicios
+    if (data.servicios && data.servicios.lista) {
+      const grid = document.getElementById('servicios-grid');
+      if (grid) {
+        grid.innerHTML = data.servicios.lista.map((s, i) => `
+          <div class="card service-card reveal" style="animation-delay: ${i*100}ms;">
+            <div class="service-icon">${s.icono}</div>
+            <h3>${s.titulo}</h3>
+            <p>${s.descripcion}</p>
+          </div>
+        `).join('');
+        // Re-registrar los nuevos elementos .reveal
+        grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+      }
+    }
+
+    // Impacto
+    if (data.impacto) {
+      // El título y subtítulo del HTML son los correctos; solo actualizamos si el JSON
+      // trae campos específicos para ello (titulo / subtitulo). Los campos
+      // testimonio_autor/rol se reservan para el testimoniante, no para los encabezados.
+      if (data.impacto.titulo) {
+        if (document.getElementById('impacto-titulo')) document.getElementById('impacto-titulo').textContent = data.impacto.titulo;
+      }
+      if (data.impacto.subtitulo) {
+        if (document.getElementById('impacto-subtitulo')) document.getElementById('impacto-subtitulo').textContent = data.impacto.subtitulo;
+      }
+
+      const desc = data.impacto.testimonio_texto || '';
+      if (desc && document.getElementById('impacto-desc')) {
+        document.getElementById('impacto-desc').innerHTML = desc.replace(/\n/g, '<br>');
+      }
+
+      if (data.impacto.testimonio_foto) {
+        const fotoEl = document.getElementById('impacto-img');
+        if (fotoEl) fotoEl.src = data.impacto.testimonio_foto;
+      }
+    }
+
+  } catch (e) {
+    console.log("No se pudo cargar contenido_pagina.json", e);
+  }
+}
+
+// ── LABOR SOCIAL ────────────────────────────────────────────
+async function loadLabores() {
+  try {
+    const res = await fetch('labores.json?v=' + Date.now());
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    renderLabores(data);
+  } catch {
+    try {
+      const res2 = await fetch('guardar_labores.php?action=get');
+      if (res2.ok) {
+        const json2 = await res2.json();
+        renderLabores(json2.data || []);
+        return;
+      }
+    } catch { /* silencioso */ }
+    renderLabores([]);
+  }
+}
+
+function formatLaborDate(fecha, hora) {
+  if (!fecha) return '';
+  const d = new Date(fecha + 'T00:00:00');
+  const dateStr = d.toLocaleDateString('es-EC', { day: '2-digit', month: 'long', year: 'numeric' });
+  return hora ? `${dateStr} — ${hora}` : dateStr;
+}
+
+function relativeDate(fechaStr) {
+  if (!fechaStr) return '';
+  const fecha = new Date(fechaStr + 'T00:00:00');
+  const hoy   = new Date();
+  hoy.setHours(0,0,0,0);
+  const diff  = Math.floor((hoy - fecha) / 86400000);
+  if (diff === 0) return 'Hoy';
+  if (diff === 1) return 'Ayer';
+  if (diff < 7)  return `Hace ${diff} días`;
+  if (diff < 30) return `Hace ${Math.floor(diff/7)} semana${Math.floor(diff/7)>1?'s':''}`;
+  if (diff < 365) return `Hace ${Math.floor(diff/30)} mes${Math.floor(diff/30)>1?'es':''}`;
+  return `Hace ${Math.floor(diff/365)} año${Math.floor(diff/365)>1?'s':''}`;
+}
+
+function renderLabores(data) {
+  const track = document.getElementById('labor-track');
+  if (!track) return;
+
+  const wrap = track.parentNode;       // labor-carousel-wrap
+  const container = wrap.parentNode;   // .container
+
+  // Helper: obtener o crear un div auxiliar fuera del carousel
+  function getAuxEl(id) {
+    let el = document.getElementById(id);
+    if (!el) {
+      el = document.createElement('div');
+      el.id = id;
+      container.insertBefore(el, wrap.nextSibling);
+    }
+    return el;
+  }
+
+  // Helper: construir HTML de una tarjeta
+  function buildCard(item, idx, total) {
+    const fotos = item.fotos || [];
+    const imgWrap = fotos.length > 0
+      ? `<img src="${fotos[0]}" alt="${item.titulo}" class="labor-card-img" loading="lazy">`
+      : `<div class="labor-card-no-img">🤝</div>`;
+    const photoBadge = fotos.length > 1
+      ? `<button class="labor-photo-badge" onclick="openLaborGallery(${idx}, 0, event)" title="Ver galería de fotos">
+           <i class="fas fa-images"></i> ${fotos.length} fotos
+         </button>` : '';
+    const recentBadge = idx === 0 ? `<span class="labor-recent-badge">⭐ Reciente</span>` : '';
+    const galleryBtn = fotos.length > 0
+      ? `<button class="btn-galeria" onclick="openLaborGallery(${idx}, 0, event)">
+           <i class="fas fa-expand-alt"></i> Ver ${fotos.length > 1 ? 'galería' : 'foto'}
+         </button>` : '';
+    return `
+      <div class="labor-card" data-fotos='${JSON.stringify(fotos)}'>
+        <div class="labor-card-img-wrap">
+          ${imgWrap}${recentBadge}${photoBadge}
+        </div>
+        <div class="labor-card-content">
+          <h3 class="labor-card-title">${item.titulo || 'Labor Social'}</h3>
+          <p class="labor-card-desc">${item.descripcion || ''}</p>
+          <div class="labor-card-meta">
+            ${item.ubicacion ? `<div class="labor-meta-item"><i class="fas fa-map-marker-alt"></i><span><strong>${item.ubicacion}</strong></span></div>` : ''}
+            ${item.fecha ? `<div class="labor-meta-item"><i class="fas fa-calendar-alt"></i><span>${formatLaborDate(item.fecha, item.hora)}</span></div>` : ''}
+          </div>
+          <div class="labor-card-footer">
+            ${item.fecha ? `<span class="labor-time-badge">${relativeDate(item.fecha)}</span>` : '<div></div>'}
+            ${galleryBtn}
+          </div>
+        </div>
+      </div>`;
+  }
+
+  // Ordenar: más recientes primero
+  const sorted = [...data].sort((a, b) => {
+    const cmp = (b.fecha || '').localeCompare(a.fecha || '');
+    if (cmp !== 0) return cmp;
+    return (b.id || '').localeCompare(a.id || '');
+  });
+
+  const emptyEl   = getAuxEl('labor-empty-state');
+  const centeredEl = getAuxEl('labor-centered');
+
+  // ── 0 labores: estado vacío ──────────────────────────
+  if (!sorted.length) {
+    wrap.style.display = 'none';
+    centeredEl.style.display = 'none';
+    emptyEl.innerHTML = `
+      <div class="labor-empty">
+        <div class="labor-empty-icon">🤝</div>
+        <h3>Pronto publicaremos nuestras labores</h3>
+        <p>Estamos documentando el trabajo realizado en las comunidades.</p>
+      </div>`;
+    emptyEl.style.display = 'block';
+    updateLaborNavBtns();
+    return;
+  }
+
+  // ── 1 o 2 labores: centradas fuera del carousel ──────
+  if (sorted.length <= 2) {
+    wrap.style.display = 'none';
+    emptyEl.style.display = 'none';
+    centeredEl.style.cssText = 'display:flex; justify-content:center; flex-wrap:wrap; gap:24px; padding:20px 0 30px;';
+    centeredEl.innerHTML = sorted.map((item, idx) => buildCard(item, idx, sorted.length)).join('');
+    window._laborData = sorted;
+    // Registrar los datos en las tarjetas para la galería
+    centeredEl.querySelectorAll('.labor-card').forEach((el, idx) => {
+      el._idx = idx;
+    });
+    updateLaborNavBtns();
+    return;
+  }
+
+  // ── 3+ labores: carrusel normal ──────────────────────
+  emptyEl.style.display = 'none';
+  centeredEl.style.display = 'none';
+  wrap.style.display = '';
+  track.style.display = '';
+
+  track.innerHTML = sorted.map((item, idx) => buildCard(item, idx, sorted.length)).join('');
+  window._laborData = sorted;
+
+  initLaborDragScroll();
+  updateLaborNavBtns();
+}
+
+function updateLaborNavBtns() {
+  const track  = document.getElementById('labor-track');
+  const btnL   = document.getElementById('labor-nav-left');
+  const btnR   = document.getElementById('labor-nav-right');
+  if (!track || !btnL || !btnR) return;
+
+  const updateState = () => {
+    btnL.disabled = track.scrollLeft <= 4;
+    btnR.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+  };
+
+  track.addEventListener('scroll', updateState, { passive: true });
+  updateState();
+}
+
+function laborScroll(dir) {
+  const track = document.getElementById('labor-track');
+  if (!track) return;
+  const cardWidth = track.querySelector('.labor-card')?.offsetWidth || 360;
+  track.scrollBy({ left: dir * (cardWidth + 24), behavior: 'smooth' });
+}
+
+function initLaborDragScroll() {
+  const track = document.getElementById('labor-track');
+  if (!track) return;
+  let isDown = false, startX, scrollLeft;
+
+  track.addEventListener('mousedown', e => {
+    isDown   = true;
+    startX   = e.pageX - track.offsetLeft;
+    scrollLeft = track.scrollLeft;
+    track.classList.add('dragging');
+  });
+  track.addEventListener('mouseleave', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
+  track.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x    = e.pageX - track.offsetLeft;
+    const walk = (x - startX) * 1.4;
+    track.scrollLeft = scrollLeft - walk;
+  });
+}
+
+// ── Galería de fotos de una labor ───────────────────────────
+let _galleryFotos = [];
+let _galleryIdx   = 0;
+
+function openLaborGallery(laborIdx, fotoIdx, event) {
+  if (event) event.stopPropagation();
+  const data = window._laborData;
+  if (!data || !data[laborIdx]) return;
+
+  _galleryFotos = data[laborIdx].fotos || [];
+  if (!_galleryFotos.length) return;
+
+  _galleryIdx = fotoIdx || 0;
+  renderGalleryPhoto();
+
+  const overlay = document.getElementById('labor-gallery-overlay');
+  if (overlay) {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function renderGalleryPhoto() {
+  const img     = document.getElementById('gallery-img');
+  const counter = document.getElementById('gallery-counter');
+  if (img)     img.src = _galleryFotos[_galleryIdx];
+  if (counter) counter.textContent = `${_galleryIdx + 1} / ${_galleryFotos.length}`;
+
+  const prev = document.getElementById('gallery-prev');
+  const next = document.getElementById('gallery-next');
+  if (prev) prev.style.opacity = _galleryIdx === 0 ? '0.35' : '1';
+  if (next) next.style.opacity = _galleryIdx === _galleryFotos.length - 1 ? '0.35' : '1';
+}
+
+function closeGallery() {
+  const overlay = document.getElementById('labor-gallery-overlay');
+  if (overlay) overlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Controles de galería
+document.getElementById('labor-gallery-close')?.addEventListener('click', closeGallery);
+document.getElementById('gallery-prev')?.addEventListener('click', () => {
+  if (_galleryIdx > 0) { _galleryIdx--; renderGalleryPhoto(); }
+});
+document.getElementById('gallery-next')?.addEventListener('click', () => {
+  if (_galleryIdx < _galleryFotos.length - 1) { _galleryIdx++; renderGalleryPhoto(); }
+});
+document.getElementById('labor-gallery-overlay')?.addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeGallery();
+});
+
+// Teclado en galería
+document.addEventListener('keydown', e => {
+  const overlay = document.getElementById('labor-gallery-overlay');
+  if (!overlay?.classList.contains('open')) return;
+  if (e.key === 'ArrowLeft' && _galleryIdx > 0) { _galleryIdx--; renderGalleryPhoto(); }
+  if (e.key === 'ArrowRight' && _galleryIdx < _galleryFotos.length - 1) { _galleryIdx++; renderGalleryPhoto(); }
+});
+
+// ── CONVENIOS ───────────────────────────────────────────────
+async function loadConvenios() {
+  try {
+    const res = await fetch('convenios.json?v=' + Date.now());
+    if (!res.ok) throw new Error('not found');
+    const data = await res.json();
+    renderConvenios(data);
+  } catch {
+    try {
+      const res2 = await fetch('guardar_convenios.php?action=get');
+      if (res2.ok) {
+        const json2 = await res2.json();
+        renderConvenios(json2.data || []);
+        return;
+      }
+    } catch { /* silencioso */ }
+    renderConvenios([]);
+  }
+}
+
+function renderConvenios(data) {
+  const grid = document.getElementById('convenios-grid');
+  if (!grid) return;
+
+  if (!data.length) {
+    grid.innerHTML = `
+      <div class="convenios-empty">
+        <div style="font-size:3rem; margin-bottom:14px;">🤝</div>
+        <h3>Próximamente anunciaremos nuestros convenios</h3>
+        <p>Estamos formalizando alianzas con instituciones para ampliar nuestro impacto.</p>
+      </div>`;
+    return;
+  }
+
+  grid.innerHTML = data.map(item => {
+    const logoHtml = item.logo
+      ? `<img src="${item.logo}" alt="${item.nombre}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'convenio-logo-placeholder\\'>🏛️</div>'">`
+      : `<div class="convenio-logo-placeholder">🏛️</div>`;
+
+    return `
+      <div class="convenio-card reveal">
+        <div class="convenio-logo-wrap">${logoHtml}</div>
+        <p class="convenio-nombre">${item.nombre}</p>
+      </div>`;
+  }).join('');
+
+  grid.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
+

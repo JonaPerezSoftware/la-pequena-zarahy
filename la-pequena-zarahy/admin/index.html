@@ -26,6 +26,57 @@
       --shadow: 0 4px 20px rgba(219, 39, 119, .08)
     }
 
+    /* ── Toast notifications ── */
+    #toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-size: .9rem;
+      font-weight: 600;
+      color: #fff;
+      box-shadow: 0 8px 30px rgba(0,0,0,.2);
+      min-width: 260px;
+      max-width: 360px;
+      animation: toastIn .35s cubic-bezier(.34,1.56,.64,1) forwards;
+      transition: opacity .35s, transform .35s;
+    }
+    .toast.hide {
+      animation: toastOut .35s ease forwards;
+    }
+    .toast.success { background: linear-gradient(135deg, #16a34a, #15803d); }
+    .toast.error   { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+    .toast.info    { background: linear-gradient(135deg, #4c1d95, #db2777); }
+    @keyframes toastIn  { from { opacity:0; transform:translateY(20px) scale(.9); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes toastOut { from { opacity:1; transform:translateY(0) scale(1); }  to { opacity:0; transform:translateY(20px) scale(.9); } }
+    .toast-close {
+      margin-left: auto;
+      background: rgba(255,255,255,.25);
+      border: none;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -419,6 +470,9 @@
 
 <body>
 
+  <!-- Toast container – siempre visible sin importar el scroll -->
+  <div id="toast-container"></div>
+
   <!-- ══════════════════ LOGIN ══════════════════ -->
   <div id="login-screen">
     <div class="login-card">
@@ -453,7 +507,7 @@
       <div style="display: flex; align-items: center; gap: 10px;">
         <img src="../varios/LogoNuevo.png" alt="Logo"
           style="height: 60px; width: auto; filter: brightness(1.1) drop-shadow(1px 1px 0 #fff) drop-shadow(-1px -1px 0 #fff) drop-shadow(1px -1px 0 #fff) drop-shadow(-1px 1px 0 #fff) drop-shadow(0 0 5px rgba(255,255,255,0.5));">
-        <h1>La Pequeña Zarahy — Gestión de Vacantes</h1>
+        <h1>La Pequeña Zarahy — Panel de Administración</h1>
       </div>
       <div class="topbar-right">
         <span id="admin-date"></span>
@@ -468,9 +522,15 @@
     <div class="main">
 
       <!-- TABS NAV -->
-      <div class="tabs" style="display:flex; gap:10px; margin-bottom: 24px;">
+      <div class="tabs" style="display:flex; gap:10px; margin-bottom: 24px; flex-wrap:wrap">
         <button class="btn btn-gradient" id="tab-vacantes" onclick="showTab('vacantes')">Gestión de Vacantes</button>
         <button class="btn btn-outline" id="tab-cobertura" onclick="showTab('cobertura')">Red de Cobertura</button>
+        <button class="btn btn-outline" id="tab-contenido" onclick="showTab('contenido')">Contenido</button>
+        <button class="btn btn-outline" id="tab-directiva" onclick="showTab('directiva')">Directiva</button>
+        <button class="btn btn-outline" id="tab-valores" onclick="showTab('valores')">Nuestros Valores</button>
+        <button class="btn btn-outline" id="tab-servicios" onclick="showTab('servicios')">Nuestros Servicios</button>
+        <button class="btn btn-outline" id="tab-labores" onclick="showTab('labores')">Labor Social</button>
+        <button class="btn btn-outline" id="tab-convenios" onclick="showTab('convenios')">Convenios</button>
       </div>
 
       <!-- VIEW: VACANTES -->
@@ -629,6 +689,333 @@
         </div>
       </div> <!-- /VIEW COBERTURA -->
 
+      <!-- VIEW: CONTENIDO -->
+      <div id="view-contenido" style="display: none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>✏️ Editar Contenido de la Página</h2>
+          </div>
+          <div class="panel-body">
+            <div id="cont-alert" class="alert"></div>
+            <form id="cont-form">
+              <h3 style="margin-bottom: 10px; color: var(--purple);">Inicio</h3>
+              <div class="form-group">
+                <label>Título</label>
+                <input id="cont-inicio-titulo" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Descripción</label>
+                <textarea id="cont-inicio-descripcion" class="form-control" rows="3"></textarea>
+              </div>
+
+              <h3 style="margin-top: 20px; margin-bottom: 10px; color: var(--purple);">Nosotros</h3>
+              <div class="form-group">
+                <label>Título</label>
+                <input id="cont-nosotros-titulo" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Subtítulo</label>
+                <textarea id="cont-nosotros-texto1" class="form-control" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Introducción</label>
+                <textarea id="cont-nosotros-texto2" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Misión</label>
+                <textarea id="cont-nosotros-mision" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Visión</label>
+                <textarea id="cont-nosotros-vision" class="form-control" rows="3"></textarea>
+              </div>
+
+              <h3 style="margin-top: 20px; margin-bottom: 10px; color: var(--purple);">Fundadora</h3>
+              <div class="form-group">
+                <label>Nombre de la Fundadora</label>
+                <input id="cont-fundadora-nombre" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Cargo / Distintivo</label>
+                <input id="cont-fundadora-cargo" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Cita / Frase</label>
+                <textarea id="cont-fundadora-cita" class="form-control" rows="3"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Foto de la Fundadora</label>
+                <input type="file" id="cont-fundadora-foto-file" accept="image/*" onchange="uploadFundadoraFoto(this)">
+                <input type="hidden" id="cont-fundadora-foto-path">
+                <div id="fundadora-foto-preview-container" style="margin-top:10px; position:relative; width:80px; height:80px; display:none;"></div>
+              </div>
+
+              <h3 style="margin-top: 20px; margin-bottom: 10px; color: var(--purple);">Gestión e Intervención Social
+              </h3>
+              <div class="form-group">
+                <label>Título</label>
+                <input id="cont-impacto-autor" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Subtítulo</label>
+                <input id="cont-impacto-rol" type="text" class="form-control">
+              </div>
+              <div class="form-group">
+                <label>Párrafos</label>
+                <textarea id="cont-impacto-texto" class="form-control" rows="4"></textarea>
+              </div>
+              <div class="form-group">
+                <label>Imagen de la sección</label>
+                <input type="file" id="cont-impacto-foto-file" accept="image/*" onchange="uploadImpactoFoto(this)">
+                <input type="hidden" id="cont-impacto-foto-path">
+                <div id="impacto-foto-preview-container" style="margin-top:10px; position:relative; width:120px; height:80px; display:none;"></div>
+              </div>
+
+              <!-- Directiva, Valores y Servicios omitidos para no sobrecargar de momento. Los arreglos dinámicos siguen en JSON. -->
+              <input type="hidden" id="cont-full-json">
+
+              <button type="submit" class="btn btn-gradient"
+                style="margin-top:20px; width:100%; justify-content:center; padding:14px;">Guardar Cambios 🚀</button>
+            </form>
+          </div>
+        </div>
+      </div> <!-- /VIEW CONTENIDO -->
+
+      <!-- VIEW: LABORES -->
+      <div id="view-labores" style="display: none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>➕ Publicar Nueva Labor Social</h2>
+            <button class="btn btn-outline" onclick="toggleFormLabores()" id="toggle-form-labores-btn">Colapsar</button>
+          </div>
+          <div class="panel-body" id="add-form-labores-body">
+            <div id="labores-alert" class="alert"></div>
+            <form id="add-form-labores" enctype="multipart/form-data">
+              <input type="hidden" id="l-id" name="id">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Título *</label>
+                  <input id="l-titulo" name="titulo" type="text" placeholder="Ej: Entrega de donaciones" required>
+                </div>
+                <div class="form-group">
+                  <label>Ubicación</label>
+                  <input id="l-ubicacion" name="ubicacion" type="text" placeholder="Ej: Centro de acopio">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Fecha *</label>
+                  <input id="l-fecha" name="fecha" type="date" required>
+                </div>
+                <div class="form-group">
+                  <label>Hora</label>
+                  <input id="l-hora" name="hora" type="time">
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Descripción *</label>
+                <textarea id="l-descripcion" name="descripcion" rows="3" required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Fotos (Máx 5)</label>
+                <input type="file" id="l-fotos" name="fotos[]" accept="image/*" multiple
+                  onchange="previewLaboresImages(this)">
+                <div id="labores-preview-container" style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="submit" class="btn btn-gradient">Guardar Labor Social 🚀</button>
+                <button type="button" class="btn btn-outline" onclick="resetLaboresForm()">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <h2>📋 Labores Publicadas</h2>
+            <button class="btn btn-outline" onclick="loadLabores()" style="font-size:.78rem;padding:7px 16px">↻
+              Actualizar</button>
+          </div>
+          <div class="panel-body">
+            <div class="vac-list" id="labores-list">
+              <div class="empty-state">Cargando labores...</div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /VIEW LABORES -->
+
+      <!-- VIEW: CONVENIOS -->
+      <div id="view-convenios" style="display: none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>➕ Añadir Convenio Institucional</h2>
+            <button class="btn btn-outline" onclick="toggleFormConvenios()"
+              id="toggle-form-convenios-btn">Colapsar</button>
+          </div>
+          <div class="panel-body" id="add-form-convenios-body">
+            <div id="convenios-alert" class="alert"></div>
+            <form id="add-form-convenios" enctype="multipart/form-data">
+              <input type="hidden" id="conv-id" name="id">
+              <div class="form-group">
+                <label>Nombre de la Institución *</label>
+                <input id="conv-nombre" name="nombre" type="text" placeholder="Ej: Universidad Estatal" required>
+              </div>
+              <div class="form-group">
+                <label>Logo de la Institución</label>
+                <input type="file" id="conv-logo" name="logo" accept="image/*" onchange="previewConvenioLogo(this)">
+                <div id="convenio-preview-container" style="display:flex; gap:10px; margin-top:10px;"></div>
+              </div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button type="submit" class="btn btn-gradient">Guardar Convenio 🚀</button>
+                <button type="reset" class="btn btn-outline"
+                  onclick="document.getElementById('conv-id').value=''; document.getElementById('convenio-preview-container').innerHTML=''">Limpiar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header">
+            <h2>📋 Convenios Activos</h2>
+            <button class="btn btn-outline" onclick="loadConvenios()" style="font-size:.78rem;padding:7px 16px">↻
+              Actualizar</button>
+          </div>
+          <div class="panel-body">
+            <div class="vac-list" id="convenios-list">
+              <div class="empty-state">Cargando convenios...</div>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /VIEW CONVENIOS -->
+
+      <!-- ══ VIEW: DIRECTIVA ══ -->
+      <div id="view-directiva" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>👥 Nuestra Directiva</h2>
+            <button class="btn btn-gradient" onclick="openDirectivaMember(null)" style="font-size:.85rem;padding:8px 18px">+ Agregar Miembro</button>
+          </div>
+          <div class="panel-body">
+            <div id="directiva-admin-list" style="display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:8px;">
+              <div class="empty-state">Cargando directiva...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal edición / creación -->
+        <div id="directiva-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9999; align-items:center; justify-content:center;">
+          <div style="background:#fff; border-radius:16px; padding:32px; width:100%; max-width:420px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.25);">
+            <button onclick="closeDirectivaModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#6b7280;">✕</button>
+            <h3 id="directiva-modal-title" style="margin-bottom:20px; color:var(--purple);">Agregar Miembro</h3>
+            <input type="hidden" id="directiva-edit-index">
+
+            <div class="form-group">
+              <label>Nombre completo</label>
+              <input id="directiva-nombre" type="text" class="form-control" placeholder="Ej: Gardenia Guerrero">
+            </div>
+            <div class="form-group">
+              <label>Cargo</label>
+              <input id="directiva-cargo" type="text" class="form-control" placeholder="Ej: Presidenta">
+            </div>
+            <div class="form-group">
+              <label>Foto</label>
+              <input type="file" id="directiva-foto-file" accept="image/*" onchange="uploadDirectivaFoto(this)">
+              <input type="hidden" id="directiva-foto-path">
+              <div id="directiva-foto-preview" style="margin-top:10px; position:relative; width:80px; height:80px; display:none;"></div>
+              <div id="directiva-foto-upload-status" style="margin-top:6px; font-size:.8rem; color:var(--gray);"></div>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+              <button class="btn btn-gradient" style="flex:1; justify-content:center;" onclick="saveDirectivaMember()">Guardar</button>
+              <button class="btn btn-outline" style="flex:1; justify-content:center;" onclick="closeDirectivaModal()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /VIEW DIRECTIVA -->
+
+      <!-- ══ VIEW: VALORES ══ -->
+      <div id="view-valores" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>💫 Nuestros Valores</h2>
+            <button class="btn btn-gradient" onclick="openValorCard(null)" style="font-size:.85rem;padding:8px 18px">+ Agregar Valor</button>
+          </div>
+          <div class="panel-body">
+            <div id="valores-admin-list" style="display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:8px;">
+              <div class="empty-state">Cargando valores...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal edición / creación -->
+        <div id="valores-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9999; align-items:center; justify-content:center;">
+          <div style="background:#fff; border-radius:16px; padding:32px; width:100%; max-width:420px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.25);">
+            <button onclick="closeValorModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#6b7280;">✕</button>
+            <h3 id="valores-modal-title" style="margin-bottom:20px; color:var(--purple);">Agregar Valor</h3>
+            <input type="hidden" id="valor-edit-index">
+
+            <div class="form-group">
+              <label>Ícono (emoji)</label>
+              <input id="valor-icono" type="text" class="form-control" placeholder="Ej: 📜" style="font-size:1.5rem; text-align:center;">
+            </div>
+            <div class="form-group">
+              <label>Título</label>
+              <input id="valor-titulo" type="text" class="form-control" placeholder="Ej: Empatía">
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea id="valor-descripcion" class="form-control" rows="3" placeholder="Describe este valor..."></textarea>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+              <button class="btn btn-gradient" style="flex:1; justify-content:center;" onclick="saveValorCard()">Guardar</button>
+              <button class="btn btn-outline" style="flex:1; justify-content:center;" onclick="closeValorModal()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /VIEW VALORES -->
+
+      <!-- ══ VIEW: SERVICIOS ══ -->
+      <div id="view-servicios" style="display:none;">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>💼 Nuestros Servicios</h2>
+            <button class="btn btn-gradient" onclick="openServicioCard(null)" style="font-size:.85rem;padding:8px 18px">+ Agregar Servicio</button>
+          </div>
+          <div class="panel-body">
+            <div id="servicios-admin-list" style="display:flex; flex-wrap:wrap; justify-content:center; gap:16px; margin-top:8px;">
+              <div class="empty-state">Cargando servicios...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal edición / creación -->
+        <div id="servicios-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:9999; align-items:center; justify-content:center;">
+          <div style="background:#fff; border-radius:16px; padding:32px; width:100%; max-width:420px; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.25);">
+            <button onclick="closeServicioModal()" style="position:absolute;top:12px;right:14px;background:none;border:none;font-size:1.4rem;cursor:pointer;color:#6b7280;">✕</button>
+            <h3 id="servicios-modal-title" style="margin-bottom:20px; color:var(--purple);">Agregar Servicio</h3>
+            <input type="hidden" id="servicio-edit-index">
+
+            <div class="form-group">
+              <label>Ícono (emoji)</label>
+              <input id="servicio-icono" type="text" class="form-control" placeholder="Ej: 🧠" style="font-size:1.5rem; text-align:center;">
+            </div>
+            <div class="form-group">
+              <label>Título</label>
+              <input id="servicio-titulo" type="text" class="form-control" placeholder="Ej: Acompañamiento Emocional">
+            </div>
+            <div class="form-group">
+              <label>Descripción</label>
+              <textarea id="servicio-descripcion" class="form-control" rows="3" placeholder="Describe este servicio..."></textarea>
+            </div>
+
+            <div style="display:flex; gap:10px; margin-top:20px;">
+              <button class="btn btn-gradient" style="flex:1; justify-content:center;" onclick="saveServicioCard()">Guardar</button>
+              <button class="btn btn-outline" style="flex:1; justify-content:center;" onclick="closeServicioModal()">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div> <!-- /VIEW SERVICIOS -->
+
     </div>
   </div>
 
@@ -640,11 +1027,29 @@
     let localData = [];
 
     // ── Helpers ───────────────────────────────────────────────
+    // ── Toast notifications ───────────────────────────────────
     function showAlert(id, msg, type) {
-      const el = document.getElementById(id);
-      el.textContent = msg;
-      el.className = 'alert ' + type;
-      setTimeout(() => { el.className = 'alert'; el.textContent = ''; }, 4000);
+      // Also update the legacy in-page element if it exists
+      const legacyEl = document.getElementById(id);
+      if (legacyEl) {
+        legacyEl.textContent = msg;
+        legacyEl.className = 'alert ' + type;
+        setTimeout(() => { legacyEl.className = 'alert'; legacyEl.textContent = ''; }, 5000);
+      }
+      showToast(msg, type);
+    }
+
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = 'toast ' + type;
+      const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+      toast.innerHTML = `<span>${icon} ${msg}</span><button class="toast-close" onclick="this.closest('.toast').remove()">✕</button>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.classList.add('hide');
+        setTimeout(() => toast.remove(), 370);
+      }, 5000);
     }
     function updateStats(data) {
       const active = data.filter(v => v.activa !== false).length;
@@ -683,27 +1088,650 @@
       loadCobertura();
     }
 
+    // ── Tab Management ─────────────────────────────────────────
+    function showTab(tabName) {
+      document.getElementById('view-vacantes').style.display = tabName === 'vacantes' ? 'block' : 'none';
+      document.getElementById('view-cobertura').style.display = tabName === 'cobertura' ? 'block' : 'none';
+      document.getElementById('view-contenido').style.display = tabName === 'contenido' ? 'block' : 'none';
+      if (document.getElementById('view-directiva')) document.getElementById('view-directiva').style.display = tabName === 'directiva' ? 'block' : 'none';
+      if (document.getElementById('view-valores')) document.getElementById('view-valores').style.display = tabName === 'valores' ? 'block' : 'none';
+      if (document.getElementById('view-servicios')) document.getElementById('view-servicios').style.display = tabName === 'servicios' ? 'block' : 'none';
+      if (document.getElementById('view-labores')) document.getElementById('view-labores').style.display = tabName === 'labores' ? 'block' : 'none';
+      if (document.getElementById('view-convenios')) document.getElementById('view-convenios').style.display = tabName === 'convenios' ? 'block' : 'none';
+
+      const btnV = document.getElementById('tab-vacantes');
+      const btnC = document.getElementById('tab-cobertura');
+      const btnCont = document.getElementById('tab-contenido');
+      const btnL = document.getElementById('tab-labores');
+      const btnConv = document.getElementById('tab-convenios');
+
+      btnV.className = tabName === 'vacantes' ? 'btn btn-gradient' : 'btn btn-outline';
+      btnC.className = tabName === 'cobertura' ? 'btn btn-gradient' : 'btn btn-outline';
+      if (btnCont) btnCont.className = tabName === 'contenido' ? 'btn btn-gradient' : 'btn btn-outline';
+      const btnDir = document.getElementById('tab-directiva');
+      if (btnDir) btnDir.className = tabName === 'directiva' ? 'btn btn-gradient' : 'btn btn-outline';
+      const btnVal = document.getElementById('tab-valores');
+      if (btnVal) btnVal.className = tabName === 'valores' ? 'btn btn-gradient' : 'btn btn-outline';
+      const btnServ = document.getElementById('tab-servicios');
+      if (btnServ) btnServ.className = tabName === 'servicios' ? 'btn btn-gradient' : 'btn btn-outline';
+      if (btnL) btnL.className = tabName === 'labores' ? 'btn btn-gradient' : 'btn btn-outline';
+      if (btnConv) btnConv.className = tabName === 'convenios' ? 'btn btn-gradient' : 'btn btn-outline';
+
+      if (tabName === 'contenido') {
+        loadAdminContenido();
+      } else if (tabName === 'directiva') {
+        loadAdminDirectiva();
+      } else if (tabName === 'valores') {
+        loadAdminValores();
+      } else if (tabName === 'servicios') {
+        loadAdminServicios();
+      } else if (tabName === 'labores' && typeof loadLabores === 'function') {
+        loadLabores();
+      } else if (tabName === 'convenios' && typeof loadConvenios === 'function') {
+        loadConvenios();
+      }
+    }
+
+    // ── VALORES ───────────────────────────────────────────
+    let valoresLista = [];
+
+    async function loadAdminValores() {
+      const list = document.getElementById('valores-admin-list');
+      list.innerHTML = '<div class="empty-state">Cargando...</div>';
+      try {
+        const res = await fetch('guardar_contenido.php?action=get');
+        const json = await res.json();
+        const data = json.data || json;
+        valoresLista = (data.valores && data.valores.lista) ? [...data.valores.lista] : [];
+        renderValoresAdminList();
+      } catch (e) {
+        list.innerHTML = '<div class="empty-state">Error al cargar</div>';
+      }
+    }
+
+    function renderValoresAdminList() {
+      const list = document.getElementById('valores-admin-list');
+      if (!valoresLista.length) {
+        list.innerHTML = '<div class="empty-state">No hay valores aún. ¡Agrega el primero!</div>';
+        return;
+      }
+      list.innerHTML = valoresLista.map((v, i) => `
+        <div style="background:#fff; border-radius:12px; border:1.5px solid var(--border); padding:20px 16px; text-align:center; position:relative; box-shadow:var(--shadow); width:220px; flex-shrink:0;">
+          <button onclick="deleteValorCard(${i})" title="Eliminar"
+            style="position:absolute;top:8px;right:8px;background:#fee2e2;color:#dc2626;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">✕</button>
+          <div style="font-size:2.2rem; margin-bottom:10px;">${v.icono || '📜'}</div>
+          <p style="font-weight:700;font-size:.9rem;color:var(--text);margin:0 0 6px;">${v.titulo || ''}</p>
+          <p style="font-size:.78rem;color:var(--gray);margin:0 0 12px; line-height:1.4;">${v.descripcion || ''}</p>
+          <button class="btn btn-outline" style="font-size:.78rem;padding:6px 14px;width:100%;" onclick="openValorCard(${i})">&#x270F;&#xFE0F; Editar</button>
+        </div>
+      `).join('');
+    }
+
+    function openValorCard(index) {
+      const modal = document.getElementById('valores-modal');
+      modal.style.display = 'flex';
+      document.getElementById('valor-edit-index').value = index !== null ? index : '';
+      document.getElementById('valores-modal-title').textContent = index !== null ? 'Editar Valor' : 'Agregar Valor';
+
+      if (index !== null && valoresLista[index]) {
+        const v = valoresLista[index];
+        document.getElementById('valor-icono').value = v.icono || '';
+        document.getElementById('valor-titulo').value = v.titulo || '';
+        document.getElementById('valor-descripcion').value = v.descripcion || '';
+      } else {
+        document.getElementById('valor-icono').value = '';
+        document.getElementById('valor-titulo').value = '';
+        document.getElementById('valor-descripcion').value = '';
+      }
+    }
+
+    function closeValorModal() {
+      document.getElementById('valores-modal').style.display = 'none';
+    }
+
+    async function saveValorCard() {
+      const icono      = document.getElementById('valor-icono').value.trim();
+      const titulo     = document.getElementById('valor-titulo').value.trim();
+      const descripcion = document.getElementById('valor-descripcion').value.trim();
+      const idxRaw     = document.getElementById('valor-edit-index').value;
+
+      if (!titulo) {
+        showToast('El título es obligatorio.', 'error');
+        return;
+      }
+
+      const valor = { icono, titulo, descripcion };
+      if (idxRaw !== '') {
+        valoresLista[parseInt(idxRaw)] = valor;
+      } else {
+        valoresLista.push(valor);
+      }
+      await saveValores();
+    }
+
+    async function deleteValorCard(index) {
+      if (!confirm(`¿Eliminar el valor "${valoresLista[index].titulo}"?`)) return;
+      valoresLista.splice(index, 1);
+      await saveValores();
+    }
+
+    async function saveValores() {
+      try {
+        const resGet = await fetch('guardar_contenido.php?action=get');
+        const jsonGet = await resGet.json();
+        const fullData = jsonGet.data || jsonGet;
+        fullData.valores = { lista: valoresLista };
+
+        const fd = new URLSearchParams();
+        fd.append('action', 'save');
+        fd.append('_pwd', ADMIN_PWD);
+        fd.append('data', JSON.stringify(fullData));
+
+        const res = await fetch('guardar_contenido.php', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          showToast('✅ Valores guardados correctamente', 'success');
+          closeValorModal();
+          renderValoresAdminList();
+        } else {
+          showToast('❌ Error al guardar: ' + json.message, 'error');
+        }
+      } catch (e) {
+        showToast('❌ Error de conexión', 'error');
+      }
+    }
+    // ── SERVICIOS ───────────────────────────────────────────
+    let serviciosLista = [];
+
+    async function loadAdminServicios() {
+      const list = document.getElementById('servicios-admin-list');
+      list.innerHTML = '<div class="empty-state">Cargando...</div>';
+      try {
+        const res = await fetch('guardar_contenido.php?action=get');
+        const json = await res.json();
+        const data = json.data || json;
+        serviciosLista = (data.servicios && data.servicios.lista) ? [...data.servicios.lista] : [];
+        renderServiciosAdminList();
+      } catch (e) {
+        list.innerHTML = '<div class="empty-state">Error al cargar</div>';
+      }
+    }
+
+    function renderServiciosAdminList() {
+      const list = document.getElementById('servicios-admin-list');
+      if (!serviciosLista.length) {
+        list.innerHTML = '<div class="empty-state">No hay servicios aún. ¡Agrega el primero!</div>';
+        return;
+      }
+      list.innerHTML = serviciosLista.map((s, i) => `
+        <div style="background:#fff; border-radius:12px; border:1.5px solid var(--border); padding:20px 16px; text-align:center; position:relative; box-shadow:var(--shadow); width:220px; flex-shrink:0;">
+          <button onclick="deleteServicioCard(${i})" title="Eliminar"
+            style="position:absolute;top:8px;right:8px;background:#fee2e2;color:#dc2626;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">✕</button>
+          <div style="font-size:2.2rem; margin-bottom:10px;">${s.icono || '💼'}</div>
+          <p style="font-weight:700;font-size:.9rem;color:var(--text);margin:0 0 6px;">${s.titulo || ''}</p>
+          <p style="font-size:.78rem;color:var(--gray);margin:0 0 12px; line-height:1.4;">${s.descripcion || ''}</p>
+          <button class="btn btn-outline" style="font-size:.78rem;padding:6px 14px;width:100%;" onclick="openServicioCard(${i})">&#x270F;&#xFE0F; Editar</button>
+        </div>
+      `).join('');
+    }
+
+    function openServicioCard(index) {
+      const modal = document.getElementById('servicios-modal');
+      modal.style.display = 'flex';
+      document.getElementById('servicio-edit-index').value = index !== null ? index : '';
+      document.getElementById('servicios-modal-title').textContent = index !== null ? 'Editar Servicio' : 'Agregar Servicio';
+
+      if (index !== null && serviciosLista[index]) {
+        const s = serviciosLista[index];
+        document.getElementById('servicio-icono').value = s.icono || '';
+        document.getElementById('servicio-titulo').value = s.titulo || '';
+        document.getElementById('servicio-descripcion').value = s.descripcion || '';
+      } else {
+        document.getElementById('servicio-icono').value = '';
+        document.getElementById('servicio-titulo').value = '';
+        document.getElementById('servicio-descripcion').value = '';
+      }
+    }
+
+    function closeServicioModal() {
+      document.getElementById('servicios-modal').style.display = 'none';
+    }
+
+    async function saveServicioCard() {
+      const icono       = document.getElementById('servicio-icono').value.trim();
+      const titulo      = document.getElementById('servicio-titulo').value.trim();
+      const descripcion = document.getElementById('servicio-descripcion').value.trim();
+      const idxRaw      = document.getElementById('servicio-edit-index').value;
+
+      if (!titulo) {
+        showToast('El título es obligatorio.', 'error');
+        return;
+      }
+
+      const servicio = { icono, titulo, descripcion };
+      if (idxRaw !== '') {
+        serviciosLista[parseInt(idxRaw)] = servicio;
+      } else {
+        serviciosLista.push(servicio);
+      }
+      await saveServicios();
+    }
+
+    async function deleteServicioCard(index) {
+      if (!confirm(`¿Eliminar el servicio "${serviciosLista[index].titulo}"?`)) return;
+      serviciosLista.splice(index, 1);
+      await saveServicios();
+    }
+
+    async function saveServicios() {
+      try {
+        const resGet = await fetch('guardar_contenido.php?action=get');
+        const jsonGet = await resGet.json();
+        const fullData = jsonGet.data || jsonGet;
+        fullData.servicios = { lista: serviciosLista };
+
+        const fd = new URLSearchParams();
+        fd.append('action', 'save');
+        fd.append('_pwd', ADMIN_PWD);
+        fd.append('data', JSON.stringify(fullData));
+
+        const res = await fetch('guardar_contenido.php', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          showToast('✅ Servicios guardados correctamente', 'success');
+          closeServicioModal();
+          renderServiciosAdminList();
+        } else {
+          showToast('❌ Error al guardar: ' + json.message, 'error');
+        }
+      } catch (e) {
+        showToast('❌ Error de conexión', 'error');
+      }
+    }
+
+    // ── DIRECTIVA ──────────────────────────────────────────────
+    let directivaMiembros = [];
+
+    async function loadAdminDirectiva() {
+      const list = document.getElementById('directiva-admin-list');
+      list.innerHTML = '<div class="empty-state">Cargando...</div>';
+      try {
+        const res = await fetch('guardar_contenido.php?action=get');
+        const json = await res.json();
+        const data = json.data || json;
+        directivaMiembros = (data.directiva && data.directiva.miembros) ? [...data.directiva.miembros] : [];
+        renderDirectivaAdminList();
+      } catch (e) {
+        list.innerHTML = '<div class="empty-state">Error al cargar</div>';
+      }
+    }
+
+    function renderDirectivaAdminList() {
+      const list = document.getElementById('directiva-admin-list');
+      if (!directivaMiembros.length) {
+        list.innerHTML = '<div class="empty-state">No hay miembros aún. ¡Agrega el primero!</div>';
+        return;
+      }
+      list.innerHTML = directivaMiembros.map((m, i) => `
+        <div style="background:#fff; border-radius:12px; border:1.5px solid var(--border); padding:16px; text-align:center; position:relative; box-shadow:var(--shadow); width:220px; flex-shrink:0;">
+          <button onclick="deleteDirectivaMember(${i})" title="Eliminar"
+            style="position:absolute;top:8px;right:8px;background:#fee2e2;color:#dc2626;border:none;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:12px;display:flex;align-items:center;justify-content:center;">✕</button>
+          <div style="width:70px;height:70px;border-radius:50%;overflow:hidden;margin:0 auto 10px;border:3px solid var(--border);background:#f3f4f6;">
+            ${m.foto
+              ? `<img src="../${m.foto}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'">`
+              : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.8rem;">👤</div>`}
+          </div>
+          <p style="font-weight:700;font-size:.9rem;color:var(--text);margin:0 0 4px;">${m.nombre || ''}</p>
+          <p style="font-size:.78rem;color:var(--purple);margin:0 0 12px;">${m.cargo || ''}</p>
+          <button class="btn btn-outline" style="font-size:.78rem;padding:6px 14px;width:100%;" onclick="openDirectivaMember(${i})">✏️ Editar</button>
+        </div>
+      `).join('');
+    }
+
+    function openDirectivaMember(index) {
+      const modal = document.getElementById('directiva-modal');
+      modal.style.display = 'flex';
+      document.getElementById('directiva-edit-index').value = index !== null ? index : '';
+      document.getElementById('directiva-modal-title').textContent = index !== null ? 'Editar Miembro' : 'Agregar Miembro';
+      document.getElementById('directiva-foto-upload-status').textContent = '';
+
+      if (index !== null && directivaMiembros[index]) {
+        const m = directivaMiembros[index];
+        document.getElementById('directiva-nombre').value = m.nombre || '';
+        document.getElementById('directiva-cargo').value = m.cargo || '';
+        document.getElementById('directiva-foto-path').value = m.foto || '';
+        showDirectivaFotoPreview(m.foto || '');
+      } else {
+        document.getElementById('directiva-nombre').value = '';
+        document.getElementById('directiva-cargo').value = '';
+        document.getElementById('directiva-foto-path').value = '';
+        document.getElementById('directiva-foto-file').value = '';
+        showDirectivaFotoPreview('');
+      }
+    }
+
+    function closeDirectivaModal() {
+      document.getElementById('directiva-modal').style.display = 'none';
+    }
+
+    async function saveDirectivaMember() {
+      const nombre = document.getElementById('directiva-nombre').value.trim();
+      const cargo  = document.getElementById('directiva-cargo').value.trim();
+      const foto   = document.getElementById('directiva-foto-path').value;
+      const idxRaw = document.getElementById('directiva-edit-index').value;
+
+      if (!nombre || !cargo) {
+        showToast('Por favor, completa el nombre y el cargo.', 'error');
+        return;
+      }
+
+      const member = { nombre, cargo, foto };
+      if (idxRaw !== '') {
+        directivaMiembros[parseInt(idxRaw)] = member;
+      } else {
+        directivaMiembros.push(member);
+      }
+
+      await saveDirectiva();
+    }
+
+    async function deleteDirectivaMember(index) {
+      if (!confirm(`¿Eliminar a "${directivaMiembros[index].nombre}" de la directiva?`)) return;
+      directivaMiembros.splice(index, 1);
+      await saveDirectiva();
+    }
+
+    async function saveDirectiva() {
+      try {
+        const fdGet = new URLSearchParams();
+        fdGet.append('action', 'get');
+        const resGet = await fetch('guardar_contenido.php?action=get');
+        const jsonGet = await resGet.json();
+        const fullData = jsonGet.data || jsonGet;
+        fullData.directiva = { miembros: directivaMiembros };
+
+        const fd = new URLSearchParams();
+        fd.append('action', 'save');
+        fd.append('_pwd', ADMIN_PWD);
+        fd.append('data', JSON.stringify(fullData));
+
+        const res = await fetch('guardar_contenido.php', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          showToast('✅ Directiva guardada correctamente', 'success');
+          closeDirectivaModal();
+          renderDirectivaAdminList();
+        } else {
+          showToast('❌ Error al guardar: ' + json.message, 'error');
+        }
+      } catch (e) {
+        showToast('❌ Error de conexión', 'error');
+      }
+    }
+
+    async function uploadDirectivaFoto(input) {
+      if (!input.files || !input.files[0]) return;
+      const file = input.files[0];
+      const status = document.getElementById('directiva-foto-upload-status');
+      status.textContent = '⏳ Subiendo imagen...';
+      const oldPath = document.getElementById('directiva-foto-path').value;
+      const fd = new FormData();
+      fd.append('action', 'upload_img');
+      fd.append('image', file);
+      if (oldPath) fd.append('old_path', oldPath);
+      fd.append('_pwd', ADMIN_PWD);
+
+      try {
+        const res = await fetch('guardar_contenido.php', { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success && json.data && json.data.path) {
+          document.getElementById('directiva-foto-path').value = json.data.path;
+          showDirectivaFotoPreview(json.data.path);
+          status.textContent = '✅ Imagen subida con éxito';
+        } else {
+          status.textContent = '❌ ' + json.message;
+        }
+      } catch (e) {
+        status.textContent = '❌ Error de conexión';
+      }
+    }
+
+    function showDirectivaFotoPreview(path) {
+      const container = document.getElementById('directiva-foto-preview');
+      if (!path) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+      }
+      container.style.display = 'block';
+      container.innerHTML = `
+        <img src="../${path}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;border:2px solid var(--border);" onerror="this.style.display='none'">
+        <button type="button" onclick="clearDirectivaFoto()" style="position:absolute;top:-4px;right:-4px;background:#ef4444;color:#fff;border:none;width:18px;height:18px;border-radius:50%;cursor:pointer;font-size:10px;display:flex;align-items:center;justify-content:center;">✕</button>
+      `;
+    }
+
+    function clearDirectivaFoto() {
+      document.getElementById('directiva-foto-path').value = '';
+      document.getElementById('directiva-foto-file').value = '';
+      document.getElementById('directiva-foto-upload-status').textContent = '';
+      showDirectivaFotoPreview('');
+    }
+
+    // ── CONTENIDO ──────────────────────────────────────────────
+    const API_CONT = 'guardar_contenido.php';
+    const ADMIN_PWD = 'JoseyGarde1328'; // Se envía como fallback de autenticación
+    let fullContenidoData = {};
+
+    // Helper: agrega _pwd a cualquier FormData o URLSearchParams antes de enviarlo
+    async function fetchCont(bodyData, isFormData = false) {
+      if (isFormData) {
+        bodyData.append('_pwd', ADMIN_PWD);
+      } else {
+        bodyData.append('_pwd', ADMIN_PWD);
+      }
+      return fetch(API_CONT, { method: 'POST', body: bodyData });
+    }
+
+    async function loadAdminContenido() {
+      try {
+        const res = await fetch(API_CONT + '?action=get');
+        if (res.ok) {
+          const json = await res.json();
+          const data = json.data || json;
+          fullContenidoData = data;
+
+          if (data.inicio) {
+            document.getElementById('cont-inicio-titulo').value = data.inicio.titulo || '';
+            document.getElementById('cont-inicio-descripcion').value = data.inicio.descripcion || '';
+          }
+          if (data.nosotros) {
+            document.getElementById('cont-nosotros-titulo').value = data.nosotros.titulo || '';
+            document.getElementById('cont-nosotros-texto1').value = data.nosotros.texto1 || '';
+            document.getElementById('cont-nosotros-texto2').value = data.nosotros.texto2 || '';
+            if (data.nosotros.mision_vision) {
+              document.getElementById('cont-nosotros-mision').value = data.nosotros.mision_vision.mision || '';
+              document.getElementById('cont-nosotros-vision').value = data.nosotros.mision_vision.vision || '';
+            } else {
+              document.getElementById('cont-nosotros-mision').value = '';
+              document.getElementById('cont-nosotros-vision').value = '';
+            }
+          }
+          if (data.fundadora) {
+            document.getElementById('cont-fundadora-nombre').value = data.fundadora.nombre || '';
+            document.getElementById('cont-fundadora-cargo').value = data.fundadora.cargo || '';
+            document.getElementById('cont-fundadora-cita').value = data.fundadora.cita || '';
+            document.getElementById('cont-fundadora-foto-path').value = data.fundadora.foto || '';
+            showFundadoraFotoPreview(data.fundadora.foto);
+          } else {
+            document.getElementById('cont-fundadora-nombre').value = '';
+            document.getElementById('cont-fundadora-cargo').value = '';
+            document.getElementById('cont-fundadora-cita').value = '';
+            document.getElementById('cont-fundadora-foto-path').value = '';
+            showFundadoraFotoPreview('');
+          }
+          if (data.impacto) {
+            document.getElementById('cont-impacto-autor').value = data.impacto.testimonio_autor || '';
+            document.getElementById('cont-impacto-rol').value = data.impacto.testimonio_rol || '';
+            document.getElementById('cont-impacto-texto').value = data.impacto.testimonio_texto || '';
+            document.getElementById('cont-impacto-foto-path').value = data.impacto.testimonio_foto || '';
+            showImpactoFotoPreview(data.impacto.testimonio_foto);
+          } else {
+            document.getElementById('cont-impacto-foto-path').value = '';
+            showImpactoFotoPreview('');
+          }
+        }
+      } catch (e) { }
+    }
+
+    document.getElementById('cont-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = e.target.querySelector('[type=submit]');
+      btn.disabled = true; btn.textContent = '⏳ Guardando...';
+
+      const dataObj = {
+        ...fullContenidoData,
+        inicio: {
+          ...(fullContenidoData.inicio || {}),
+          titulo: document.getElementById('cont-inicio-titulo').value,
+          descripcion: document.getElementById('cont-inicio-descripcion').value
+        },
+        nosotros: {
+          ...(fullContenidoData.nosotros || {}),
+          titulo: document.getElementById('cont-nosotros-titulo').value,
+          texto1: document.getElementById('cont-nosotros-texto1').value,
+          texto2: document.getElementById('cont-nosotros-texto2').value,
+          mision_vision: {
+            mision: document.getElementById('cont-nosotros-mision').value,
+            vision: document.getElementById('cont-nosotros-vision').value
+          }
+        },
+        fundadora: {
+          nombre: document.getElementById('cont-fundadora-nombre').value,
+          cargo: document.getElementById('cont-fundadora-cargo').value,
+          cita: document.getElementById('cont-fundadora-cita').value,
+          foto: document.getElementById('cont-fundadora-foto-path').value
+        },
+        impacto: {
+          ...(fullContenidoData.impacto || {}),
+          testimonio_autor: document.getElementById('cont-impacto-autor').value,
+          testimonio_rol: document.getElementById('cont-impacto-rol').value,
+          testimonio_texto: document.getElementById('cont-impacto-texto').value,
+          testimonio_foto: document.getElementById('cont-impacto-foto-path').value
+        }
+      };
+
+      const fd = new URLSearchParams();
+      fd.append('action', 'save');
+      fd.append('data', JSON.stringify(dataObj));
+
+      try {
+        const res = await fetchCont(fd);
+        const json = await res.json();
+        if (json.success) showAlert('cont-alert', '✅ Guardado correctamente', 'success');
+        else showAlert('cont-alert', '❌ Error al guardar', 'error');
+      } catch (e) {
+        showAlert('cont-alert', '❌ Error de red', 'error');
+      }
+      btn.disabled = false; btn.textContent = 'Guardar Cambios 🚀';
+    });
+
+    async function uploadImpactoFoto(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const oldPath = document.getElementById('cont-impacto-foto-path').value;
+        const fd = new FormData();
+        fd.append('action', 'upload_img');
+        fd.append('image', file);
+        if (oldPath) fd.append('old_path', oldPath);
+        try {
+          const res = await fetchCont(fd, true);
+          const json = await res.json();
+          if (json.success && json.data && json.data.path) {
+            document.getElementById('cont-impacto-foto-path').value = json.data.path;
+            showImpactoFotoPreview(json.data.path);
+            showAlert('cont-alert', '✅ Imagen de sección subida con éxito', 'success');
+          } else {
+            showAlert('cont-alert', '❌ ' + json.message, 'error');
+          }
+        } catch (e) {
+          showAlert('cont-alert', '❌ Error de conexión al subir la imagen', 'error');
+        }
+      }
+    }
+
+    function showImpactoFotoPreview(path) {
+      const container = document.getElementById('impacto-foto-preview-container');
+      if (!path) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+      }
+      container.style.display = 'block';
+      container.innerHTML = `
+        <img src="../${path}" style="width:100%; height:100%; object-fit:cover; border-radius:8px; border:1px solid #fecdd3;">
+        <button type="button" onclick="deleteImpactoFoto()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+      `;
+    }
+
+    function deleteImpactoFoto() {
+      if (confirm('¿Eliminar la imagen de esta sección?')) {
+        document.getElementById('cont-impacto-foto-path').value = '';
+        document.getElementById('cont-impacto-foto-file').value = '';
+        showImpactoFotoPreview('');
+      }
+    }
+
+    async function uploadFundadoraFoto(input) {
+      if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const oldPath = document.getElementById('cont-fundadora-foto-path').value;
+        const fd = new FormData();
+        fd.append('action', 'upload_img');
+        fd.append('image', file);
+        if (oldPath) fd.append('old_path', oldPath);
+
+        try {
+          const res = await fetchCont(fd, true);
+          const json = await res.json();
+          if (json.success && json.data && json.data.path) {
+            document.getElementById('cont-fundadora-foto-path').value = json.data.path;
+            showFundadoraFotoPreview(json.data.path);
+            showAlert('cont-alert', '✅ Foto de fundadora subida con éxito', 'success');
+          } else {
+            showAlert('cont-alert', '❌ ' + json.message, 'error');
+          }
+        } catch (e) {
+          showAlert('cont-alert', '❌ Error de conexión al subir la imagen', 'error');
+        }
+      }
+    }
+
+    function showFundadoraFotoPreview(path) {
+      const container = document.getElementById('fundadora-foto-preview-container');
+      if (!path) {
+        container.style.display = 'none';
+        container.innerHTML = '';
+        return;
+      }
+      container.style.display = 'block';
+      container.innerHTML = `
+        <img src="../${path}" style="width:100%; height:100%; object-fit:cover; border-radius:8px; border:1px solid #fecdd3;">
+        <button type="button" onclick="deleteFundadoraFoto()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+      `;
+    }
+
+    function deleteFundadoraFoto() {
+      if (confirm('¿Eliminar la foto de la fundadora?')) {
+        document.getElementById('cont-fundadora-foto-path').value = '';
+        document.getElementById('cont-fundadora-foto-file').value = '';
+        showFundadoraFotoPreview('');
+      }
+    }
+
     function logout() {
       if (confirm('¿Cerrar sesión?')) {
         fetch(API, { method: 'POST', body: new URLSearchParams({ action: 'logout' }) }).catch(() => { });
         location.reload();
-      }
-    }
-
-    // ── TABS ───────────────────────────────────────────────────
-    function showTab(tab) {
-      if (tab === 'vacantes') {
-        document.getElementById('view-vacantes').style.display = 'block';
-        document.getElementById('view-cobertura').style.display = 'none';
-        document.getElementById('tab-vacantes').className = 'btn btn-gradient';
-        document.getElementById('tab-cobertura').className = 'btn btn-outline';
-        document.querySelector('.topbar h1').textContent = 'La Pequeña Zarahy — Gestión de Vacantes';
-      } else {
-        document.getElementById('view-vacantes').style.display = 'none';
-        document.getElementById('view-cobertura').style.display = 'block';
-        document.getElementById('tab-vacantes').className = 'btn btn-outline';
-        document.getElementById('tab-cobertura').className = 'btn btn-gradient';
-        document.querySelector('.topbar h1').textContent = 'La Pequeña Zarahy — Cobertura';
       }
     }
 
@@ -1019,6 +2047,281 @@
         if (data.success) loadVacantes();
         else alert(data.message);
       } catch { alert('Error de conexión.'); }
+    }
+
+    // ── Labores ────────────────────────────────────────────────
+    const API_LAB = '../guardar_labores.php';
+    let laboresData = [];
+
+    function toggleFormLabores() {
+      const b = document.getElementById('add-form-labores-body');
+      const btn = document.getElementById('toggle-form-labores-btn');
+      if (b.style.display === 'none') { b.style.display = 'block'; btn.textContent = 'Colapsar'; }
+      else { b.style.display = 'none'; btn.textContent = 'Expandir'; }
+    }
+
+    async function loadLabores() {
+      if (isLocal) return;
+      try {
+        const res = await fetch(API_LAB + '?action=get');
+        const json = await res.json();
+        if (json.success) {
+          laboresData = json.data;
+          renderLabores(laboresData);
+        }
+      } catch (e) { }
+    }
+
+    function renderLabores(data) {
+      const list = document.getElementById('labores-list');
+      if (!data || !data.length) {
+        list.innerHTML = '<div class="empty-state">No hay labores sociales publicadas.</div>';
+        return;
+      }
+      list.innerHTML = data.map(l => `
+        <div class="vac-item">
+          <div class="vac-info" style="flex:1">
+            <h3>${l.titulo}</h3>
+            <div class="vac-meta">
+              <span class="vac-tag" style="background:#f9fafb;color:#6b7280">📅 ${formatDate(l.fecha)} ${l.hora || ''}</span>
+              <span class="vac-tag">📍 ${l.ubicacion || 'Sin ubicación'}</span>
+            </div>
+            <p style="font-size:0.8rem; margin-top:8px; color:var(--gray)">${l.descripcion ? l.descripcion.substring(0, 100) + '...' : ''}</p>
+          </div>
+          <div class="vac-actions">
+            <button class="btn btn-outline" onclick="editLabor('${l.id}')">✏️ Editar</button>
+            <button class="btn btn-danger" onclick="deleteLabor('${l.id}')">🗑 Eliminar</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    let selectedLaborFiles = [];
+
+    document.getElementById('add-form-labores').addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const id = document.getElementById('l-id').value;
+      fd.append('action', id ? 'edit' : 'add');
+
+      // Eliminar el campo original de fotos para reemplazarlo con la lista filtrada
+      fd.delete('fotos[]');
+      selectedLaborFiles.forEach(file => {
+        fd.append('fotos[]', file);
+      });
+
+      try {
+        const res = await fetch(API_LAB, { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          showAlert('labores-alert', '✅ ' + json.message, 'success');
+          loadLabores();
+          resetLaboresForm();
+        } else {
+          showAlert('labores-alert', '❌ ' + json.message, 'error');
+        }
+      } catch (e) {
+        showAlert('labores-alert', '❌ Error de conexión', 'error');
+      }
+    });
+
+    function previewLaboresImages(input) {
+      if (input.files && input.files.length) {
+        const filesArray = Array.from(input.files);
+        filesArray.forEach(file => {
+          // Evitar duplicados por nombre y peso
+          const exists = selectedLaborFiles.some(f => f.name === file.name && f.size === file.size);
+          if (!exists) {
+            selectedLaborFiles.push(file);
+          }
+        });
+      }
+      // Limpiar el valor del input para que permita volver a seleccionar el mismo archivo si se desea,
+      // y para que no interfiera en la recolección manual de selectedLaborFiles en el submit.
+      input.value = '';
+      renderNewPreviews();
+    }
+
+    function renderNewPreviews() {
+      const previewContainer = document.getElementById('labores-preview-container');
+      const newPreviews = previewContainer.querySelectorAll('.new-preview');
+      newPreviews.forEach(el => el.remove());
+
+      selectedLaborFiles.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const div = document.createElement('div');
+          div.className = 'new-preview';
+          div.style.position = 'relative';
+          div.style.width = '80px';
+          div.style.height = '80px';
+          div.style.marginRight = '10px';
+          div.style.marginBottom = '10px';
+          div.innerHTML = `
+            <img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover; border-radius:8px; border:2px dashed var(--purple);">
+            <span style="position:absolute; bottom:2px; right:2px; background:rgba(0,0,0,0.6); color:#fff; font-size:8px; padding:1px 3px; border-radius:3px;">Nuevo</span>
+            <button type="button" onclick="removeSelectedFile(${index})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+          `;
+          previewContainer.appendChild(div);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function removeSelectedFile(index) {
+      selectedLaborFiles.splice(index, 1);
+      renderNewPreviews();
+    }
+
+    function resetLaboresForm() {
+      document.getElementById('add-form-labores').reset();
+      document.getElementById('l-id').value = '';
+      selectedLaborFiles = [];
+      document.getElementById('labores-preview-container').innerHTML = '';
+    }
+
+    function editLabor(id) {
+      const l = laboresData.find(x => x.id === id);
+      if (!l) return;
+      resetLaboresForm();
+      document.getElementById('l-id').value = l.id;
+      document.getElementById('l-titulo').value = l.titulo;
+      document.getElementById('l-ubicacion').value = l.ubicacion;
+      document.getElementById('l-fecha').value = l.fecha;
+      document.getElementById('l-hora').value = l.hora;
+      document.getElementById('l-descripcion').value = l.descripcion;
+
+      // Mostrar fotos actuales
+      const previewContainer = document.getElementById('labores-preview-container');
+      previewContainer.innerHTML = '';
+      if (l.fotos && l.fotos.length) {
+        l.fotos.forEach(foto => {
+          const div = document.createElement('div');
+          div.style.position = 'relative';
+          div.style.width = '80px';
+          div.style.height = '80px';
+          div.style.marginRight = '10px';
+          div.style.marginBottom = '10px';
+          div.innerHTML = `
+            <img src="../${foto}" style="width:100%; height:100%; object-fit:cover; border-radius:8px; border: 1px solid #fecdd3;">
+            <input type="hidden" name="fotos_prev[]" value="${foto}">
+            <button type="button" onclick="this.parentElement.remove()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+          `;
+          previewContainer.appendChild(div);
+        });
+      }
+
+      document.getElementById('add-form-labores-body').style.display = 'block';
+      document.querySelector('.main').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    async function deleteLabor(id) {
+      if (!confirm('¿Eliminar esta labor?')) return;
+      try {
+        const res = await fetch(API_LAB, { method: 'POST', body: new URLSearchParams({ action: 'delete', id }) });
+        const json = await res.json();
+        if (json.success) loadLabores();
+        else alert(json.message);
+      } catch (e) { alert('Error de red'); }
+    }
+
+    // ── Convenios ──────────────────────────────────────────────
+    const API_CONV = '../guardar_convenios.php';
+    let conveniosData = [];
+
+    function toggleFormConvenios() {
+      const b = document.getElementById('add-form-convenios-body');
+      const btn = document.getElementById('toggle-form-convenios-btn');
+      if (b.style.display === 'none') { b.style.display = 'block'; btn.textContent = 'Colapsar'; }
+      else { b.style.display = 'none'; btn.textContent = 'Expandir'; }
+    }
+
+    async function loadConvenios() {
+      if (isLocal) return;
+      try {
+        const res = await fetch(API_CONV + '?action=get');
+        const json = await res.json();
+        if (json.success) {
+          conveniosData = json.data;
+          renderConvenios(conveniosData);
+        }
+      } catch (e) { }
+    }
+
+    function renderConvenios(data) {
+      const list = document.getElementById('convenios-list');
+      if (!data || !data.length) {
+        list.innerHTML = '<div class="empty-state">No hay convenios.</div>';
+        return;
+      }
+      list.innerHTML = data.map(c => `
+        <div class="vac-item" style="align-items:center;">
+          ${c.logo ? `<img src="../${c.logo}" style="width:50px; height:50px; object-fit:contain;">` : '<div style="width:50px;height:50px;background:#eee;border-radius:8px"></div>'}
+          <div class="vac-info" style="flex:1">
+            <h3 style="margin:0">${c.nombre}</h3>
+          </div>
+          <div class="vac-actions">
+            <button class="btn btn-danger" onclick="deleteConvenio('${c.id}')">🗑 Eliminar</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    document.getElementById('add-form-convenios').addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      fd.append('action', 'add');
+      try {
+        const res = await fetch(API_CONV, { method: 'POST', body: fd });
+        const json = await res.json();
+        if (json.success) {
+          showAlert('convenios-alert', '✅ ' + json.message, 'success');
+          loadConvenios();
+          e.target.reset();
+          clearConvenioLogo();
+        } else {
+          showAlert('convenios-alert', '❌ ' + json.message, 'error');
+        }
+      } catch (e) {
+        showAlert('convenios-alert', '❌ Error de conexión', 'error');
+      }
+    });
+
+    function previewConvenioLogo(input) {
+      const previewContainer = document.getElementById('convenio-preview-container');
+      previewContainer.innerHTML = '';
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const div = document.createElement('div');
+          div.style.position = 'relative';
+          div.style.width = '80px';
+          div.style.height = '80px';
+          div.innerHTML = `
+            <img src="${e.target.result}" style="width:100%; height:100%; object-fit:contain; border-radius:8px; border:2px dashed var(--purple); padding:4px; background:#f9f5ff;">
+            <button type="button" onclick="clearConvenioLogo()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+          `;
+          previewContainer.appendChild(div);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function clearConvenioLogo() {
+      const input = document.getElementById('conv-logo');
+      if (input) input.value = '';
+      const previewContainer = document.getElementById('convenio-preview-container');
+      if (previewContainer) previewContainer.innerHTML = '';
+    }
+
+    async function deleteConvenio(id) {
+      if (!confirm('¿Eliminar convenio?')) return;
+      try {
+        const res = await fetch(API_CONV, { method: 'POST', body: new URLSearchParams({ action: 'delete', id }) });
+        const json = await res.json();
+        if (json.success) loadConvenios();
+        else alert(json.message);
+      } catch (e) { alert('Error de red'); }
     }
   </script>
 </body>

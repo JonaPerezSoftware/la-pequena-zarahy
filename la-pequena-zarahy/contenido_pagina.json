@@ -1,0 +1,146 @@
+{
+    "inicio": {
+        "titulo": "Transformamos Vidas con Propósito",
+        "descripcion": "La Pequeña Zarahy es una fundación social, con sede en el Ecuador, que impulsa el desarrollo mediante el acompañamiento integral y la gestión estratégica del talento humano. Bajo un modelo de sostenibilidad ética, reinvertimos los ingresos de nuestras capacitaciones para cubrir la infraestructura operativa; sin embargo, dependemos de la suma de voluntades y de fondos nacionales, internacionales y donantes anónimos para ejecutar intervenciones directas en comunidades vulnerables.",
+        "boton_donar": "💛 Quiero Donar",
+        "boton_unete": "Conocer más →"
+    },
+    "nosotros": {
+        "titulo": "Nuestra Misión y Visión",
+        "texto1": "Guiamos cada acción por un propósito claro: transformar vidas con dignidad y esperanza.",
+        "texto2": "Somos una fundación sin fines de lucro y agente de cambio en el Ecuador, que conecta empresas, municipios y comunidades para generar impacto real. Brindamos servicios de capacitación, procesos de selección, visitas domiciliarias con informes sociales, mediación, salud mental y apoyo social, garantizando procesos más humanos, confiables y con valor social. A través de la autogestión y el apoyo solidario, transformamos cada servicio en oportunidades que fortalecen a quienes más lo necesitan. Contamos con una red de coordinadoras en cada territorio del país, asegurando cobertura y acompañamiento a nivel nacional.",
+        "mision_vision": {
+            "mision": "En La Pequeña Zarahy trabajamos para transformar vidas a través de la unión de profesionales, empresas, instituciones y comunidades comprometidas con el bienestar social, humano y emocional de quienes más lo necesitan. Nuestro propósito es crear espacios de apoyo, orientación, capacitación y acompañamiento integral, impulsando proyectos sociales, educativos y comunitarios con amor, empatía, liderazgo y acción real. Creemos en el poder de las alianzas estratégicas para generar oportunidades, fortalecer familias y construir una sociedad más humana, consciente y solidaria.",
+            "vision": "Ser una fundación reconocida a nivel nacional e internacional por su impacto humano, profesional y comunitario, convirtiéndose en una red de transformación social que inspire cambios reales en la vida de miles de personas. Aspiramos a seguir creciendo mediante alianzas estratégicas con profesionales, universidades, empresas, fundaciones y líderes comunitarios, llevando esperanza, formación, desarrollo y apoyo a cada rincón donde exista una necesidad. Queremos dejar un legado de amor, resiliencia y servicio que trascienda generaciones, demostrando que cuando se trabaja con propósito, el impacto puede cambiar comunidades enteras."
+        },
+        "estadisticas": {
+            "familias": 500,
+            "proyectos": 20,
+            "voluntarios": 100
+        }
+    },
+    "fundadora": {
+        "nombre": "Lcda. Gardenia Guerrero Guzmán",
+        "cargo": "Fundadora de la Fundación",
+        "cita": "\"Mi mayor propósito es sembrar esperanza y brindar oportunidades a quienes más lo necesitan. Creo firmemente que con empatía y trabajo conjunto, podemos transformar vidas y construir un Ecuador lleno de posibilidades para todos.\"",
+        "foto": "uploads\/contenido\/img_6a56c93d04f15.jpeg"
+    },
+    "directiva": {
+        "miembros": [
+            {
+                "nombre": "Gardenia Graciela Guerrero Guzmán",
+                "cargo": "Presidenta",
+                "foto": "varios\/directiva\/presidenta.jpeg"
+            },
+            {
+                "nombre": "José Rigoberto Rodríguez Tacuri",
+                "cargo": "Vicepresidente",
+                "foto": "varios\/directiva\/vicepresidente.jpeg"
+            },
+            {
+                "nombre": "Betzi Emperatriz Gómez Rojas",
+                "cargo": "Secretaria",
+                "foto": "uploads\/contenido\/img_6a56cc2e1d557.png"
+            },
+            {
+                "nombre": "Brayan Alexander Rodríguez Calderón",
+                "cargo": "Tesorero",
+                "foto": "varios\/directiva\/tesorero.jpeg"
+            },
+            {
+                "nombre": "Adriana Lissette Ronquillo González",
+                "cargo": "Vocal",
+                "foto": "uploads\/contenido\/img_6a56cc286c61b.png"
+            },
+            {
+                "nombre": "Mónica Zenaida Vera Cagua",
+                "cargo": "Vocal",
+                "foto": "varios\/directiva\/vocal2.jpeg"
+            }
+        ]
+    },
+    "valores": {
+        "lista": [
+            {
+                "icono": "💜",
+                "titulo": "Empatía",
+                "descripcion": "Nos conectamos genuinamente con cada persona y comunidad, escuchando sus necesidades y actuando con compasión real."
+            },
+            {
+                "icono": "🤝",
+                "titulo": "Comunidad",
+                "descripcion": "Fortalecemos redes de apoyo y conexión social, construyendo vínculos duraderos entre personas y organizaciones."
+            },
+            {
+                "icono": "🌟",
+                "titulo": "Transformación",
+                "descripcion": "Generamos cambios reales y duraderos en la sociedad, impulsando el desarrollo integral de las comunidades más vulnerables."
+            }
+        ]
+    },
+    "servicios": {
+        "lista": [
+            {
+                "icono": "🧠",
+                "titulo": "Acompañamiento Emocional",
+                "descripcion": "Apoyo integral en salud mental y bienestar emocional para personas y familias que atraviesan situaciones de crisis, duelo o vulnerabilidad."
+            },
+            {
+                "icono": "👥",
+                "titulo": "Orientación Social y Familiar",
+                "descripcion": "Guía profesional para fortalecer relaciones familiares y comunitarias, promoviendo la cohesión social y el bienestar colectivo."
+            },
+            {
+                "icono": "🛡️",
+                "titulo": "Protección de Derechos",
+                "descripcion": "Defensa y garantía de los derechos fundamentales en contextos vulnerables, con enfoque humanitario y acompañamiento personalizado."
+            },
+            {
+                "icono": "💼",
+                "titulo": "Servicios Organizacionales",
+                "descripcion": "Selección de personal, gestión del talento humano y asesoría organizacional para empresas e instituciones comprometidas con el impacto social."
+            },
+            {
+                "icono": "📖",
+                "titulo": "Procesos Formativos",
+                "descripcion": "Capacitaciones en liderazgo, inteligencia emocional y desarrollo personal, diseñadas para individuos, equipos y organizaciones."
+            },
+            {
+                "icono": "🕊️",
+                "titulo": "Mediación de Conflictos",
+                "descripcion": "Resolución de conflictos a través de procesos participativos y transformadores que promueven el diálogo y la convivencia pacífica."
+            },
+            {
+                "icono": "🏛️",
+                "titulo": "Trabajo con Alcaldías y Municipios",
+                "descripcion": "Articulamos alianzas estratégicas con gobiernos locales para diseñar y ejecutar proyectos de impacto social directo en comunidades vulnerables."
+            },
+            {
+                "icono": "🎓",
+                "titulo": "Capacitaciones",
+                "descripcion": "Ofrecemos programas de formación en habilidades blandas, emprendimiento y desarrollo comunitario para potenciar el talento de las personas."
+            },
+            {
+                "icono": "🧘",
+                "titulo": "Apoyo Psicológico",
+                "descripcion": "Atención psicológica profesional para personas en situaciones de crisis, trauma o estrés, con un enfoque humano, ético y confidencial."
+            },
+            {
+                "icono": "📚",
+                "titulo": "Acompañamiento Educativo y Orientación",
+                "descripcion": "Apoyo escolar, refuerzo académico y orientación vocacional para niños, jóvenes y adultos que buscan potenciar su futuro profesional."
+            },
+            {
+                "icono": "⚖️",
+                "titulo": "Asesoría Legal",
+                "descripcion": "Orientamos y acompañamos a familias y personas en el ejercicio de sus derechos, facilitando el acceso a la justicia con perspectiva social."
+            }
+        ]
+    },
+    "impacto": {
+        "testimonio_texto": "Trabajamos junto a la comunidad, impulsando acciones de apoyo, orientación y acompañamiento social dirigidas a las personas y familias que más lo necesitan. A través de la Fundación para el desarrollo humano Puente de Oportunidades “La Pequeña Zarahy”, promovemos una labor comunitaria basada en la solidaridad, la inclusión y el compromiso humano.\n\nNuestro enfoque comunitario busca fortalecer la unión entre familias, líderes barriales, instituciones y redes de apoyo, desarrollando actividades de ayuda social, visitas domiciliarias, orientación familiar, atención a grupos vulnerables y programas de bienestar comunitario.\n\nCreemos en una comunidad más unida, participativa y solidaria, donde el trabajo social permita generar oportunidades, prevenir problemáticas sociales y mejorar la calidad de vida de niños, adultos mayores, jóvenes y familias en situación de vulnerabilidad.\n\nTrabajamos de la mano con municipios, organizaciones e instituciones para construir espacios de apoyo y desarrollo social que beneficien a toda la comunidad parroquial.",
+        "testimonio_autor": "Gestión e Intervención Social con Enfoque de Labor Social",
+        "testimonio_rol": "Trabajando por el bienestar y desarrollo de la comunidad parroquial.",
+        "testimonio_foto": "varios\/ChatGPT Image 3 may 2026, 17_31_03.png"
+    }
+}
