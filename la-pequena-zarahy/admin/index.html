@@ -864,11 +864,28 @@
                 <textarea id="l-descripcion" name="descripcion" rows="3" required></textarea>
               </div>
               <div class="form-group">
-                <label>Fotos (Máx 5)</label>
+                <label>Fotos (Máx 10)</label>
                 <input type="file" id="l-fotos" name="fotos[]" accept="image/*" multiple
                   onchange="previewLaboresImages(this)">
                 <div id="labores-preview-container" style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
                 </div>
+              </div>
+              <div class="form-group">
+                <label>Videos (Máx 5) <small style="color:var(--gray);font-weight:400;">— MP4, WEBM, MOV · máx 100 MB c/u</small></label>
+                <input type="file" id="l-videos" name="videos[]" accept="video/*" multiple
+                  onchange="previewLaboresVideos(this)">
+                <div id="labores-video-preview-container" style="display:flex; gap:10px; margin-top:15px; flex-wrap:wrap;">
+                </div>
+              </div>
+              <div id="labores-progress-container" style="display:none; margin-top:15px; margin-bottom:15px; background:rgba(99,102,241,0.06); padding:12px; border-radius:10px; border:1px solid rgba(99,102,241,0.2);">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:0.85rem; font-weight:600; color:var(--purple);">
+                  <span id="labores-progress-status">Subiendo archivos...</span>
+                  <span id="labores-progress-percent">0%</span>
+                </div>
+                <div style="width:100%; height:10px; background:#e5e7eb; border-radius:5px; overflow:hidden;">
+                  <div id="labores-progress-bar" style="width:0%; height:100%; background:linear-gradient(90deg, #6366f1, #a855f7); transition:width 0.2s ease;"></div>
+                </div>
+                <small style="color:#6b7280; font-size:0.75rem; display:block; margin-top:5px;">⏳ Por favor, no cierres ni recargues esta pestaña mientras se suben los archivos.</small>
               </div>
               <div style="display:flex;gap:10px;flex-wrap:wrap">
                 <button type="submit" class="btn btn-gradient">Guardar Labor Social 🚀</button>
@@ -2144,32 +2161,99 @@
     }
 
     let selectedLaborFiles = [];
+    let selectedLaborVideos = [];
 
-    document.getElementById('add-form-labores').addEventListener('submit', async e => {
+    document.getElementById('add-form-labores').addEventListener('submit', function(e) {
       e.preventDefault();
+      
+      // Validar tamaño individual y acumulado antes de subir
+      let totalBytes = 0;
+      let oversizedFiles = [];
+      
+      selectedLaborFiles.forEach(f => {
+        totalBytes += f.size;
+        if (f.size > 10 * 1024 * 1024) oversizedFiles.push(`Imagen "${f.name}" (supera 10 MB)`);
+      });
+
+      selectedLaborVideos.forEach(f => {
+        totalBytes += f.size;
+        if (f.size > 100 * 1024 * 1024) oversizedFiles.push(`Video "${f.name}" (supera 100 MB)`);
+      });
+
+      if (oversizedFiles.length > 0) {
+        showAlert('labores-alert', '❌ Los siguientes archivos exceden el tamaño máximo:\n' + oversizedFiles.join(', '), 'error');
+        return;
+      }
+
       const fd = new FormData(e.target);
       const id = document.getElementById('l-id').value;
       fd.append('action', id ? 'edit' : 'add');
 
-      // Eliminar el campo original de fotos para reemplazarlo con la lista filtrada
       fd.delete('fotos[]');
-      selectedLaborFiles.forEach(file => {
-        fd.append('fotos[]', file);
-      });
+      selectedLaborFiles.forEach(file => fd.append('fotos[]', file));
 
-      try {
-        const res = await fetch(API_LAB, { method: 'POST', body: fd });
-        const json = await res.json();
-        if (json.success) {
-          showAlert('labores-alert', '✅ ' + json.message, 'success');
-          loadLabores();
-          resetLaboresForm();
-        } else {
-          showAlert('labores-alert', '❌ ' + json.message, 'error');
-        }
-      } catch (e) {
-        showAlert('labores-alert', '❌ Error de conexión', 'error');
+      fd.delete('videos[]');
+      selectedLaborVideos.forEach(file => fd.append('videos[]', file));
+
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      const progressContainer = document.getElementById('labores-progress-container');
+      const progressBar = document.getElementById('labores-progress-bar');
+      const progressPercent = document.getElementById('labores-progress-percent');
+      const progressStatus = document.getElementById('labores-progress-status');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Guardando...';
+
+      if (progressContainer) {
+        progressContainer.style.display = 'block';
+        if (progressBar) progressBar.style.width = '0%';
+        if (progressPercent) progressPercent.textContent = '0%';
+        if (progressStatus) progressStatus.textContent = totalBytes > 0 ? 'Iniciando subida de multimedia...' : 'Guardando datos...';
       }
+
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', API_LAB + '?action=' + (id ? 'edit' : 'add'), true);
+
+      if (xhr.upload) {
+        xhr.upload.onprogress = function(evt) {
+          if (evt.lengthComputable && totalBytes > 0) {
+            const percent = Math.round((evt.loaded / evt.total) * 100);
+            if (progressBar) progressBar.style.width = percent + '%';
+            if (progressPercent) progressPercent.textContent = percent + '%';
+            if (progressStatus) {
+              progressStatus.textContent = percent < 100 ? `Subiendo archivos... ${percent}%` : 'Procesando archivos en el servidor...';
+            }
+          }
+        };
+      }
+
+      xhr.onload = function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Guardar Labor Social 🚀';
+        if (progressContainer) progressContainer.style.display = 'none';
+
+        try {
+          const json = JSON.parse(xhr.responseText);
+          if (json.success) {
+            showAlert('labores-alert', '✅ ' + json.message, 'success');
+            loadLabores();
+            resetLaboresForm();
+          } else {
+            showAlert('labores-alert', '❌ ' + json.message, 'error');
+          }
+        } catch (err) {
+          showAlert('labores-alert', '❌ Error al procesar respuesta del servidor.', 'error');
+        }
+      };
+
+      xhr.onerror = function() {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Guardar Labor Social 🚀';
+        if (progressContainer) progressContainer.style.display = 'none';
+        showAlert('labores-alert', '❌ Error de conexión o se agotó el tiempo de espera de la subida.', 'error');
+      };
+
+      xhr.send(fd);
     });
 
     function previewLaboresImages(input) {
@@ -2220,11 +2304,53 @@
       renderNewPreviews();
     }
 
+    function previewLaboresVideos(input) {
+      if (input.files && input.files.length) {
+        const filesArray = Array.from(input.files);
+        filesArray.forEach(file => {
+          const exists = selectedLaborVideos.some(f => f.name === file.name && f.size === file.size);
+          if (!exists) {
+            selectedLaborVideos.push(file);
+          }
+        });
+      }
+      input.value = '';
+      renderNewVideoPreviews();
+    }
+
+    function renderNewVideoPreviews() {
+      const container = document.getElementById('labores-video-preview-container');
+      container.querySelectorAll('.new-video-preview').forEach(el => el.remove());
+
+      selectedLaborVideos.forEach((file, index) => {
+        const url = URL.createObjectURL(file);
+        const div = document.createElement('div');
+        div.className = 'new-video-preview';
+        div.style.position = 'relative';
+        div.style.width = '140px';
+        div.style.marginRight = '10px';
+        div.style.marginBottom = '10px';
+        div.innerHTML = `
+          <video src="${url}" style="width:100%; border-radius:8px; border:2px dashed var(--purple); display:block;" controls muted playsinline preload="metadata"></video>
+          <span style="position:absolute; bottom:2px; left:2px; background:rgba(0,0,0,0.6); color:#fff; font-size:8px; padding:1px 4px; border-radius:3px;">Nuevo</span>
+          <button type="button" onclick="removeSelectedVideo(${index})" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function removeSelectedVideo(index) {
+      selectedLaborVideos.splice(index, 1);
+      renderNewVideoPreviews();
+    }
+
     function resetLaboresForm() {
       document.getElementById('add-form-labores').reset();
       document.getElementById('l-id').value = '';
       selectedLaborFiles = [];
+      selectedLaborVideos = [];
       document.getElementById('labores-preview-container').innerHTML = '';
+      document.getElementById('labores-video-preview-container').innerHTML = '';
     }
 
     function editLabor(id) {
@@ -2255,6 +2381,25 @@
             <button type="button" onclick="this.parentElement.remove()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
           `;
           previewContainer.appendChild(div);
+        });
+      }
+
+      // Mostrar videos actuales
+      const videoPreviewContainer = document.getElementById('labores-video-preview-container');
+      videoPreviewContainer.innerHTML = '';
+      if (l.videos && l.videos.length) {
+        l.videos.forEach(video => {
+          const div = document.createElement('div');
+          div.style.position = 'relative';
+          div.style.width = '140px';
+          div.style.marginRight = '10px';
+          div.style.marginBottom = '10px';
+          div.innerHTML = `
+            <video src="../${video}" style="width:100%; border-radius:8px; border: 1px solid #c4b5fd; display:block;" controls muted playsinline preload="metadata"></video>
+            <input type="hidden" name="videos_prev[]" value="${video}">
+            <button type="button" onclick="this.parentElement.remove()" style="position:absolute; top:-5px; right:-5px; background:#ef4444; color:#fff; border:none; width:18px; height:18px; border-radius:50%; cursor:pointer; font-size:10px; display:flex; align-items:center; justify-content:center;">✕</button>
+          `;
+          videoPreviewContainer.appendChild(div);
         });
       }
 

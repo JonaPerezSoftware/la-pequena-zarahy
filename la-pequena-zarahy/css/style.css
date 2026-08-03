@@ -806,11 +806,20 @@ textarea.form-control{resize:vertical;min-height:90px}
   background: var(--gradient-soft);
 }
 
-/* Badge de fotos múltiples */
-.labor-photo-badge {
+/* Contenedor de badges derechos (fotos y videos) */
+.labor-badges-right {
   position: absolute;
   top: 12px;
   right: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  z-index: 2;
+}
+
+/* Badge de contenido multimedia */
+.labor-photo-badge {
   background: rgba(0,0,0,0.7);
   backdrop-filter: blur(4px);
   color: #fff;
@@ -818,17 +827,31 @@ textarea.form-control{resize:vertical;min-height:90px}
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 50px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: background 0.2s;
-  z-index: 2;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.labor-photo-badge.video {
+  background: rgba(124, 58, 237, 0.85);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .labor-photo-badge:hover {
-  background: var(--purple);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+.labor-photo-badge.photo:hover {
+  background: rgba(0, 0, 0, 0.85);
+}
+
+.labor-photo-badge.video:hover {
+  background: rgba(109, 40, 217, 0.95);
 }
 
 /* Badge "más reciente" */

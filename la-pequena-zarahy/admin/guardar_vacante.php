@@ -4,7 +4,7 @@
 // CONFIGURAR: cambiar $admin_password por una contraseña segura
 // ============================================================
 
-session_set_cookie_params(['path' => '/']);
+session_set_cookie_params(['path' => '/', 'samesite' => 'Lax']);
 session_start();
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Origin: *');

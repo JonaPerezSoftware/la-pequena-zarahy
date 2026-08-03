@@ -1,52 +1,181 @@
 [
     {
-        "id": "lab_1784079480_105",
-        "titulo": "DAD",
-        "descripcion": "DASDASD",
-        "ubicacion": "Marcelino maridueña",
-        "fecha": "2026-07-14",
+        "id": "lab_1785779083_107",
+        "titulo": "prueba definitiva",
+        "descripcion": "prueba definitva",
+        "ubicacion": "casa",
+        "fecha": "2026-08-03",
         "hora": "",
         "fotos": [
-            "uploads\/labores\/labor_6a56e478c15c1.jpg",
-            "uploads\/labores\/labor_6a56e478c191d.jpg",
-            "uploads\/labores\/labor_6a56e478c1d3f.jpeg"
+            "uploads\/labores\/labor_6a70d38b4eaa6.jpg",
+            "uploads\/labores\/labor_6a70d38b4efec.jpg",
+            "uploads\/labores\/labor_6a70d38b4f433.jpg",
+            "uploads\/labores\/labor_6a70d38b4f88e.jpg",
+            "uploads\/labores\/labor_6a70d38b4fd03.jpeg",
+            "uploads\/labores\/labor_6a70d38b50179.jpeg",
+            "uploads\/labores\/labor_6a70d38b5064d.jpeg",
+            "uploads\/labores\/labor_6a70d38b50a2f.jpg",
+            "uploads\/labores\/labor_6a70d38b5109a.jpg",
+            "uploads\/labores\/labor_6a70d38b51653.jpg"
         ],
-        "creado": "2026-07-15 03:38:00"
+        "videos": [
+            "uploads\/labores\/labor_vid_6a70d38b51e72.mp4",
+            "uploads\/labores\/labor_vid_6a70d38b52575.mp4",
+            "uploads\/labores\/labor_vid_6a70d38b52bd5.mp4",
+            "uploads\/labores\/labor_vid_6a70d38b5323a.mp4",
+            "uploads\/labores\/labor_vid_6a70d38b53909.mp4"
+        ],
+        "creado": "2026-08-03 19:44:43"
     },
     {
-        "id": "lab_1784079455_893",
-        "titulo": "DASDAS",
-        "descripcion": "DASDAS",
-        "ubicacion": "DASDASD",
-        "fecha": "2026-07-14",
+        "id": "lab_1785778998_440",
+        "titulo": "prueba 9",
+        "descripcion": "prueba 9",
+        "ubicacion": "casa",
+        "fecha": "2026-08-03",
         "hora": "",
-        "fotos": [
-            "uploads\/labores\/labor_6a56e45f38e8d.jpg"
+        "fotos": [],
+        "videos": [
+            "uploads\/labores\/labor_vid_6a70d3364ef74.mp4",
+            "uploads\/labores\/labor_vid_6a70d3364f7b2.mp4",
+            "uploads\/labores\/labor_vid_6a70d3364feb2.mp4",
+            "uploads\/labores\/labor_vid_6a70d3365063e.mp4",
+            "uploads\/labores\/labor_vid_6a70d33650de7.mp4"
         ],
-        "creado": "2026-07-15 03:37:35"
+        "creado": "2026-08-03 19:43:18"
     },
     {
-        "id": "lab_1784079438_821",
-        "titulo": "asAS",
-        "descripcion": "SDADASD",
-        "ubicacion": "milagro",
-        "fecha": "2026-07-14",
+        "id": "lab_1785778744_831",
+        "titulo": "prueba 8",
+        "descripcion": "prueba 8",
+        "ubicacion": "casa",
+        "fecha": "2026-08-03",
         "hora": "",
         "fotos": [
-            "uploads\/labores\/labor_6a56e44eb3950.jpg"
+            "uploads\/labores\/labor_6a70d23890404.jpg",
+            "uploads\/labores\/labor_6a70d238908da.jpg",
+            "uploads\/labores\/labor_6a70d23890c7b.jpg",
+            "uploads\/labores\/labor_6a70d2389126a.jpg",
+            "uploads\/labores\/labor_6a70d23891627.jpeg",
+            "uploads\/labores\/labor_6a70d23891a08.jpeg",
+            "uploads\/labores\/labor_6a70d23891e49.jpeg",
+            "uploads\/labores\/labor_6a70d238921e4.jpg",
+            "uploads\/labores\/labor_6a70d238926b7.jpg",
+            "uploads\/labores\/labor_6a70d23892a92.jpg"
         ],
-        "creado": "2026-07-15 03:37:18"
+        "videos": [
+            "uploads\/labores\/labor_vid_6a70d23899421.mp4"
+        ],
+        "creado": "2026-08-03 19:39:04"
     },
     {
-        "id": "lab_1784079163_159",
-        "titulo": "prueba",
-        "descripcion": "dsadas",
-        "ubicacion": "Marcelino maridueña",
-        "fecha": "2026-07-14",
+        "id": "lab_1785778615_688",
+        "titulo": "Prueba 7",
+        "descripcion": "prueba 7",
+        "ubicacion": "casa",
+        "fecha": "2026-08-03",
         "hora": "",
         "fotos": [
-            "uploads\/labores\/labor_6a56e33b29b2e.jpg"
+            "uploads\/labores\/labor_6a70d1b7ab501.jpg",
+            "uploads\/labores\/labor_6a70d1b7abac7.jpg",
+            "uploads\/labores\/labor_6a70d1b7abec0.jpg",
+            "uploads\/labores\/labor_6a70d1b7ac319.jpg",
+            "uploads\/labores\/labor_6a70d1b7ac803.jpeg",
+            "uploads\/labores\/labor_6a70d1b7acc55.jpeg",
+            "uploads\/labores\/labor_6a70d1b7ad140.jpeg",
+            "uploads\/labores\/labor_6a70d1b7ad5ee.jpg",
+            "uploads\/labores\/labor_6a70d1b7ada6b.jpg",
+            "uploads\/labores\/labor_6a70d1b7add80.png"
         ],
-        "creado": "2026-07-15 03:32:43"
+        "videos": [],
+        "creado": "2026-08-03 19:36:55"
+    },
+    {
+        "id": "lab_1785729016_685",
+        "titulo": "prueba 6",
+        "descripcion": "preuba 6",
+        "ubicacion": "casa",
+        "fecha": "2026-08-02",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a700ff83348b.jpg",
+            "uploads\/labores\/labor_6a700ff83382f.jpg",
+            "uploads\/labores\/labor_6a700ff833c94.jpg",
+            "uploads\/labores\/labor_6a700ff834005.jpg",
+            "uploads\/labores\/labor_6a700ff8341b3.jpeg"
+        ],
+        "videos": [
+            "uploads\/labores\/labor_vid_6a700ff8346b4.mp4",
+            "uploads\/labores\/labor_vid_6a700ff834f3a.mp4"
+        ],
+        "creado": "2026-08-03 05:50:16"
+    },
+    {
+        "id": "lab_1785728966_295",
+        "titulo": "prueba 5",
+        "descripcion": "prueba 5",
+        "ubicacion": "casa",
+        "fecha": "2026-08-02",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a700fc6e9e4a.jpg"
+        ],
+        "videos": [
+            "uploads\/labores\/labor_vid_6a700fc6ea73f.mp4"
+        ],
+        "creado": "2026-08-03 05:49:26"
+    },
+    {
+        "id": "lab_1785728941_262",
+        "titulo": "prueba 4",
+        "descripcion": "preuba 4",
+        "ubicacion": "casa",
+        "fecha": "2026-08-01",
+        "hora": "",
+        "fotos": [],
+        "videos": [
+            "uploads\/labores\/labor_vid_6a700fad7ec7a.mp4"
+        ],
+        "creado": "2026-08-03 05:49:01"
+    },
+    {
+        "id": "lab_1785728727_136",
+        "titulo": "prueba 3",
+        "descripcion": "prueba 3",
+        "ubicacion": "casa",
+        "fecha": "2026-08-02",
+        "hora": "",
+        "fotos": [],
+        "videos": [
+            "uploads\/labores\/labor_vid_6a700f1a38504.mp4"
+        ],
+        "creado": "2026-08-03 05:45:27",
+        "editado": "2026-08-03 05:46:34"
+    },
+    {
+        "id": "lab_1785728463_743",
+        "titulo": "Prueba 2",
+        "descripcion": "Prueba 2",
+        "ubicacion": "casa",
+        "fecha": "2026-08-01",
+        "hora": "",
+        "fotos": [],
+        "videos": [
+            "uploads\/labores\/labor_vid_6a700dcf1e8e7.mp4"
+        ],
+        "creado": "2026-08-03 05:41:03"
+    },
+    {
+        "id": "lab_1785728406_157",
+        "titulo": "Prueba 1",
+        "descripcion": "Prueba 1",
+        "ubicacion": "casa",
+        "fecha": "2026-08-01",
+        "hora": "",
+        "fotos": [
+            "uploads\/labores\/labor_6a700d9657338.jpg"
+        ],
+        "videos": [],
+        "creado": "2026-08-03 05:40:06"
     }
 ]

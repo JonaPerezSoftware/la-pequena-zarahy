@@ -4,7 +4,7 @@
  * La Pequeña Zarahy
  */
 
-session_set_cookie_params(['path' => '/']);
+session_set_cookie_params(['path' => '/', 'samesite' => 'Lax']);
 session_start();
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
@@ -34,21 +34,47 @@ function writeData(array $data) {
 }
 
 function isAuth() {
-    return !empty($_SESSION['admin_ok']);
+    return !empty($_SESSION['admin_ok']) || !empty($_SESSION['convenio_auth']);
 }
 
 function checkAuth() {
     if (!isAuth()) respond(false, 'No autorizado. Por favor inicia sesión.');
 }
 
-function validateImage($file) {
-    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
-    $finfo = finfo_open(FILEINFO_MIME_TYPE);
-    $mime  = finfo_file($finfo, $file['tmp_name']);
-    finfo_close($finfo);
+function getMimeType($tmpName) {
+    if (!empty($tmpName) && file_exists($tmpName)) {
+        if (function_exists('finfo_open')) {
+            $finfo = @finfo_open(FILEINFO_MIME_TYPE);
+            if ($finfo) {
+                $mime = @finfo_file($finfo, $tmpName);
+                @finfo_close($finfo);
+                if ($mime) return $mime;
+            }
+        }
+        if (function_exists('mime_content_type')) {
+            $mime = @mime_content_type($tmpName);
+            if ($mime) return $mime;
+        }
+    }
+    return '';
+}
 
-    if (!in_array($mime, $allowedTypes)) {
+function validateImage($file) {
+    $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'image/svg+xml'];
+    $allowedExts  = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'];
+
+    if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+        return 'No se recibió el archivo del logo correctamente en el servidor.';
+    }
+
+    $mime = getMimeType($file['tmp_name']);
+    $ext  = strtolower(pathinfo($file['name'] ?? '', PATHINFO_EXTENSION));
+
+    if ($mime && !in_array($mime, $allowedTypes) && !in_array($ext, $allowedExts)) {
         return 'Tipo de archivo no permitido. Solo se aceptan imágenes (JPG, PNG, WEBP, SVG).';
+    }
+    if (!in_array($ext, $allowedExts)) {
+        return 'Extensión de imagen no permitida. Solo se aceptan imágenes (JPG, PNG, WEBP, SVG).';
     }
     if ($file['size'] > MAX_FILE_SIZE) {
         return 'El logo supera el tamaño máximo de 10 MB.';

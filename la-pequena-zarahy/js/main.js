@@ -697,22 +697,30 @@ function renderLabores(data) {
   // Helper: construir HTML de una tarjeta
   function buildCard(item, idx, total) {
     const fotos = item.fotos || [];
+    const videos = item.videos || [];
+    const totalMedia = fotos.length + videos.length;
     const imgWrap = fotos.length > 0
       ? `<img src="${fotos[0]}" alt="${item.titulo}" class="labor-card-img" loading="lazy">`
       : `<div class="labor-card-no-img">🤝</div>`;
-    const photoBadge = fotos.length > 1
-      ? `<button class="labor-photo-badge" onclick="openLaborGallery(${idx}, 0, event)" title="Ver galería de fotos">
-           <i class="fas fa-images"></i> ${fotos.length} fotos
+    const photoBadge = fotos.length > 0
+      ? `<button class="labor-photo-badge photo" onclick="openLaborGallery(${idx}, 0, event)" title="Ver imágenes">
+           <i class="fas fa-images"></i> ${fotos.length} foto${fotos.length > 1 ? 's' : ''}
          </button>` : '';
+    const videoBadge = videos.length > 0
+      ? `<button class="labor-photo-badge video" onclick="openLaborGallery(${idx}, ${fotos.length}, event)" title="Ver videos">
+           <i class="fas fa-play-circle"></i> ${videos.length} video${videos.length > 1 ? 's' : ''}
+         </button>` : '';
+    const topBadges = (photoBadge || videoBadge)
+      ? `<div class="labor-badges-right">${photoBadge}${videoBadge}</div>` : '';
     const recentBadge = idx === 0 ? `<span class="labor-recent-badge">⭐ Reciente</span>` : '';
-    const galleryBtn = fotos.length > 0
+    const galleryBtn = totalMedia > 0
       ? `<button class="btn-galeria" onclick="openLaborGallery(${idx}, 0, event)">
-           <i class="fas fa-expand-alt"></i> Ver ${fotos.length > 1 ? 'galería' : 'foto'}
+           <i class="fas fa-expand-alt"></i> Ver ${totalMedia > 1 ? 'galería' : (videos.length > 0 ? 'video' : 'foto')}
          </button>` : '';
     return `
       <div class="labor-card" data-fotos='${JSON.stringify(fotos)}'>
         <div class="labor-card-img-wrap">
-          ${imgWrap}${recentBadge}${photoBadge}
+          ${imgWrap}${recentBadge}${topBadges}
         </div>
         <div class="labor-card-content">
           <h3 class="labor-card-title">${item.titulo || 'Labor Social'}</h3>
@@ -826,20 +834,23 @@ function initLaborDragScroll() {
   });
 }
 
-// ── Galería de fotos de una labor ───────────────────────────
-let _galleryFotos = [];
+// ── Galería de fotos y videos de una labor ──────────────────
+let _galleryMedia = [];  // array de { src, type: 'image'|'video' }
 let _galleryIdx   = 0;
 
-function openLaborGallery(laborIdx, fotoIdx, event) {
+function openLaborGallery(laborIdx, mediaIdx, event) {
   if (event) event.stopPropagation();
   const data = window._laborData;
   if (!data || !data[laborIdx]) return;
 
-  _galleryFotos = data[laborIdx].fotos || [];
-  if (!_galleryFotos.length) return;
+  const item   = data[laborIdx];
+  const fotos  = (item.fotos  || []).map(src => ({ src, type: 'image' }));
+  const videos = (item.videos || []).map(src => ({ src, type: 'video' }));
+  _galleryMedia = [...fotos, ...videos];
+  if (!_galleryMedia.length) return;
 
-  _galleryIdx = fotoIdx || 0;
-  renderGalleryPhoto();
+  _galleryIdx = Math.min(mediaIdx || 0, _galleryMedia.length - 1);
+  renderGalleryMedia();
 
   const overlay = document.getElementById('labor-gallery-overlay');
   if (overlay) {
@@ -848,31 +859,42 @@ function openLaborGallery(laborIdx, fotoIdx, event) {
   }
 }
 
-function renderGalleryPhoto() {
+function renderGalleryMedia() {
+  const media   = _galleryMedia[_galleryIdx];
   const img     = document.getElementById('gallery-img');
+  const video   = document.getElementById('gallery-video');
   const counter = document.getElementById('gallery-counter');
-  if (img)     img.src = _galleryFotos[_galleryIdx];
-  if (counter) counter.textContent = `${_galleryIdx + 1} / ${_galleryFotos.length}`;
+  if (counter) counter.textContent = `${_galleryIdx + 1} / ${_galleryMedia.length}`;
+
+  if (media && media.type === 'video') {
+    if (img)   { img.style.display = 'none'; img.src = ''; }
+    if (video) { video.style.display = 'block'; video.src = media.src; }
+  } else {
+    if (video) { video.style.display = 'none'; video.pause(); video.src = ''; }
+    if (img)   { img.style.display = 'block'; img.src = media ? media.src : ''; }
+  }
 
   const prev = document.getElementById('gallery-prev');
   const next = document.getElementById('gallery-next');
   if (prev) prev.style.opacity = _galleryIdx === 0 ? '0.35' : '1';
-  if (next) next.style.opacity = _galleryIdx === _galleryFotos.length - 1 ? '0.35' : '1';
+  if (next) next.style.opacity = _galleryIdx === _galleryMedia.length - 1 ? '0.35' : '1';
 }
 
 function closeGallery() {
   const overlay = document.getElementById('labor-gallery-overlay');
   if (overlay) overlay.classList.remove('open');
+  const video = document.getElementById('gallery-video');
+  if (video) { video.pause(); video.src = ''; }
   document.body.style.overflow = '';
 }
 
 // Controles de galería
 document.getElementById('labor-gallery-close')?.addEventListener('click', closeGallery);
 document.getElementById('gallery-prev')?.addEventListener('click', () => {
-  if (_galleryIdx > 0) { _galleryIdx--; renderGalleryPhoto(); }
+  if (_galleryIdx > 0) { _galleryIdx--; renderGalleryMedia(); }
 });
 document.getElementById('gallery-next')?.addEventListener('click', () => {
-  if (_galleryIdx < _galleryFotos.length - 1) { _galleryIdx++; renderGalleryPhoto(); }
+  if (_galleryIdx < _galleryMedia.length - 1) { _galleryIdx++; renderGalleryMedia(); }
 });
 document.getElementById('labor-gallery-overlay')?.addEventListener('click', e => {
   if (e.target === e.currentTarget) closeGallery();
@@ -882,8 +904,9 @@ document.getElementById('labor-gallery-overlay')?.addEventListener('click', e =>
 document.addEventListener('keydown', e => {
   const overlay = document.getElementById('labor-gallery-overlay');
   if (!overlay?.classList.contains('open')) return;
-  if (e.key === 'ArrowLeft' && _galleryIdx > 0) { _galleryIdx--; renderGalleryPhoto(); }
-  if (e.key === 'ArrowRight' && _galleryIdx < _galleryFotos.length - 1) { _galleryIdx++; renderGalleryPhoto(); }
+  if (e.key === 'ArrowLeft'  && _galleryIdx > 0) { _galleryIdx--; renderGalleryMedia(); }
+  if (e.key === 'ArrowRight' && _galleryIdx < _galleryMedia.length - 1) { _galleryIdx++; renderGalleryMedia(); }
+  if (e.key === 'Escape') closeGallery();
 });
 
 // ── CONVENIOS ───────────────────────────────────────────────
