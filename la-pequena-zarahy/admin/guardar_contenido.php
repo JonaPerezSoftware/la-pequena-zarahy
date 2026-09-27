@@ -1,6 +1,6 @@
 <?php
-// ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_password = 'JoseyGarde1328';
+require_once __DIR__ . '/../config.php';
+$admin_password = defined('ADMIN_PASSWORD') ? ADMIN_PASSWORD : '';
 $data_file = __DIR__ . '/../contenido_pagina.json';
 $upload_dir = __DIR__ . '/../uploads/contenido/';
 

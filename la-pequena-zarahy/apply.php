@@ -92,9 +92,10 @@ file_put_contents($log_file, $log_content);
 // IMPORTAR MOTOR SMTP DIRECTO
 require_once 'class.smtp.php';
 
+require_once __DIR__ . '/config.php';
 // Configuración SMTP
 $smtp_user = 'info@xn--lapequeazarahy-wnb.es';
-$smtp_pass = 'Zarahy7.g';
+$smtp_pass = defined('SMTP_PASS') ? SMTP_PASS : '';
 
 // Enlace al CV (Dominio oficial forzado)
 $cv_url = "https://xn--lapequeazarahy-wnb.es/uploads/cvs/" . $filename;

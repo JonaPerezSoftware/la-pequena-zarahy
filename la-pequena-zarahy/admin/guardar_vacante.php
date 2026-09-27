@@ -9,8 +9,8 @@ session_start();
 header('Content-Type: application/json; charset=UTF-8');
 header('Access-Control-Allow-Origin: *');
 
-// ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_password = 'JoseyGarde1328'; // ← CAMBIAR por contraseña segura
+require_once __DIR__ . '/../config.php';
+$admin_password = defined('ADMIN_PASSWORD') ? ADMIN_PASSWORD : '';
 $data_file = __DIR__ . '/../vacantes.json';
 // ───────────────────────────────────────────────────────────
 

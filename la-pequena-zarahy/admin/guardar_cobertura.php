@@ -3,8 +3,8 @@ session_set_cookie_params(['path' => '/', 'samesite' => 'Lax']);
 session_start();
 header('Content-Type: application/json; charset=UTF-8');
 
-// ── CONFIGURACIÓN ──────────────────────────────────────────
-$admin_password = 'JoseyGarde1328';
+require_once __DIR__ . '/../config.php';
+$admin_password = defined('ADMIN_PASSWORD') ? ADMIN_PASSWORD : '';
 $data_file = __DIR__ . '/../cobertura.json';
 $upload_dir = __DIR__ . '/../uploads/cobertura/';
 

@@ -1086,7 +1086,7 @@
   <script>
     // ── Configuración ──────────────────────────────────────────
     const API = 'guardar_vacante.php';
-    const PASSWORD = 'Zarahy7.g'; // Mismo que en PHP — solo para modo local
+    const PASSWORD = ''; // Configurar localmente solo si se abre sin servidor PHP
     let isLocal = false; // true cuando no hay PHP (abrir como archivo)
     let localData = [];
 
@@ -1583,14 +1583,12 @@
 
     // ── CONTENIDO ──────────────────────────────────────────────
     const API_CONT = 'guardar_contenido.php';
-    const ADMIN_PWD = 'JoseyGarde1328'; // Se envía como fallback de autenticación
+    const ADMIN_PWD = ''; // Opcional: la autenticación se maneja vía sesión PHP ($_SESSION)
     let fullContenidoData = {};
 
     // Helper: agrega _pwd a cualquier FormData o URLSearchParams antes de enviarlo
     async function fetchCont(bodyData, isFormData = false) {
-      if (isFormData) {
-        bodyData.append('_pwd', ADMIN_PWD);
-      } else {
+      if (ADMIN_PWD) {
         bodyData.append('_pwd', ADMIN_PWD);
       }
       return fetch(API_CONT, { method: 'POST', body: bodyData });

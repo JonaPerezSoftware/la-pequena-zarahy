@@ -10,9 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
+require_once __DIR__ . '/config.php';
 // CONFIGURACIÓN SMTP HOSTINGER
 $smtp_user = 'info@xn--lapequeazarahy-wnb.es'; // info@lapequeñazarahy.es
-$smtp_pass = 'Zarahy7.g';
+$smtp_pass = defined('SMTP_PASS') ? SMTP_PASS : '';
 $admin_emails = [
     'zarahygardenia@gmail.com',
     // 'otro_correo@ejemplo.com' // Descomenta y edita esta línea para añadir más correos

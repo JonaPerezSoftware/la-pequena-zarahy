@@ -5,10 +5,10 @@
  */
 
 function enviarCorreoSMTP($to, $subject, $body, $attachments = []) {
-    // Configuración Hostinger
+    require_once __DIR__ . '/config.php';
     $smtp_host = 'smtp.hostinger.com';
     $smtp_user = 'info@xn--lapequeazarahy-wnb.es'; // Dominio con ñ en formato IDN
-    $smtp_pass = 'Zarahy7.g';
+    $smtp_pass = defined('SMTP_PASS') ? SMTP_PASS : '';
     $smtp_port = 465;
 
     // Cabeceras básicas para simular el envío

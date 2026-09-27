@@ -3,10 +3,20 @@
 Thumbs.db
 *.log
 
-# Subidas de usuarios (Privacidad)
-/uploads/cvs/*
+# Entorno y credenciales sensibles
+.env
+config.local.php
+config.php
+
+# Subidas de usuarios y documentos subidos (Privacidad y Seguridad)
+/uploads/*
+!/uploads/.htaccess
 !/uploads/cvs/.htaccess
 
-# Otros
+# Datos dinámicos / base de datos en JSON (Evita sobrescribir contenido del servidor)
+*.json
+
+# Configuración de IDEs
 .vscode/
 .idea/
+

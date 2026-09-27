@@ -13,13 +13,14 @@ header('X-Content-Type-Options: nosniff');
 @ini_set('max_input_time', '600');
 @ini_set('memory_limit', '512M');
 
+require_once __DIR__ . '/config.php';
 define('DATA_FILE',    __DIR__ . '/labores.json');
 define('UPLOAD_DIR',   __DIR__ . '/uploads/labores/');
 define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10 MB para imágenes
 define('MAX_VIDEO_SIZE', 100 * 1024 * 1024); // 100 MB para videos
 define('MAX_PHOTOS',   10);
 define('MAX_VIDEOS',   5);
-define('PASSWORD_HASH', password_hash('Zarahy7.g', PASSWORD_DEFAULT));
+define('PASSWORD_HASH', password_hash(defined('ZARAHY_PASSWORD') ? ZARAHY_PASSWORD : '', PASSWORD_DEFAULT));
 
 // ── Helpers ──────────────────────────────────────────────────
 function respond($success, $message = '', $data = null) {
@@ -176,7 +177,8 @@ switch ($action) {
     // ── Login ─────────────────────────────────────────────────
     case 'login':
         $pwd = $_POST['password'] ?? '';
-        if (password_verify($pwd, PASSWORD_HASH) || $pwd === 'Zarahy7.g') {
+        $targetPwd = defined('ZARAHY_PASSWORD') ? ZARAHY_PASSWORD : '';
+        if (password_verify($pwd, PASSWORD_HASH) || ($targetPwd !== '' && $pwd === $targetPwd)) {
             $_SESSION['labor_auth'] = true;
             respond(true, 'Sesión iniciada.');
         }

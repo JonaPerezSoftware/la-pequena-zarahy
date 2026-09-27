@@ -9,10 +9,11 @@ session_start();
 header('Content-Type: application/json; charset=utf-8');
 header('X-Content-Type-Options: nosniff');
 
+require_once __DIR__ . '/config.php';
 define('DATA_FILE',    __DIR__ . '/convenios.json');
 define('UPLOAD_DIR',   __DIR__ . '/uploads/convenios/');
 define('MAX_FILE_SIZE', 10 * 1024 * 1024); // 10 MB
-define('PASSWORD_HASH', password_hash('Zarahy7.g', PASSWORD_DEFAULT));
+define('PASSWORD_HASH', password_hash(defined('ZARAHY_PASSWORD') ? ZARAHY_PASSWORD : '', PASSWORD_DEFAULT));
 
 // ── Helpers ──────────────────────────────────────────────────
 function respond($success, $message = '', $data = null) {
@@ -112,7 +113,8 @@ switch ($action) {
     // ── Login ─────────────────────────────────────────────────
     case 'login':
         $pwd = $_POST['password'] ?? '';
-        if (password_verify($pwd, PASSWORD_HASH) || $pwd === 'Zarahy7.g') {
+        $targetPwd = defined('ZARAHY_PASSWORD') ? ZARAHY_PASSWORD : '';
+        if (password_verify($pwd, PASSWORD_HASH) || ($targetPwd !== '' && $pwd === $targetPwd)) {
             $_SESSION['convenio_auth'] = true;
             respond(true, 'Sesión iniciada.');
         }
